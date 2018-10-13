@@ -179,8 +179,9 @@ public class Register extends JFrame {
 		
 		
 		txtpass = new JPasswordField();
-		txtpass.setCaretColor(Color.RED);
-		txtpass.setBorder(UIManager.getBorder("ComboBox.border"));
+		txtpass.setColumns(10);
+		txtpass.setCaretColor(Color.BLACK);
+		txtpass.setBorder(UIManager.getBorder("DesktopIcon.border"));
 		txtpass.setBackground(Color.WHITE);
 		txtpass.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtpass.setBounds(32, 197, 317, 50);
@@ -291,7 +292,7 @@ public class Register extends JFrame {
 				boolean phonenotnull = true;
 				UserManager c = new UserManager();
 				String date = c.chackdate(cbday.getSelectedItem().toString(), cbmon.getSelectedItem().toString(), cbyear.getSelectedItem().toString());
-				if (!(Pattern.matches("^[0]+[0-9]+$", textphone.getText()))&&textphone.getText().length()!=10) {
+				if (!(Pattern.matches("^[0]+[0-9]+$", textphone.getText()))||textphone.getText().length()!=10) {
 				       labelalertphone.setVisible(true);
 				       pass=false;
 				       phonenotnull=false;
