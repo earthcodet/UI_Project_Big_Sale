@@ -43,6 +43,9 @@ import java.util.LinkedList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class aDMIN extends JFrame {
@@ -55,15 +58,31 @@ public class aDMIN extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UIManager.setLookAndFeel(
+				            UIManager.getSystemLookAndFeelClassName());
+					aDMIN frame = new aDMIN("Mr. ...");
+					frame.setVisible(true);
+					frame.setResizable(false);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	/**
 	 * Create the frame.
 	 */
-	public aDMIN() {
-		setTitle("ADMIN");
+	public aDMIN(String username) {
+		setTitle("BIG SALE - Home");
 		Toolkit kit = Toolkit.getDefaultToolkit();
-	    Image icons = kit.createImage("D:\\eclipse JAVA\\workspaceJAVA\\UI_Project2\\src\\Frame\\ICON.png");
+	    Image icons = kit.createImage(Home.class.getResource("/Image/ICON.png"));
 	    setIconImage(icons);
+		setTitle("ADMIN BIG SALE - Add Product");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 986, 705);
 		contentPane = new JPanel();
@@ -72,7 +91,7 @@ public class aDMIN extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 950, 644);
+		tabbedPane.setBounds(10, 34, 950, 621);
 		contentPane.add(tabbedPane);
 		
 		JPanel addProduct = new JPanel();
@@ -171,6 +190,40 @@ public class aDMIN extends JFrame {
 		NewProduct_tbl = new JTable();
 		NewProduct_SCP.setViewportView(NewProduct_tbl);
 		tabbedPane.setEnabledAt(0, true);
+		
+		JLabel lblusername = new JLabel("~Unknow~");
+		lblusername.setForeground(Color.DARK_GRAY);
+		lblusername.setFont(new Font("CS ChatThai", Font.PLAIN, 24));
+		lblusername.setBounds(51, 13, 192, 16);
+		lblusername.setText(username);
+		contentPane.add(lblusername);
+		
+		JLabel label = new JLabel("\u0E2D\u0E2D\u0E01\u0E08\u0E32\u0E01\u0E23\u0E30\u0E1A\u0E1A");
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int res = JOptionPane.showConfirmDialog(aDMIN.this, "คุณแน่ใจที่จะออกจากระบบหรือไม่?", "Log out", JOptionPane.YES_NO_OPTION);
+				if(res == JOptionPane.YES_OPTION) {
+					Home nw = new Home();
+					nw.setVisible(true);
+					dispose();
+				}
+				else {
+					setVisible(true);
+				}
+			}
+		});
+		label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		label.setForeground(Color.BLUE);
+		label.setFont(new Font("CS ChatThai", Font.PLAIN, 24));
+		label.setBounds(253, 13, 111, 16);
+		contentPane.add(label);
+		
+		JLabel label_1 = new JLabel("\u0E04\u0E38\u0E13 : ");
+		label_1.setForeground(Color.DARK_GRAY);
+		label_1.setFont(new Font("CS ChatThai", Font.PLAIN, 24));
+		label_1.setBounds(10, 13, 40, 16);
+		contentPane.add(label_1);
 		loadNewProduct();
 	}
 	public void loadNewProduct() {

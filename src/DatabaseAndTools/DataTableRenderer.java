@@ -11,7 +11,7 @@ import javax.swing.table.TableCellRenderer;
 public class DataTableRenderer extends DefaultTableCellRenderer implements TableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 		ImagePanel i = new ImagePanel();
-		i.img = (BufferedImage) value/*ค่า ใน ตาราง Object*/;
+		i.img = (BufferedImage) value;
 		return i;
 	}
 }

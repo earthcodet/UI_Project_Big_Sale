@@ -47,40 +47,17 @@ public class about extends JFrame {
 		});
 		setTitle("BIG SALE - About");
 		Toolkit kit = Toolkit.getDefaultToolkit();
-	    Image icons = kit.createImage("D:\\eclipse JAVA\\workspaceJAVA\\UI_Project2\\src\\Frame\\ICON.png");
+	    Image icons = kit.createImage(Home_LoggedIn.class.getResource("/Image/ICON.png"));
 	    setIconImage(icons);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 547, 578);
+		setBounds(100, 100, 547, 515);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBackground(new Color(0, 51, 102));
-		panel.setBounds(0, 11, 546, 146);
-		contentPane.add(panel);
-		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Easy_IT\\Desktop\\\u0E42\u0E25\u0E42\u0E01\u0E49\u0E2A\u0E35\u0E02\u0E32\u0E273.png"));
-		label.setBounds(174, 27, 107, 95);
-		panel.add(label);
-		
-		JLabel label_1 = new JLabel("BIG SALE");
-		label_1.setForeground(Color.WHITE);
-		label_1.setFont(new Font("Trajan Pro", Font.BOLD, 26));
-		label_1.setBounds(277, 44, 136, 56);
-		panel.add(label_1);
-		
-		JLabel lblShopFinFun = new JLabel("Shop, fin, fun");
-		lblShopFinFun.setForeground(Color.WHITE);
-		lblShopFinFun.setFont(new Font("Tekton Pro Ext", Font.PLAIN, 17));
-		lblShopFinFun.setBounds(277, 88, 136, 26);
-		panel.add(lblShopFinFun);
-		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 156, 533, 383);
+		panel_1.setBounds(0, 124, 533, 383);
 		contentPane.add(panel_1);
 		panel_1.setBackground(new Color(211, 211, 211));
 		panel_1.setLayout(null);
@@ -125,5 +102,35 @@ public class about extends JFrame {
 		lblBuu.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblBuu.setBounds(62, 282, 233, 25);
 		panel_2.add(lblBuu);
+		
+		//
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(8, 54, 69));
+		panel.setBounds(0, 0, 531, 131);
+		contentPane.add(panel);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(about.class.getResource("/Image/\u0E42\u0E25\u0E42\u0E01\u0E49\u0E2A\u0E35\u0E02\u0E32\u0E273.png")));
+		label.setBounds(10, 11, 108, 96);
+		panel.add(label);
+		
+		JLabel label_1 = new JLabel("SALE");
+		label_1.setForeground(Color.WHITE);
+		label_1.setFont(new Font("Segoe WP Black", Font.BOLD, 24));
+		label_1.setBounds(158, 40, 70, 40);
+		panel.add(label_1);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(255, 102, 51));
+		panel_4.setBounds(108, 78, 115, 10);
+		panel.add(panel_4);
+		
+		JLabel label_8 = new JLabel("BIG");
+		label_8.setForeground(new Color(255, 102, 51));
+		label_8.setFont(new Font("Segoe WP Black", Font.BOLD, 24));
+		label_8.setBackground(Color.WHITE);
+		label_8.setBounds(107, 40, 53, 40);
+		panel.add(label_8);
 	}
 }
