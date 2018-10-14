@@ -100,7 +100,6 @@ public class Home extends JFrame {
 	 * Create the frame.
 	 */
 	public Home() {
-		setMinimumSize(new Dimension(1600, 900));
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				int res = JOptionPane.showConfirmDialog(Home.this, "Are you sure to closing window?", "Confirm closing", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -116,28 +115,23 @@ public class Home extends JFrame {
 	    Image icons = kit.createImage(Home.class.getResource("/Image/ICON.png"));
 	    setIconImage(icons);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 0, 1151, 816);
+		setBounds(100, 0, 1385, 909);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel MenuBar = new JPanel();
-		MenuBar.setBounds(0, 0, 1582, 42);
+		MenuBar.setBounds(0, 0, 1365, 42);
 		contentPane.add(MenuBar);
 		MenuBar.setBackground(new Color(0, 51, 51));
 		MenuBar.setLayout(null);
 		
 		JLabel taggingProduct_Bar = new JLabel("\u0E15\u0E34\u0E14\u0E15\u0E32\u0E21\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32");
-		taggingProduct_Bar.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-		});
 		taggingProduct_Bar.setBorder(UIManager.getBorder("MenuBar.border"));
 		taggingProduct_Bar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taggingProduct_Bar.setForeground(Color.WHITE);
-		taggingProduct_Bar.setBounds(1188, 13, 76, 23);
+		taggingProduct_Bar.setBounds(1004, 11, 76, 23);
 		MenuBar.add(taggingProduct_Bar);
 		
 		JLabel login_Bar = new JLabel("\u0E25\u0E07\u0E0A\u0E37\u0E48\u0E2D\u0E40\u0E02\u0E49\u0E32\u0E43\u0E0A\u0E49");
@@ -160,7 +154,7 @@ public class Home extends JFrame {
 		login_Bar.setForeground(Color.WHITE);
 		login_Bar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		login_Bar.setBorder(UIManager.getBorder("MenuBar.border"));
-		login_Bar.setBounds(1292, 13, 76, 23);
+		login_Bar.setBounds(1108, 11, 76, 23);
 		MenuBar.add(login_Bar);
 		
 		JLabel regsiter_Bar = new JLabel("\u0E2A\u0E21\u0E31\u0E04\u0E23\u0E2A\u0E21\u0E32\u0E0A\u0E34\u0E01");
@@ -180,7 +174,7 @@ public class Home extends JFrame {
 		regsiter_Bar.setForeground(Color.WHITE);
 		regsiter_Bar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		regsiter_Bar.setBorder(UIManager.getBorder("MenuBar.border"));
-		regsiter_Bar.setBounds(1395, 13, 73, 23);
+		regsiter_Bar.setBounds(1211, 11, 73, 23);
 		MenuBar.add(regsiter_Bar);
 		
 		JLabel about_Bar = new JLabel("");
@@ -191,12 +185,12 @@ public class Home extends JFrame {
 				ab.setVisible(true);
 			}
 		});
-		about_Bar.setBounds(1513, 13, 22, 27);
+		about_Bar.setBounds(1313, 11, 22, 27);
 		MenuBar.add(about_Bar);
 		about_Bar.setIcon(new ImageIcon(Home.class.getResource("/Image/markz.png")));
 		
 		JPanel SearchPanel = new JPanel();
-		SearchPanel.setBounds(0, 40, 1582, 131);
+		SearchPanel.setBounds(0, 40, 1365, 131);
 		contentPane.add(SearchPanel);
 		SearchPanel.setBackground(new Color(8, 54, 69));
 		SearchPanel.setLayout(null);
@@ -208,7 +202,7 @@ public class Home extends JFrame {
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField.setBounds(487, 56, 650, 40);
+		textField.setBounds(527, 56, 504, 40);
 		SearchPanel.add(textField);
 		textField.setColumns(10);
 		
@@ -220,7 +214,7 @@ public class Home extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 102, 51));
-		panel_1.setBounds(1134, 56, 44, 40);
+		panel_1.setBounds(1028, 56, 44, 40);
 		SearchPanel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -231,7 +225,7 @@ public class Home extends JFrame {
 		
 		JLabel label_2 = new JLabel("");
 		label_2.setIcon(new ImageIcon(Home.class.getResource("/Image/\u0E15\u0E23\u0E30\u0E01\u0E25\u0E49\u0E32\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E322.png")));
-		label_2.setBounds(1258, 56, 32, 40);
+		label_2.setBounds(1133, 56, 32, 40);
 		SearchPanel.add(label_2);
 		
 		JPanel panel_2 = new JPanel();
@@ -247,7 +241,7 @@ public class Home extends JFrame {
 		SearchPanel.add(lblBig);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 169, 1582, 684);
+		scrollPane.setBounds(0, 169, 1365, 701);
 		contentPane.add(scrollPane);
 		
 		JPanel ShowPanel = new JPanel();
@@ -264,7 +258,7 @@ public class Home extends JFrame {
 			}
 		});
 		
-		bannerChoosing4.setBounds(565, 224, 15, 25);
+		bannerChoosing4.setBounds(613, 224, 15, 25);
 		ShowPanel.add(bannerChoosing4);
 		bannerChoosing4.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
@@ -275,7 +269,7 @@ public class Home extends JFrame {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner7.png")));
 			}
 		});
-		bannerChoosing7.setBounds(640, 224, 15, 25);
+		bannerChoosing7.setBounds(688, 224, 15, 25);
 		ShowPanel.add(bannerChoosing7);
 		bannerChoosing7.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
@@ -286,7 +280,7 @@ public class Home extends JFrame {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner5.png")));
 			}
 		});
-		bannerChoosing5.setBounds(590, 224, 15, 25);
+		bannerChoosing5.setBounds(638, 224, 15, 25);
 		ShowPanel.add(bannerChoosing5);
 		bannerChoosing5.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
@@ -297,7 +291,7 @@ public class Home extends JFrame {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner1.png")));
 			}
 		});
-		bannerChoosing1.setBounds(490, 224, 15, 25);
+		bannerChoosing1.setBounds(538, 224, 15, 25);
 		ShowPanel.add(bannerChoosing1);
 		bannerChoosing1.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
@@ -308,7 +302,7 @@ public class Home extends JFrame {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner3.png")));
 			}
 		});
-		bannerChoosing3.setBounds(540, 224, 15, 25);
+		bannerChoosing3.setBounds(588, 224, 15, 25);
 		ShowPanel.add(bannerChoosing3);
 		bannerChoosing3.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
@@ -319,7 +313,7 @@ public class Home extends JFrame {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner2.png")));
 			}
 		});
-		bannerChoosing2.setBounds(515, 224, 15, 25);
+		bannerChoosing2.setBounds(563, 224, 15, 25);
 		ShowPanel.add(bannerChoosing2);
 		bannerChoosing2.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
@@ -330,19 +324,19 @@ public class Home extends JFrame {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner6.png")));
 			}
 		});
-		bannerChoosing6.setBounds(615, 224, 15, 25);
+		bannerChoosing6.setBounds(663, 224, 15, 25);
 		ShowPanel.add(bannerChoosing6);
 		bannerChoosing6.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
 		JLabel lblMostPopular = new JLabel("Most Popular");
 		lblMostPopular.setFont(new Font("Dubai", Font.PLAIN, 26));
-		lblMostPopular.setBounds(180, 335, 162, 34);
+		lblMostPopular.setBounds(134, 337, 162, 34);
 		ShowPanel.add(lblMostPopular);
 		
 		JPanel GlobalCollPanel = new JPanel();
 		GlobalCollPanel.setLayout(null);
 		GlobalCollPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		GlobalCollPanel.setBounds(673, 286, 259, 45);
+		GlobalCollPanel.setBounds(559, 279, 259, 45);
 		ShowPanel.add(GlobalCollPanel);
 		
 		JLabel lblGlobalCollection = new JLabel("Global Collection");
@@ -358,7 +352,7 @@ public class Home extends JFrame {
 		JPanel VoucherPanel = new JPanel();
 		VoucherPanel.setLayout(null);
 		VoucherPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		VoucherPanel.setBounds(956, 286, 259, 45);
+		VoucherPanel.setBounds(842, 279, 259, 45);
 		ShowPanel.add(VoucherPanel);
 		
 		JLabel lblVouchers = new JLabel("Vouchers");
@@ -374,7 +368,7 @@ public class Home extends JFrame {
 		JPanel BigMallPanel = new JPanel();
 		BigMallPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		BigMallPanel.setLayout(null);
-		BigMallPanel.setBounds(391, 286, 259, 45);
+		BigMallPanel.setBounds(277, 279, 259, 45);
 		ShowPanel.add(BigMallPanel);
 		
 		JLabel lblBigmall = new JLabel("BigMall");
@@ -389,7 +383,7 @@ public class Home extends JFrame {
 		
 		JPanel pullDownMenu = new JPanel();
 		pullDownMenu.setBackground(Color.WHITE);
-		pullDownMenu.setBounds(183, 14, 198, 249);
+		pullDownMenu.setBounds(83, 14, 198, 249);
 		ShowPanel.add(pullDownMenu);
 		pullDownMenu.setLayout(null);
 		
@@ -511,7 +505,7 @@ public class Home extends JFrame {
 		JLabel lblGroceries = new JLabel("Groceries & Pets");
 		lblGroceries.setFont(new Font("Dubai", Font.PLAIN, 14));
 		lblGroceries.setBounds(10, 11, 100, 14);
-			
+		
 		JLabel arrowGroce = new JLabel("");
 		arrowGroce.setVisible(false);
 		arrowGroce.setIcon(new ImageIcon(Home.class.getResource("/Image/arrowMenu.png")));
@@ -597,42 +591,42 @@ public class Home extends JFrame {
 		
 		banner = new JLabel("");
 		banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner1.png")));
-		banner.setBounds(100, 0, 1559, 263);
+		banner.setBounds(0, 0, 1559, 263);
 		ShowPanel.add(banner);
 		
 		SubShowPanel = new JPanel();
-		SubShowPanel.setBounds(0, 382, 1580, 1000);
+		SubShowPanel.setBounds(0, 382, 1346, 1062);
 		ShowPanel.add(SubShowPanel);
 		SubShowPanel.setLayout(null);
 		SubShowPanel.setBackground(SystemColor.menu);
 		
 		MostPop_Img = new ImagePanel((Image) null);
 		MostPop_Img.setBackground(Color.WHITE);
-		MostPop_Img.setBounds(181, 13, 220, 212);
+		MostPop_Img.setBounds(137, 11, 220, 212);
 		SubShowPanel.add(MostPop_Img);
 		
 		tbl_MostPop = new JTable();
-		tbl_MostPop.setBounds(409, 13, 963, 212);
+		tbl_MostPop.setBounds(367, 11, 807, 212);
 		
 		SubShowPanel.add(tbl_MostPop);
 		
 		JLabel label_6 = new JLabel("Collections");
 		label_6.setFont(new Font("Dubai", Font.PLAIN, 26));
-		label_6.setBounds(181, 250, 162, 34);
+		label_6.setBounds(137, 255, 162, 34);
 		SubShowPanel.add(label_6);
 		
 		JLabel label_7 = new JLabel("Flash Sale");
 		label_7.setFont(new Font("Dubai", Font.PLAIN, 26));
-		label_7.setBounds(181, 550, 142, 34);
+		label_7.setBounds(137, 549, 142, 34);
 		SubShowPanel.add(label_7);
 		
 		tbl_FlashSale = new JTable();
-		tbl_FlashSale.setBounds(173, 655, 1199, 150);
+		tbl_FlashSale.setBounds(137, 661, 1079, 150);
 		SubShowPanel.add(tbl_FlashSale);
 		
 		JPanel tbl_Collections = new JPanel();
 		tbl_Collections.setLayout(null);
-		tbl_Collections.setBounds(154, 300, 1010, 228);
+		tbl_Collections.setBounds(116, 300, 871, 228);
 		SubShowPanel.add(tbl_Collections);
 		
 		JPanel CollOne_Show = new JPanel();
@@ -688,7 +682,7 @@ public class Home extends JFrame {
 		CollTwo_Show.add(Img3CollTwo);
 		
 		JPanel FlashTime_Panel = new JPanel();
-		FlashTime_Panel.setBounds(181, 597, 1191, 45);
+		FlashTime_Panel.setBounds(137, 596, 1079, 45);
 		SubShowPanel.add(FlashTime_Panel);
 		FlashTime_Panel.setBorder(UIManager.getBorder("List.focusCellHighlightBorder"));
 		FlashTime_Panel.setBackground(Color.DARK_GRAY);
@@ -755,7 +749,7 @@ public class Home extends JFrame {
 		FlashTime_Panel.add(label_14);
 		
 		JPanel FollowUsPanel = new JPanel();
-		FollowUsPanel.setBounds(0, 850, 1580, 152);
+		FollowUsPanel.setBounds(0, 909, 1346, 152);
 		SubShowPanel.add(FollowUsPanel);
 		FollowUsPanel.setLayout(null);
 		FollowUsPanel.setBackground(Color.WHITE);
