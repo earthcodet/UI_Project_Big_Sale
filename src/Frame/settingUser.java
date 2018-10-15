@@ -64,7 +64,7 @@ public class settingUser extends JFrame {
 	private JPanel panel_Manage_Account;
 	private JPanel panel_Manage_EditMyAccount;
 	static LinkedList<OrderProductDB> orderMyAccount;
-	static int[] sizeOrderID;
+	static int[] checkDuplicateOrderID;
 	private JTextField text_name;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -100,7 +100,12 @@ public class settingUser extends JFrame {
 		OrderProductManager MJManager = new OrderProductManager();
 		orderMyAccount = MJManager.get_Image_Order(user_id);
 		System.out.println(orderMyAccount.size());
-		sizeOrderID = new int[orderMyAccount.size()];
+		checkDuplicateOrderID = new int[orderMyAccount.size()];
+		checkDuplicateImage();
+		for(int i = 0 ;i<checkDuplicateOrderID.length;i++) {
+			System.out.print(checkDuplicateOrderID[i]+" ");
+		}
+		System.out.println();
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				//Home showHome = new Home();
@@ -935,21 +940,60 @@ public class settingUser extends JFrame {
 		lbl_Manage_MyReturns.setForeground(Color.GRAY);
 		lbl_Manage_Cancellations.setForeground(Color.GRAY);
 	}
-
+	public void checkDuplicateImage() {
+		//checkDuplicateOrderID
+		int tempCheck = 0;
+		for (int i = 1,j=0; i < orderMyAccount.size(); i++) {
+			if(orderMyAccount.get(i).get_order_id()== orderMyAccount.get(i-1).get_order_id()) {
+				tempCheck++;
+			}
+			else  {
+				if(tempCheck!=0)
+					checkDuplicateOrderID[j]=tempCheck+1;
+				else
+					checkDuplicateOrderID[j]=tempCheck;
+				tempCheck=0;
+				j++;
+			}
+		}
+	}
 	public void loadTablePageAccount() {
+		int[] checkImage = new int[4];
+		BufferedImage[] img= new BufferedImage[4] ;
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("คำสั่งซื้อ #");
 		model.addColumn("สั่งซื้อวันที่");
-		model.addColumn("รายการสินค้า");
+		model.addColumn("รายการสินค้า#1");
+		model.addColumn("รายการสินค้า#2");
+		model.addColumn("รายการสินค้า#3");
+		model.addColumn("รายการสินค้า#4");
 		model.addColumn("ยอดรวมทั้งสื้น");
 		model.addColumn("");
-		for (int i = 0; i < orderMyAccount.size(); i++) {
-			model.addRow(new Object[] { orderMyAccount.get(i).get_order_id(), orderMyAccount.get(i).get_date(),
-					orderMyAccount.get(i).getNewProduct_Img(), "฿" + orderMyAccount.get(i).get_priceAll() + ".00",
+		for (int i = 0,j=0,k=0; i < orderMyAccount.size(); i++) {
+			System.out.println(orderMyAccount.get(i).get_order_id());
+			if(checkDuplicateOrderID[j]>0) {
+				System.out.println(orderMyAccount.get(i).get_order_id()+"if "+i);
+				 img[checkDuplicateOrderID[j]-1]=orderMyAccount.get(i).getNewProduct_Img();
+				 checkDuplicateOrderID[j]=checkDuplicateOrderID[j]-1;
+			}
+			if(checkDuplicateOrderID[j]==0) {
+				if(img[0]==null&&img[1]==null&&img[2]==null&&img[3]==null)
+				System.out.println(orderMyAccount.get(i).get_order_id()+"else "+i);
+				model.addRow(new Object[] { orderMyAccount.get(i).get_order_id(), orderMyAccount.get(i).get_date(),
+					orderMyAccount.get(i).getNewProduct_Img(),img[1],img[2],img[3], "฿" + orderMyAccount.get(i).get_priceAll() + ".00",
 					"จัดการคำสั่งซื้อ" });
+				System.out.println("x"+i+" "+orderMyAccount.get(i).get_order_id());
+				img[0]=null;
+				img[1]=null;
+				img[2]=null;
+				img[3]=null;
+			}
 		}
 		NewProduct_tbl.setModel(model);
-		NewProduct_tbl.getColumn("รายการสินค้า").setCellRenderer(new DataTableRenderer());
+		for(int i =1 ; i<5;i++) {
+			if(	NewProduct_tbl.getColumn("รายการสินค้า#"+i)!=null)
+				NewProduct_tbl.getColumn("รายการสินค้า#"+i).setCellRenderer(new DataTableRenderer());
+		}
 		DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)NewProduct_tbl.getDefaultRenderer(Object.class);
 	    renderer.setHorizontalAlignment( SwingConstants.CENTER );
 		NewProduct_tbl.setRowHeight(120);
