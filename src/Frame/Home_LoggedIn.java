@@ -26,6 +26,7 @@ import javax.swing.UIManager;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.DefaultCellEditor;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -41,6 +42,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 import javax.swing.JTextField;
@@ -76,76 +78,114 @@ public class Home_LoggedIn extends JFrame {
 	private JLabel Mincount;
 	private JLabel Hourcount;
 	private JLabel banner;
-	
-	/***********************/
-	//static String username;
-	/***********************/
-//public void setUser(String user) {
-	//username=user;
-//}
-	
-	public Home_LoggedIn(String username) {
+	private JPanel Sub_pullDownMenu;
+	List<JPanel> subMenus = new LinkedList<>();
+	int user_id;
+	private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
+	    Image img = icon.getImage();
+	    Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
+	    return new ImageIcon(resizedImage);
+	    }
+	public Home_LoggedIn(String username,int user_id) {
+		this.user_id=user_id;
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				int res = JOptionPane.showConfirmDialog(Home_LoggedIn.this, "Are you sure to closing window?", "Confirm closing", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-				if(res == JOptionPane.YES_OPTION) {
-					dispose();
-				}
-				else
-					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+				Home open = new Home();
+				open.setVisible(true);
+				dispose();
 			}
 		});
-		setResizable(false);
-		setTitle("BIG SALE - Home (Logged in)");
+		setTitle("BIG SALE - Home");
 		Toolkit kit = Toolkit.getDefaultToolkit();
 	    Image icons = kit.createImage(Home_LoggedIn.class.getResource("/Image/ICON.png"));
 	    setIconImage(icons);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 0, 1031, 760);
+		setBounds(100, 0, 1385, 909);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JPanel panelShowTag = new JPanel();
+		panelShowTag.setVisible(false);
+		panelShowTag.setBounds(787, 43, 232, 225);
+		contentPane.add(panelShowTag);
+		
+		//Start
+		
+		
+		JPanel panelShow = new JPanel();
+		panelShow.setVisible(false);
+		panelShow.setBounds(984, 42, 232, 226);
+		contentPane.add(panelShow);
+		panelShow.setLayout(null);
+		
+		JLabel lblProfile = new JLabel("");
+		ImageIcon icon = new ImageIcon(settingUser2.class.getResource("/Image/smile.png"));
+		lblProfile.setBounds(21, 35, 36, 34);
+		int offset = lblProfile.getInsets().left;
+		lblProfile.setIcon(resizeIcon(icon, lblProfile.getWidth() - offset, lblProfile.getHeight() - offset));
+		panelShow.add(lblProfile);
+		
+		JLabel lblNewLabel = new JLabel("\u0E08\u0E31\u0E14\u0E01\u0E32\u0E23\u0E01\u0E31\u0E1A\u0E1A\u0E31\u0E0D\u0E0A\u0E35\u0E02\u0E2D\u0E07\u0E09\u0E31\u0E19");
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				settingUser open = new settingUser(username,user_id);
+				open.setVisible(true);
+				dispose();
+			}
+		});
+		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(67, 35, 134, 24);
+		panelShow.add(lblNewLabel);
+		
+		JLabel labelMyOrder = new JLabel("\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23\u0E2A\u0E31\u0E48\u0E07\u0E0B\u0E37\u0E49\u0E2D\u0E02\u0E2D\u0E07\u0E09\u0E31\u0E19");
+		labelMyOrder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		labelMyOrder.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelMyOrder.setBounds(67, 95, 134, 34);
+		panelShow.add(labelMyOrder);
+		
+		JLabel labelLogOut = new JLabel("\u0E2D\u0E2D\u0E01\u0E08\u0E32\u0E01\u0E23\u0E30\u0E1A\u0E1A");
+		labelLogOut.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Home open = new Home();
+				open.setVisible(true);
+				dispose();
+			}
+		});
+		labelLogOut.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		labelLogOut.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelLogOut.setBounds(67, 157, 134, 27);
+		panelShow.add(labelLogOut);
+		
+		JLabel lblOrder = new JLabel("");
+		icon = new ImageIcon(settingUser2.class.getResource("/Image/box.png"));
+		offset = lblOrder.getInsets().left;
+		lblOrder.setBounds(21, 95, 36, 34);
+		lblOrder.setIcon(resizeIcon(icon, lblOrder.getWidth() - offset, lblOrder.getHeight() - offset));
+		panelShow.add(lblOrder);
+		
+		JLabel lblLogout = new JLabel("");
+		offset = lblLogout.getInsets().left;
+		icon = new ImageIcon(settingUser2.class.getResource("/Image/logout.png"));
+		lblLogout.setBounds(21, 150, 36, 34);
+		lblLogout.setIcon(resizeIcon(icon, lblLogout.getWidth() - offset, lblLogout.getHeight() - offset));
+		panelShow.add(lblLogout);
+		
 		JPanel MenuBar = new JPanel();
-		MenuBar.setBounds(0, 0, 1021, 42);
+		MenuBar.setBounds(0, 0, 1365, 42);
 		contentPane.add(MenuBar);
 		MenuBar.setBackground(new Color(0, 51, 51));
 		MenuBar.setLayout(null);
 		
 		JLabel taggingProduct_Bar = new JLabel("\u0E15\u0E34\u0E14\u0E15\u0E32\u0E21\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32");
-		taggingProduct_Bar.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-		});
-		taggingProduct_Bar.setBorder(UIManager.getBorder("MenuBar.border"));
 		taggingProduct_Bar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taggingProduct_Bar.setForeground(Color.WHITE);
-		taggingProduct_Bar.setBounds(472, 11, 76, 23);
+		taggingProduct_Bar.setBounds(863, 11, 76, 23);
 		MenuBar.add(taggingProduct_Bar);
-		
-		JLabel logout_Bar = new JLabel("\u0E2D\u0E2D\u0E01\u0E08\u0E32\u0E01\u0E23\u0E30\u0E1A\u0E1A");
-		logout_Bar.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int res = JOptionPane.showConfirmDialog(Home_LoggedIn.this, "คุณแน่ใจที่จะออกจากระบบหรือไม่?", "Log out", JOptionPane.YES_NO_OPTION);
-				if(res == JOptionPane.YES_OPTION) {
-					Home nw = new Home();
-					nw.setVisible(true);
-					dispose();
-				}
-				else {
-					setVisible(true);
-				}
-			}
-		});
-		logout_Bar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		
-		logout_Bar.setForeground(Color.WHITE);
-		logout_Bar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		logout_Bar.setBorder(UIManager.getBorder("MenuBar.border"));
-		logout_Bar.setBounds(576, 11, 88, 23);
-		MenuBar.add(logout_Bar);
 		
 		JLabel about_Bar = new JLabel("");
 		about_Bar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -155,76 +195,70 @@ public class Home_LoggedIn extends JFrame {
 				ab.setVisible(true);
 			}
 		});
-		about_Bar.setBounds(974, 11, 22, 27);
+		about_Bar.setBounds(1313, 11, 22, 27);
 		MenuBar.add(about_Bar);
 		about_Bar.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/markz.png")));
 		
-		JLabel lblWelcome = new JLabel("\u0E22\u0E34\u0E19\u0E14\u0E35\u0E15\u0E49\u0E2D\u0E19\u0E23\u0E31\u0E1A\u0E04\u0E38\u0E13 :");
-		lblWelcome.setForeground(Color.WHITE);
-		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblWelcome.setBounds(693, 11, 114, 23);
-		MenuBar.add(lblWelcome);
-		
-		JLabel lblUsername = new JLabel("");
-		lblUsername.setForeground(Color.WHITE);
-		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUsername.setBounds(807, 11, 157, 23);
-		lblUsername.setText(username);
-		MenuBar.add(lblUsername);
+		JLabel lblUser = new JLabel("New label");
+		lblUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblUser.setForeground(Color.WHITE);
+		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUser.setBounds(1010, 12, 239, 23);
+		MenuBar.add(lblUser);
 		
 		JPanel SearchPanel = new JPanel();
-		SearchPanel.setBounds(0, 40, 1021, 131);
+		SearchPanel.setBounds(0, 40, 1365, 131);
 		contentPane.add(SearchPanel);
 		SearchPanel.setBackground(new Color(8, 54, 69));
 		SearchPanel.setLayout(null);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/\u0E42\u0E25\u0E42\u0E01\u0E49\u0E2A\u0E35\u0E02\u0E32\u0E273.png")));
-		label.setBounds(10, 11, 108, 96);
+		label.setBounds(135, 13, 108, 96);
 		SearchPanel.add(label);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField.setBounds(305, 40, 434, 55);
+		textField.setBounds(527, 56, 504, 40);
 		SearchPanel.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblBigSale = new JLabel("SALE");
 		lblBigSale.setFont(new Font("Segoe WP Black", Font.BOLD, 24));
 		lblBigSale.setForeground(Color.WHITE);
-		lblBigSale.setBounds(158, 40, 70, 40);
+		lblBigSale.setBounds(331, 39, 70, 40);
 		SearchPanel.add(lblBigSale);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 102, 51));
-		panel_1.setBounds(736, 40, 53, 55);
+		panel_1.setBounds(1028, 56, 44, 40);
 		SearchPanel.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/\u0E04\u0E49\u0E19\u0E2B\u0E32 \u0E2A\u0E35\u0E02\u0E32\u0E272.png")));
-		label_1.setBounds(13, 3, 33, 51);
+		label_1.setBounds(10, 0, 33, 43);
 		panel_1.add(label_1);
 		
 		JLabel label_2 = new JLabel("");
 		label_2.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/\u0E15\u0E23\u0E30\u0E01\u0E25\u0E49\u0E32\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E322.png")));
-		label_2.setBounds(836, 46, 44, 40);
+		label_2.setBounds(1133, 56, 32, 40);
 		SearchPanel.add(label_2);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(255, 102, 51));
-		panel_2.setBounds(108, 78, 115, 10);
+		panel_2.setBounds(281, 77, 115, 10);
 		SearchPanel.add(panel_2);
 		
 		JLabel lblBig = new JLabel("BIG");
 		lblBig.setBackground(Color.WHITE);
 		lblBig.setForeground(new Color(255, 102, 51));
 		lblBig.setFont(new Font("Segoe WP Black", Font.BOLD, 24));
-		lblBig.setBounds(107, 40, 53, 40);
+		lblBig.setBounds(280, 39, 53, 40);
 		SearchPanel.add(lblBig);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 169, 1017, 552);
+		scrollPane.setBounds(0, 170, 1365, 700);
 		contentPane.add(scrollPane);
 		
 		JPanel ShowPanel = new JPanel();
@@ -234,85 +268,223 @@ public class Home_LoggedIn extends JFrame {
 		ShowPanel.setLayout(null);
 		
 		JLabel bannerChoosing4 = new JLabel("");
+		bannerChoosing4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing4.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner4.png")));
 			}
 		});
 		
-		bannerChoosing4.setBounds(565, 224, 15, 25);
+		Sub_pullDownMenu = new JPanel();
+		Sub_pullDownMenu.setVisible(false);
+		Sub_pullDownMenu.setBackground(Color.WHITE);
+		Sub_pullDownMenu.setBounds(281, 0, 223, 263);
+		ShowPanel.add(Sub_pullDownMenu);
+		Sub_pullDownMenu.setLayout(null);
+		
+JPanel subMenu1 = new JPanel();
+		
+		JLabel submenulbl1 = new JLabel("?");
+		submenulbl1.setFont(new Font("Dubai", Font.PLAIN, 14));
+		submenulbl1.setBounds(10, 11, 129, 14);
+		subMenu1.add(submenulbl1);
+		
+		subMenu1.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				subMenu1.setBackground(Color.GRAY);
+				submenulbl1.setForeground(new Color(51, 255, 255));
+
+			}
+			public void mouseExited(MouseEvent e) {
+				subMenu1.setBackground(Color.WHITE);
+				submenulbl1.setForeground(Color.BLACK);
+				
+			}
+		});
+		subMenu1.setVisible(false);
+		subMenu1.setBackground(Color.WHITE);
+		subMenu1.setBounds(0, 0, 223, 34);
+		Sub_pullDownMenu.add(subMenu1);
+		subMenu1.setLayout(null);
+		
+		JPanel subMenu2 = new JPanel();
+		
+		JLabel submenulbl2 = new JLabel("?");
+		submenulbl2.setFont(new Font("Dubai", Font.PLAIN, 14));
+		submenulbl2.setBounds(10, 11, 129, 14);
+		subMenu2.add(submenulbl2);
+		subMenu2.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				subMenu2.setBackground(Color.GRAY);
+				submenulbl2.setForeground(new Color(51, 255, 255));
+			}
+			public void mouseExited(MouseEvent e) {
+				subMenu2.setBackground(Color.WHITE);
+				submenulbl2.setForeground(Color.BLACK);
+				
+			}
+		});
+		
+		subMenu2.setVisible(false);
+		subMenu2.setBackground(Color.WHITE);
+		subMenu2.setBounds(0, 34, 223, 34);
+		Sub_pullDownMenu.add(subMenu2);
+		subMenu2.setLayout(null);
+		
+		JPanel subMenu3 = new JPanel();
+		
+		JLabel submenulbl3 = new JLabel("?");
+		submenulbl3.setFont(new Font("Dubai", Font.PLAIN, 14));
+		submenulbl3.setBounds(10, 11, 129, 14);
+		subMenu3.add(submenulbl3);
+		subMenu3.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				subMenu3.setBackground(Color.GRAY);
+				submenulbl3.setForeground(new Color(51, 255, 255));
+			}
+			public void mouseExited(MouseEvent e) {
+				subMenu3.setBackground(Color.WHITE);
+				submenulbl3.setForeground(Color.BLACK);
+				
+			}
+		});		
+		subMenu3.setVisible(false);
+		subMenu3.setBackground(Color.WHITE);
+		subMenu3.setBounds(0, 68, 223, 34);
+		Sub_pullDownMenu.add(subMenu3);
+		subMenu3.setLayout(null);
+		
+		JPanel subMenu4 = new JPanel();
+		
+		JLabel submenulbl4 = new JLabel("?");
+		submenulbl4.setFont(new Font("Dubai", Font.PLAIN, 14));
+		submenulbl4.setBounds(10, 11, 129, 14);
+		subMenu4.add(submenulbl4);
+		subMenu4.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				subMenu4.setBackground(Color.GRAY);
+				submenulbl4.setForeground(new Color(51, 255, 255));
+			}
+			public void mouseExited(MouseEvent e) {
+				subMenu4.setBackground(Color.WHITE);
+				submenulbl4.setForeground(Color.BLACK);
+				
+			}
+		});		
+		subMenu4.setVisible(false);
+		subMenu4.setBackground(Color.WHITE);
+		subMenu4.setBounds(0, 103, 223, 34);
+		Sub_pullDownMenu.add(subMenu4);
+		subMenu4.setLayout(null);
+		
+		JPanel subMenu5 = new JPanel();
+		
+		JLabel submenulbl5 = new JLabel("?");
+		submenulbl5.setFont(new Font("Dubai", Font.PLAIN, 14));
+		submenulbl5.setBounds(10, 11, 129, 14);
+		subMenu5.add(submenulbl5);
+		subMenu5.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				subMenu5.setBackground(Color.GRAY);
+				submenulbl5.setForeground(new Color(51, 255, 255));
+			}
+			public void mouseExited(MouseEvent e) {
+				subMenu5.setBackground(Color.WHITE);
+				submenulbl5.setForeground(Color.BLACK);
+				
+			}
+		});	
+		subMenu5.setVisible(false);
+		subMenu5.setBackground(Color.WHITE);
+		subMenu5.setBounds(0, 138, 223, 34);
+		Sub_pullDownMenu.add(subMenu5);
+		subMenu5.setLayout(null);
+		
+		subMenus.add(subMenu1);
+		subMenus.add(subMenu2);
+		subMenus.add(subMenu3);
+		subMenus.add(subMenu4);
+		subMenus.add(subMenu5);
+		
+		bannerChoosing4.setBounds(613, 224, 15, 25);
 		ShowPanel.add(bannerChoosing4);
 		bannerChoosing4.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing7 = new JLabel("");
+		bannerChoosing7.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing7.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner7.png")));
 			}
 		});
-		bannerChoosing7.setBounds(640, 224, 15, 25);
+		bannerChoosing7.setBounds(688, 224, 15, 25);
 		ShowPanel.add(bannerChoosing7);
 		bannerChoosing7.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing5 = new JLabel("");
+		bannerChoosing5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing5.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner5.png")));
 			}
 		});
-		bannerChoosing5.setBounds(590, 224, 15, 25);
+		bannerChoosing5.setBounds(638, 224, 15, 25);
 		ShowPanel.add(bannerChoosing5);
 		bannerChoosing5.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing1 = new JLabel("");
+		bannerChoosing1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner1.png")));
 			}
 		});
-		bannerChoosing1.setBounds(490, 224, 15, 25);
+		bannerChoosing1.setBounds(538, 224, 15, 25);
 		ShowPanel.add(bannerChoosing1);
 		bannerChoosing1.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing3 = new JLabel("");
+		bannerChoosing3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing3.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner3.png")));
 			}
 		});
-		bannerChoosing3.setBounds(540, 224, 15, 25);
+		bannerChoosing3.setBounds(588, 224, 15, 25);
 		ShowPanel.add(bannerChoosing3);
 		bannerChoosing3.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing2 = new JLabel("");
+		bannerChoosing2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing2.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner2.png")));
 			}
 		});
-		bannerChoosing2.setBounds(515, 224, 15, 25);
+		bannerChoosing2.setBounds(563, 224, 15, 25);
 		ShowPanel.add(bannerChoosing2);
 		bannerChoosing2.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing6 = new JLabel("");
+		bannerChoosing6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing6.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner6.png")));
 			}
 		});
-		bannerChoosing6.setBounds(615, 224, 15, 25);
+		bannerChoosing6.setBounds(663, 224, 15, 25);
 		ShowPanel.add(bannerChoosing6);
 		bannerChoosing6.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel lblMostPopular = new JLabel("Most Popular");
 		lblMostPopular.setFont(new Font("Dubai", Font.PLAIN, 26));
-		lblMostPopular.setBounds(47, 335, 162, 34);
+		lblMostPopular.setBounds(134, 337, 162, 34);
 		ShowPanel.add(lblMostPopular);
 		
 		JPanel GlobalCollPanel = new JPanel();
 		GlobalCollPanel.setLayout(null);
 		GlobalCollPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		GlobalCollPanel.setBounds(365, 260, 259, 45);
+		GlobalCollPanel.setBounds(559, 279, 259, 45);
 		ShowPanel.add(GlobalCollPanel);
 		
 		JLabel lblGlobalCollection = new JLabel("Global Collection");
@@ -320,15 +492,28 @@ public class Home_LoggedIn extends JFrame {
 		lblGlobalCollection.setBounds(41, 5, 153, 35);
 		GlobalCollPanel.add(lblGlobalCollection);
 		
-		JLabel label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/gc2.png")));
-		label_4.setBounds(5, 5, 250, 35);
-		GlobalCollPanel.add(label_4);
+		JLabel btnGblColl = new JLabel("");
+		btnGblColl.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/gc2.png")));
+		btnGblColl.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				//btnGblColl.setIcon(new ImageIcon(Home.class.getResource("/Image/gblClicked.png")));
+			}
+			public void mouseEntered(MouseEvent e) {
+				lblGlobalCollection.setForeground(new Color(102, 0, 255));
+				btnGblColl.setIcon(new ImageIcon(Home.class.getResource("/Image/gblClicked.png")));
+			}
+			public void mouseExited(MouseEvent e) {
+				lblGlobalCollection.setForeground(Color.BLACK);
+				btnGblColl.setIcon(new ImageIcon(Home.class.getResource("/Image/gbl.png")));
+			}
+		});
+		btnGblColl.setBounds(5, 5, 250, 35);
+		GlobalCollPanel.add(btnGblColl);
 		
 		JPanel VoucherPanel = new JPanel();
 		VoucherPanel.setLayout(null);
 		VoucherPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		VoucherPanel.setBounds(648, 260, 259, 45);
+		VoucherPanel.setBounds(842, 279, 259, 45);
 		ShowPanel.add(VoucherPanel);
 		
 		JLabel lblVouchers = new JLabel("Vouchers");
@@ -336,15 +521,28 @@ public class Home_LoggedIn extends JFrame {
 		lblVouchers.setBounds(41, 5, 153, 35);
 		VoucherPanel.add(lblVouchers);
 		
-		JLabel label_5 = new JLabel("");
-		label_5.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/vc2.png")));
-		label_5.setBounds(5, 5, 250, 35);
-		VoucherPanel.add(label_5);
+		JLabel btnVouchers = new JLabel("");
+		btnVouchers.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/vc2.png")));
+		btnVouchers.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+			public void mouseEntered(MouseEvent e) {
+				lblVouchers.setForeground(new Color(255, 153, 51));
+				btnVouchers.setIcon(new ImageIcon(Home.class.getResource("/Image/vchClicked.png")));
+			}
+			public void mouseExited(MouseEvent e) {
+				lblVouchers.setForeground(Color.BLACK);
+				btnVouchers.setIcon(new ImageIcon(Home.class.getResource("/Image/vc2.png")));
+			}
+		});
+		btnVouchers.setBounds(10, 6, 250, 35);
+		VoucherPanel.add(btnVouchers);
 		
 		JPanel BigMallPanel = new JPanel();
 		BigMallPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		BigMallPanel.setLayout(null);
-		BigMallPanel.setBounds(83, 260, 259, 45);
+		BigMallPanel.setBounds(277, 279, 259, 45);
 		ShowPanel.add(BigMallPanel);
 		
 		JLabel lblBigmall = new JLabel("BigMall");
@@ -352,14 +550,32 @@ public class Home_LoggedIn extends JFrame {
 		lblBigmall.setBounds(41, 5, 153, 35);
 		BigMallPanel.add(lblBigmall);
 		
-		JLabel label_9 = new JLabel("");
-		label_9.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/bt2.png")));
-		label_9.setBounds(5, 5, 250, 35);
-		BigMallPanel.add(label_9);
+		JLabel btnBigMall = new JLabel("");
+		btnBigMall.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+			public void mouseEntered(MouseEvent e) {
+				btnBigMall.setBounds(5, 5, 250, 35);
+				btnBigMall.setIcon(new ImageIcon(Home.class.getResource("/Image/bgmClicked.png")));
+			}
+			public void mouseExited(MouseEvent e) {
+				lblBigmall.setForeground(Color.BLACK);
+				btnBigMall.setIcon(new ImageIcon(Home.class.getResource("/Image/bgmNEW.png")));
+			}
+		});
+		btnBigMall.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/bt2.png")));
+		btnBigMall.setBounds(5, 5, 250, 35);
+		BigMallPanel.add(btnBigMall);
 		
 		JPanel pullDownMenu = new JPanel();
 		pullDownMenu.setBackground(Color.WHITE);
-		pullDownMenu.setBounds(83, 0, 198, 249);
+		pullDownMenu.setBounds(83, 14, 198, 249);
+		pullDownMenu.addMouseListener(new MouseAdapter() {
+			public void mouseExited(MouseEvent e) {
+				Sub_pullDownMenu.setVisible(false);
+			}
+		});
 		ShowPanel.add(pullDownMenu);
 		pullDownMenu.setLayout(null);
 		
@@ -379,6 +595,7 @@ public class Home_LoggedIn extends JFrame {
 				arrowToy.setVisible(true);
 				ToysPanel.setBackground(Color.GRAY);
 				lblToys.setForeground(new Color(51, 255, 255));
+				ShowSubMenuPanel(subMenus,new String[]{"Babies Gear", "Baby Clothing", "Baby Personal Care", "Baby & Toys", "Figure & Collectibles"});
 			}
 			public void mouseExited(MouseEvent e) {
 				arrowToy.setVisible(false);
@@ -407,6 +624,8 @@ public class Home_LoggedIn extends JFrame {
 				arrowMale.setVisible(true);
 				MalesPanel.setBackground(Color.GRAY);
 				lblMale.setForeground(new Color(51, 255, 255));
+				
+				ShowSubMenuPanel(subMenus,new String[]{"Shirts","Pants","Shoes","Accessories"});
 			}
 			public void mouseExited(MouseEvent e) {
 				arrowMale.setVisible(false);
@@ -436,6 +655,8 @@ public class Home_LoggedIn extends JFrame {
 				arrowFemale.setVisible(true);
 				FemalesPanel.setBackground(Color.GRAY);
 				lblFemales.setForeground(new Color(51, 255, 255));
+				
+				ShowSubMenuPanel(subMenus,new String[]{"Shirts","Pants","Shoes","Accessories"});
 			}
 			public void mouseExited(MouseEvent e) {
 				arrowFemale.setVisible(false);
@@ -465,6 +686,8 @@ public class Home_LoggedIn extends JFrame {
 				arrowElec.setVisible(true);
 				ElecPanel.setBackground(Color.GRAY);
 				lblElectronics.setForeground(new Color(51, 255, 255));
+				
+				ShowSubMenuPanel(subMenus,new String[]{"Electronics"});
 			}
 			public void mouseExited(MouseEvent e) {
 				arrowElec.setVisible(false);
@@ -481,7 +704,7 @@ public class Home_LoggedIn extends JFrame {
 		JLabel lblGroceries = new JLabel("Groceries & Pets");
 		lblGroceries.setFont(new Font("Dubai", Font.PLAIN, 14));
 		lblGroceries.setBounds(10, 11, 100, 14);
-			
+		
 		JLabel arrowGroce = new JLabel("");
 		arrowGroce.setVisible(false);
 		arrowGroce.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/arrowMenu.png")));
@@ -494,6 +717,8 @@ public class Home_LoggedIn extends JFrame {
 				arrowGroce.setVisible(true);
 				GroceriesPanel.setBackground(Color.GRAY);
 				lblGroceries.setForeground(new Color(51, 255, 255));
+				
+				ShowSubMenuPanel(subMenus,new String[]{"Groceries","Pets"});
 			}
 			public void mouseExited(MouseEvent e) {
 				arrowGroce.setVisible(false);
@@ -523,6 +748,8 @@ public class Home_LoggedIn extends JFrame {
 				arrowSport.setVisible(true);
 				SportPanel.setBackground(Color.GRAY);
 				lblSport.setForeground(new Color(51, 255, 255));
+				
+				ShowSubMenuPanel(subMenus,new String[]{"Sports","Travel"});
 			}
 			public void mouseExited(MouseEvent e) {
 				arrowSport.setVisible(false);
@@ -552,6 +779,8 @@ public class Home_LoggedIn extends JFrame {
 				arrowHealth.setVisible(true);
 				HealthPanel.setBackground(Color.GRAY);
 				lblHealth.setForeground(new Color(51, 255, 255));
+				
+				ShowSubMenuPanel(subMenus,new String[]{"Home","Lifestyle"});
 			}
 			public void mouseExited(MouseEvent e) {
 				arrowHealth.setVisible(false);
@@ -567,42 +796,42 @@ public class Home_LoggedIn extends JFrame {
 		
 		banner = new JLabel("");
 		banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner1.png")));
-		banner.setBounds(0, -14, 998, 263);
+		banner.setBounds(0, 0, 1559, 263);
 		ShowPanel.add(banner);
 		
 		SubShowPanel = new JPanel();
-		SubShowPanel.setBounds(0, 380, 998, 1000);
+		SubShowPanel.setBounds(0, 382, 1346, 1062);
 		ShowPanel.add(SubShowPanel);
 		SubShowPanel.setLayout(null);
 		SubShowPanel.setBackground(SystemColor.menu);
 		
 		MostPop_Img = new ImagePanel((Image) null);
 		MostPop_Img.setBackground(Color.WHITE);
-		MostPop_Img.setBounds(48, 11, 220, 212);
+		MostPop_Img.setBounds(137, 11, 220, 212);
 		SubShowPanel.add(MostPop_Img);
 		
 		tbl_MostPop = new JTable();
-		tbl_MostPop.setBounds(276, 11, 660, 212);
+		tbl_MostPop.setBounds(367, 11, 807, 212);
 		
 		SubShowPanel.add(tbl_MostPop);
 		
 		JLabel label_6 = new JLabel("Collections");
 		label_6.setFont(new Font("Dubai", Font.PLAIN, 26));
-		label_6.setBounds(48, 252, 162, 34);
+		label_6.setBounds(137, 255, 162, 34);
 		SubShowPanel.add(label_6);
 		
 		JLabel label_7 = new JLabel("Flash Sale");
 		label_7.setFont(new Font("Dubai", Font.PLAIN, 26));
-		label_7.setBounds(48, 552, 142, 34);
+		label_7.setBounds(137, 549, 142, 34);
 		SubShowPanel.add(label_7);
 		
 		tbl_FlashSale = new JTable();
-		tbl_FlashSale.setBounds(48, 650, 892, 150);
+		tbl_FlashSale.setBounds(137, 661, 1079, 150);
 		SubShowPanel.add(tbl_FlashSale);
 		
 		JPanel tbl_Collections = new JPanel();
 		tbl_Collections.setLayout(null);
-		tbl_Collections.setBounds(48, 297, 888, 228);
+		tbl_Collections.setBounds(116, 300, 871, 228);
 		SubShowPanel.add(tbl_Collections);
 		
 		JPanel CollOne_Show = new JPanel();
@@ -658,7 +887,7 @@ public class Home_LoggedIn extends JFrame {
 		CollTwo_Show.add(Img3CollTwo);
 		
 		JPanel FlashTime_Panel = new JPanel();
-		FlashTime_Panel.setBounds(48, 597, 892, 45);
+		FlashTime_Panel.setBounds(137, 596, 1079, 45);
 		SubShowPanel.add(FlashTime_Panel);
 		FlashTime_Panel.setBorder(UIManager.getBorder("List.focusCellHighlightBorder"));
 		FlashTime_Panel.setBackground(Color.DARK_GRAY);
@@ -725,7 +954,7 @@ public class Home_LoggedIn extends JFrame {
 		FlashTime_Panel.add(label_14);
 		
 		JPanel FollowUsPanel = new JPanel();
-		FollowUsPanel.setBounds(0, 850, 1021, 152);
+		FollowUsPanel.setBounds(0, 909, 1346, 152);
 		SubShowPanel.add(FollowUsPanel);
 		FollowUsPanel.setLayout(null);
 		FollowUsPanel.setBackground(Color.WHITE);
@@ -733,18 +962,18 @@ public class Home_LoggedIn extends JFrame {
 		JLabel label_8 = new JLabel("Follow Us");
 		label_8.setForeground(Color.DARK_GRAY);
 		label_8.setFont(new Font("Dubai", Font.PLAIN, 25));
-		label_8.setBounds(338, 40, 108, 25);
+		label_8.setBounds(448, 31, 108, 25);
 		FollowUsPanel.add(label_8);
 		
 		JLabel label_11 = new JLabel("\u00A9 BigMall 2018");
 		label_11.setForeground(Color.DARK_GRAY);
-		label_11.setBounds(860, 49, 72, 14);
+		label_11.setBounds(970, 40, 72, 14);
 		FollowUsPanel.add(label_11);
 		
 		JPanel LogosPanel = new JPanel();
 		LogosPanel.setLayout(null);
 		LogosPanel.setBackground(Color.WHITE);
-		LogosPanel.setBounds(338, 65, 264, 44);
+		LogosPanel.setBounds(448, 56, 264, 44);
 		FollowUsPanel.add(LogosPanel);
 		
 		JLabel label_13 = new JLabel("");
@@ -790,6 +1019,96 @@ public class Home_LoggedIn extends JFrame {
 		Countdown();
 		changeBanner();
 		
+		lblUser.setText("บัญชีของ "+username.toUpperCase());
+		
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelShow.setVisible(false);
+				panelShowTag.setVisible(false);
+			}
+		});
+		
+		panelShow.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				lblNewLabel.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						lblNewLabel.setForeground(new Color(255, 69, 0));
+						lblNewLabel.setBorder(UIManager.getBorder("MenuBar.border"));
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						lblNewLabel.setForeground(Color.BLACK);
+					}
+				});
+				labelMyOrder.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						labelMyOrder.setForeground(new Color(255, 69, 0));
+						labelMyOrder.setBorder(UIManager.getBorder("MenuBar.border"));
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						labelMyOrder.setForeground(Color.BLACK);
+					}
+				});
+				labelLogOut.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						labelLogOut.setForeground(new Color(255, 69, 0));
+						labelLogOut.setBorder(UIManager.getBorder("MenuBar.border"));
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						labelLogOut.setForeground(Color.BLACK);
+					}
+				});
+			}
+		});
+		
+		lblUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblUser.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				panelShow.setVisible(true);
+				panelShowTag.setVisible(false);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblUser.setForeground(new Color(255, 69, 0));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblUser.setForeground(Color.WHITE);
+			}
+		
+		});
+		
+		taggingProduct_Bar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		taggingProduct_Bar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				taggingProduct_Bar.setForeground(new Color(255, 69, 0));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				taggingProduct_Bar.setForeground(Color.WHITE);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelShow.setVisible(false);
+				panelShowTag.setVisible(true);
+			}
+		});
+		
+		textField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelShow.setVisible(false);
+				panelShowTag.setVisible(false);
+			}
+		});
 	}
 	public void loadData() {
 		DefaultTableModel modelMost = new DefaultTableModel();
@@ -885,5 +1204,22 @@ public class Home_LoggedIn extends JFrame {
 		timer.setInitialDelay(0);
 	    timer.start();
 	}
-	
+	public void ShowSubMenuPanel(List<JPanel> AllPanels,String[] TotalShows) {
+		Sub_pullDownMenu.setVisible(true);
+		for(int i=0;i<AllPanels.size();i++) {
+			JPanel tempPanel = (JPanel)AllPanels.get(i);
+			if((i+1) <= TotalShows.length) {
+				tempPanel.setVisible(true);
+				for(Component components : tempPanel.getComponents()) {
+					if(components instanceof JLabel) {
+						JLabel lbl = (JLabel)components;
+						lbl.setText(TotalShows[i]);
+					}
+				}
+			}
+			else {
+				tempPanel.setVisible(false);
+			}
+		}
+	}
 }

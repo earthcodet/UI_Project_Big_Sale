@@ -17,6 +17,9 @@ import javax.swing.table.TableColumn;
 
 import DataManager.NewProductDB;
 import DataManager.NewProductManager;
+import DataManager.OrderProductDB;
+import DataManager.OrderProductManager;
+import DataManager.ProductManager;
 import DatabaseAndTools.DataTableRenderer;
 import DatabaseAndTools.ImagePanel;
 import DatabaseAndTools.OpenFileFilter;
@@ -25,7 +28,9 @@ import javax.swing.UIManager;
 import java.awt.Color;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
 import java.awt.Font;
@@ -55,6 +60,15 @@ public class aDMIN extends JFrame {
 	private JTable NewProduct_tbl;
 	ImagePanel img_NP;
 	LinkedList<NewProductDB> listNP;
+	LinkedList<OrderProductDB> orderMyAccount;
+	private JTextField txt_productId;
+	private JTextField temail;
+	private JTextField tpriceall;
+	private JTextField torderid;
+	private JTextField tproductid;
+	private JTextField tproductcount;
+	private JTextField textField;
+	ImageIcon img1;
 	/**
 	 * Launch the application.
 	 */
@@ -191,6 +205,9 @@ public class aDMIN extends JFrame {
 		NewProduct_SCP.setViewportView(NewProduct_tbl);
 		tabbedPane.setEnabledAt(0, true);
 		
+		JPanel addOrder = new JPanel();
+		tabbedPane.addTab("New tab", null, addOrder, null);
+		
 		JLabel lblusername = new JLabel("~Unknow~");
 		lblusername.setForeground(Color.DARK_GRAY);
 		lblusername.setFont(new Font("CS ChatThai", Font.PLAIN, 24));
@@ -225,21 +242,194 @@ public class aDMIN extends JFrame {
 		label_1.setBounds(10, 13, 40, 16);
 		contentPane.add(label_1);
 		loadNewProduct();
+
+		tabbedPane.addTab("addimage", null, addOrder, null);
+		addOrder.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(472, 5, 1, 1);
+		panel.setLayout(null);
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Form ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(30, 144, 255)));
+		addOrder.add(panel);
+		
+		txt_productId = new JTextField();
+		txt_productId.setColumns(10);
+		txt_productId.setBounds(91, 90, 244, 30);
+		addOrder.add(txt_productId);
+		
+		JLabel lblProductid = new JLabel("Product_id");
+		lblProductid.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblProductid.setBounds(10, 95, 71, 19);
+		addOrder.add(lblProductid);
+		
+		ImagePanel imagePanel = new ImagePanel();
+		imagePanel.setBorder(UIManager.getBorder("FileChooser.listViewBorder"));
+		imagePanel.setBounds(88, 145, 244, 219);
+		addOrder.add(imagePanel);
+		
+		JLabel label_3 = new JLabel("Image");
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		label_3.setBounds(32, 145, 46, 19);
+		addOrder.add(label_3);
+		
+		JButton button = new JButton("Browse");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fc = new JFileChooser();
+				fc.addChoosableFileFilter(new OpenFileFilter("jpg","Photo in JPG format"));
+				fc.addChoosableFileFilter(new OpenFileFilter("png","Photo in PNG format"));
+				fc.addChoosableFileFilter(new OpenFileFilter("jpeg","Photo in JPEG format"));
+				fc.setAcceptAllFileFilterUsed(false);
+				int returnVal = fc.showOpenDialog(aDMIN.this);
+				if(returnVal == JFileChooser.APPROVE_OPTION) {
+					File f = fc.getSelectedFile();
+					try {
+						BufferedImage buffimg = ImageIO.read(f);
+						BufferedImage newbuffimg = new BufferedImage(buffimg.getWidth(),
+								buffimg.getHeight(), BufferedImage.TYPE_INT_RGB);
+						
+						newbuffimg.createGraphics().drawImage(buffimg, 0, 0, Color.WHITE, null);
+						imagePanel.setImage(newbuffimg);
+					} catch (IOException eX) {
+						eX.printStackTrace();
+					}
+				}
+			}
+		});
+		button.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		button.setBounds(91, 375, 105, 30);
+		addOrder.add(button);
+		
+		JButton btnAdd = new JButton("addimage");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NewProductDB x;
+				if(txt_productId.getText().trim().length()<1) {
+					JOptionPane.showMessageDialog(aDMIN.this,"Product_id");
+				}
+				else{
+					x = new NewProductDB((BufferedImage)imagePanel.getImage(), txt_productId.getText().trim());
+					if(ImagePanel.isDraw) {
+						ProductManager.saveTable_imageproduct(x);			
+						JOptionPane.showMessageDialog(aDMIN.this,"SAVE FINISH!!");
+					}
+					else {
+						JOptionPane.showMessageDialog(aDMIN.this,"INSERT IMAGE!!");
+						return;
+					};
+				}
+				
+				/*
+						
+				NewProductDB x;
+				if(txt_type_NP.getText().trim().length() <= 0) 
+					x = new NewProductDB((BufferedImage)img_NP.getImage(), txt_type_NP.getText().trim());
+				else 
+					x = new NewProductDB((BufferedImage)img_NP.getImage(), txt_type_NP.getText().trim());
+				if(ImagePanel.isDraw) {
+					NewProductManager.saveNew_Product(x);			
+					JOptionPane.showMessageDialog(aDMIN.this,"SAVE FINISH!!");
+				}
+				else {
+					JOptionPane.showMessageDialog(aDMIN.this,"INSERT IMAGE!!");
+					return;
+				}
+				loadNewProduct();
+				*/
+			}
+		});
+		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnAdd.setBounds(91, 420, 105, 30);
+		addOrder.add(btnAdd);
+		
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_1, null);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("E-mail");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setBounds(29, 62, 106, 43);
+		panel_1.add(lblNewLabel);
+		
+		temail = new JTextField();
+		temail.setBounds(115, 62, 382, 35);
+		panel_1.add(temail);
+		temail.setColumns(10);
+		
+		JLabel lblPriceall = new JLabel("PriceAll");
+		lblPriceall.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblPriceall.setBounds(29, 116, 106, 43);
+		panel_1.add(lblPriceall);
+		
+		tpriceall = new JTextField();
+		tpriceall.setEditable(false);
+		tpriceall.setColumns(10);
+		tpriceall.setBounds(115, 116, 382, 35);
+		panel_1.add(tpriceall);
+		
+		torderid = new JTextField();
+		torderid.setBounds(280, 204, 197, 35);
+		panel_1.add(torderid);
+		torderid.setColumns(10);
+		
+		JLabel lblOrderid = new JLabel("order_id");
+		lblOrderid.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblOrderid.setBounds(134, 196, 106, 43);
+		panel_1.add(lblOrderid);
+		
+		JLabel lblProductid_1 = new JLabel("\tproduct_id");
+		lblProductid_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblProductid_1.setBounds(134, 278, 106, 43);
+		panel_1.add(lblProductid_1);
+		
+		JLabel lblProductcount = new JLabel("product_count");
+		lblProductcount.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblProductcount.setBounds(115, 357, 144, 43);
+		panel_1.add(lblProductcount);
+		
+		tproductid = new JTextField();
+		tproductid.setColumns(10);
+		tproductid.setBounds(280, 293, 197, 35);
+		panel_1.add(tproductid);
+		
+		tproductcount = new JTextField();
+		tproductcount.setColumns(10);
+		tproductcount.setBounds(280, 372, 197, 35);
+		panel_1.add(tproductcount);
+		
+		JLabel label_2 = new JLabel("PriceAll");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_2.setBounds(134, 441, 106, 43);
+		panel_1.add(label_2);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setColumns(10);
+		textField.setBounds(280, 449, 197, 35);
+		panel_1.add(textField);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(578, 76, 89, 23);
+		panel_1.add(btnNewButton);
 	}
 	public void loadNewProduct() {
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("ID");
 		model.addColumn("Image");
 		model.addColumn("Type");
-		
 		for(NewProductDB pb : listNP = NewProductManager.getAllNew_Product()) {
 			model.addRow(new Object[]{pb.getNewProduct_ID(), pb.getNewProduct_Img(), pb.getNewProduct_Type()});
 		}
-		
+	
 		NewProduct_tbl.setModel(model);
 		NewProduct_tbl.getColumn("Image").setCellRenderer(new DataTableRenderer());
 		DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)NewProduct_tbl.getDefaultRenderer(Object.class);
 	    renderer.setHorizontalAlignment( SwingConstants.CENTER );
 		NewProduct_tbl.setRowHeight(120);
+		
+	
+	}
+	public Image bufferedImagetoImage(BufferedImage bi) {
+	    return Toolkit.getDefaultToolkit().createImage(bi.getSource());
 	}
 }

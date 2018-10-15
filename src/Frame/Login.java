@@ -102,7 +102,7 @@ public class Login extends JFrame {
 		panel_1.setLayout(null);
 
 		JLabel lblNewLabel_1 = new JLabel(
-				" \n\u0E2B\u0E21\u0E32\u0E22\u0E40\u0E25\u0E02\u0E42\u0E17\u0E23\u0E28\u0E31\u0E1E\u0E17\u0E4C\u0E2B\u0E23\u0E37\u0E2D\u0E2D\u0E35\u0E40\u0E21\u0E25\u0E4C\n\n\n\u2028 ");
+				" \r\n\u0E2B\u0E21\u0E32\u0E22\u0E40\u0E25\u0E02\u0E42\u0E17\u0E23\u0E28\u0E31\u0E1E\u0E17\u0E4C\u0E2B\u0E23\u0E37\u0E2D\u0E2D\u0E35\u0E40\u0E21\u0E25\u0E4C\r\n\r\n\r\n\u2028*");
 		lblNewLabel_1.setFont(new Font("CS ChatThai", Font.PLAIN, 25));
 		lblNewLabel_1.setBounds(23, 13, 367, 43);
 		panel_1.add(lblNewLabel_1);
@@ -163,7 +163,7 @@ public class Login extends JFrame {
 		textshow.setBounds(23, 175, 310, 44);
 		panel_1.add(textshow);
 
-		JLabel label = new JLabel("\u0E23\u0E2B\u0E31\u0E2A\u0E1C\u0E48\u0E32\u0E19");
+		JLabel label = new JLabel("\u0E23\u0E2B\u0E31\u0E2A\u0E1C\u0E48\u0E32\u0E19*");
 		label.setFont(new Font("CS ChatThai", Font.PLAIN, 25));
 		label.setBounds(23, 122, 245, 43);
 		panel_1.add(label);
@@ -213,7 +213,7 @@ public class Login extends JFrame {
 						// dispose();
 
 						if (check.equals("user")) {
-							Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin());
+							Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
 						loginHome.setVisible(true);
 						}
 						if (check.equals("admin")) {
@@ -285,7 +285,7 @@ public class Login extends JFrame {
 							dispose();
 
 							if (check.equals("user")) {
-								Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin());
+								Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
 								loginHome.setVisible(true);
 							}
 							if (check.equals("admin")) {
@@ -320,7 +320,7 @@ public class Login extends JFrame {
 							JOptionPane.showMessageDialog(Login.this, title, "แจ้งเตือน", JOptionPane.PLAIN_MESSAGE);
 							System.out.println(check);
 							if (check.equals("user")) {
-								Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin());
+								Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
 								loginHome.setVisible(true);
 							}
 							if (check.equals("admin")) {
@@ -356,7 +356,7 @@ public class Login extends JFrame {
 							dispose();
 
 							if (check.equals("user")) {
-								Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin());
+								Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
 								loginHome.setVisible(true);
 							}
 							if (check.equals("admin")) {

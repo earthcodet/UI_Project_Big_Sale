@@ -1,43 +1,20 @@
 package DataManager;
-
-import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import javax.imageio.ImageIO;
-
 import DatabaseAndTools.MySQLConnector;
 
 public class UserManager {
 	private String nameUser;
+	private int user_id;
+	public int getUserID() {
+		return user_id;
+	}
 	public String getNameUserLogin() {
 		return nameUser;
 	}
-	public static void saveNew_Product(NewProductDB x) {
-		try {
-			Connection conn = MySQLConnector.Connect();
-			String query = "INSERT INTO new_product VALUES (0, ?, ?)"; 																								
-			PreparedStatement st = conn.prepareStatement(query);
-			if (x.getNewProduct_Img() != null) {
-				ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-				ImageIO.write(x.getNewProduct_Img(), "jpg", outStream);
-				ImageIO.write(x.getNewProduct_Img(), "png", outStream);
-				ImageIO.write(x.getNewProduct_Img(), "jpeg", outStream);
-				st.setBytes(1, outStream.toByteArray());
-				outStream.close();
-			} else 
-				st.setBytes(1, new byte[0]);
-			st.setString(2, x.getNewProduct_Type());
-			st.executeUpdate();
-			st.close();
-		} catch (Exception e) {
-			System.out.println("Got an exception!");
-			System.out.println(e.getMessage());
-		}
-	}
-	
 	public boolean check_Email(String text) {
 	    try {
 	    	Connection conn = MySQLConnector.Connect();
@@ -81,11 +58,12 @@ public class UserManager {
 			String txt = "error";
 			Connection conn = MySQLConnector.Connect();
 			Statement st = conn.createStatement();
-			ResultSet rec = st.executeQuery("SELECT phone,email,password,type,name FROM user");
+			ResultSet rec = st.executeQuery("SELECT user_id,phone,email,password,type,name FROM user");
 			//Email
 			while (rec.next()) {
 			   if ((user.equals(rec.getString("email"))||user.equals(rec.getString("phone")))&&password.equals(rec.getString("password"))) {
 				   nameUser=rec.getString("name");
+				   user_id = rec.getInt("user_id");
 				   txt = rec.getString("type");
 				   }
 			}
@@ -128,18 +106,19 @@ public class UserManager {
 	 public boolean Insert(String email, String phone,String password ,String name,String date,String gender) {
 		    try {
 		    	Connection conn = MySQLConnector.Connect();
-				String query= "INSERT INTO user(email,phone,password,name,type,date,gender) VALUES(?,?,?,?,?,?,?)"; 	
+				String query= "INSERT INTO `user` VALUES(0,?,?,?,?,?,?,?)"; 	
 				PreparedStatement stmt = conn.prepareStatement(query);
-				stmt.setString(1, email);
-				stmt.setString(2, phone);
-				stmt.setString(3, password);
-				stmt.setString(4, name);
-				stmt.setString(5, "user");
-				stmt.setString(6, date);
-				stmt.setString(7, gender);
+				stmt.setString(1, phone);
+				stmt.setString(2, password);
+				stmt.setString(3, name);
+				stmt.setString(4, "user");
+				stmt.setString(5, date);
+				stmt.setString(6, gender);
+				stmt.setString(7, email);
 				stmt.executeUpdate();
 				return true;
 		    } catch (Exception exo) {
+		    	System.out.println(exo);
 		    	return false;
 		    }
 	 }

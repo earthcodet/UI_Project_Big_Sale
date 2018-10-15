@@ -368,6 +368,7 @@ public class Register extends JFrame {
 					if(pass) {
 						String gender = c.chackgender(cbgender.getSelectedItem().toString());
 						boolean checkInsert = c.Insert(textemail.getText(), textphone.getText(), new String(txtpass.getPassword()).trim(), textname.getText(),date,gender);
+						System.out.println(checkInsert);
 						if(checkInsert) {
 						JLabel title = new JLabel("สมัครสมาชิกเรียบร้อย");
 						title.setFont(new Font("CS ChatThai", Font.PLAIN, 35));
