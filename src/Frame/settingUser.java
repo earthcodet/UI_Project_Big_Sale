@@ -52,6 +52,7 @@ import java.awt.Rectangle;
 import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 public class settingUser extends JFrame {
 	private JTextField textField;
@@ -82,6 +83,7 @@ public class settingUser extends JFrame {
 	JLabel textPhone;
 	JLabel lblstatus2;
 	int user_id;
+	String username;
 	JLabel lblstatus;
 	JLabel lbl_edit;
 	UserManagerAddress managerAddress = new UserManagerAddress();
@@ -95,6 +97,8 @@ public class settingUser extends JFrame {
 	}
 
 	public settingUser(String username, int user_id) {
+		this.username=username;
+		setMinimumSize(new Dimension(900, 900));
 		this.user_id = user_id;
 		OrderProductManager MJManager = new OrderProductManager();
 		orderMyAccount = MJManager.get_Image_Order(user_id);
@@ -120,7 +124,7 @@ public class settingUser extends JFrame {
 		Image icons = kit.createImage(Home.class.getResource("/Image/ICON.png"));
 		setIconImage(icons);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 0, 1367, 909);
+		setBounds(100, 0, 1285, 909);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -132,9 +136,9 @@ public class settingUser extends JFrame {
 		JPanel panelShowTag = new JPanel();
 		panelShowTag.setVisible(false);
 		panelShowTag.setBackground(Color.WHITE);
-		panelShowTag.setBounds(787, 43, 232, 225);
+		panelShowTag.setBounds(671, 42, 232, 225);
 		contentPane.add(panelShowTag);
-		panelShow.setBounds(984, 42, 232, 226);
+		panelShow.setBounds(868, 41, 232, 226);
 		contentPane.add(panelShow);
 		panelShow.setBorder(UIManager.getBorder("DesktopIcon.border"));
 		panelShow.setBackground(Color.WHITE);
@@ -190,7 +194,7 @@ public class settingUser extends JFrame {
 		panelShow.add(label_7);
 
 		JPanel MenuBar = new JPanel();
-		MenuBar.setBounds(0, 0, 1365, 42);
+		MenuBar.setBounds(0, 0, 1281, 42);
 		contentPane.add(MenuBar);
 		MenuBar.setBackground(new Color(0, 51, 51));
 		MenuBar.setLayout(null);
@@ -218,7 +222,7 @@ public class settingUser extends JFrame {
 		taggingProduct_Bar.setBorder(UIManager.getBorder("MenuBar.border"));
 		taggingProduct_Bar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taggingProduct_Bar.setForeground(Color.WHITE);
-		taggingProduct_Bar.setBounds(860, 15, 76, 23);
+		taggingProduct_Bar.setBounds(773, 12, 76, 23);
 		MenuBar.add(taggingProduct_Bar);
 
 		JLabel about_Bar = new JLabel("");
@@ -229,7 +233,7 @@ public class settingUser extends JFrame {
 				ab.setVisible(true);
 			}
 		});
-		about_Bar.setBounds(1313, 11, 22, 27);
+		about_Bar.setBounds(1205, 8, 22, 27);
 		MenuBar.add(about_Bar);
 		about_Bar.setIcon(new ImageIcon(Home.class.getResource("/Image/markz.png")));
 
@@ -256,16 +260,23 @@ public class settingUser extends JFrame {
 
 		lblUser.setForeground(Color.WHITE);
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUser.setBounds(997, 15, 212, 23);
+		lblUser.setBounds(896, 11, 202, 23);
 		MenuBar.add(lblUser);
 
 		JPanel SearchPanel = new JPanel();
-		SearchPanel.setBounds(0, 40, 1365, 131);
+		SearchPanel.setBounds(0, 42, 1281, 129);
 		contentPane.add(SearchPanel);
 		SearchPanel.setBackground(new Color(8, 54, 69));
 		SearchPanel.setLayout(null);
 
 		JLabel label = new JLabel("");
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				goHome();
+			}
+		});
+		label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		label.setIcon(new ImageIcon(
 				Home.class.getResource("/Image/\u0E42\u0E25\u0E42\u0E01\u0E49\u0E2A\u0E35\u0E02\u0E32\u0E273.png")));
 		label.setBounds(135, 13, 108, 96);
@@ -285,9 +296,16 @@ public class settingUser extends JFrame {
 		textField.setColumns(10);
 
 		JLabel lblBigSale = new JLabel("SALE");
+		lblBigSale.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goHome();
+			}
+		});
+		lblBigSale.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblBigSale.setFont(new Font("Segoe WP Black", Font.BOLD, 24));
 		lblBigSale.setForeground(Color.WHITE);
-		lblBigSale.setBounds(331, 39, 70, 40);
+		lblBigSale.setBounds(304, 39, 70, 40);
 		SearchPanel.add(lblBigSale);
 
 		JPanel panel_1 = new JPanel();
@@ -309,19 +327,33 @@ public class settingUser extends JFrame {
 		SearchPanel.add(label_2);
 
 		JPanel panel_2 = new JPanel();
+		panel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goHome();
+			}
+		});
+		panel_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panel_2.setBackground(new Color(255, 102, 51));
-		panel_2.setBounds(281, 77, 115, 10);
+		panel_2.setBounds(254, 77, 115, 10);
 		SearchPanel.add(panel_2);
 
 		JLabel lblBig = new JLabel("BIG");
+		lblBig.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goHome();
+			}
+		});
+		lblBig.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblBig.setBackground(Color.WHITE);
 		lblBig.setForeground(new Color(255, 102, 51));
 		lblBig.setFont(new Font("Segoe WP Black", Font.BOLD, 24));
-		lblBig.setBounds(280, 39, 53, 40);
+		lblBig.setBounds(253, 39, 53, 40);
 		SearchPanel.add(lblBig);
 
 		JPanel panelSetting = new JPanel();
-		panelSetting.setBounds(41, 204, 262, 383);
+		panelSetting.setBounds(0, 193, 232, 383);
 		contentPane.add(panelSetting);
 		panelSetting.setLayout(null);
 
@@ -385,7 +417,7 @@ public class settingUser extends JFrame {
 		panelSetting.add(lbl_Manage_Cancellations);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(324, 193, 1027, 678);
+		panel.setBounds(255, 193, 1027, 678);
 		contentPane.add(panel);
 		panel.setLayout(new CardLayout(0, 0));
 
@@ -1123,5 +1155,10 @@ public class settingUser extends JFrame {
 		panel_Manage_Account.setVisible(false);
 		panel_Manage_EditMyAccount.setVisible(false);
 		panel_Manage_AddAddress.setVisible(false);
+	}
+	public void goHome() {
+		Home_LoggedIn open = new Home_LoggedIn(username,user_id);
+		open.setVisible(true);
+		dispose();
 	}
 }

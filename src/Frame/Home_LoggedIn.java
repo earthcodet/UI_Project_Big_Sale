@@ -87,6 +87,7 @@ public class Home_LoggedIn extends JFrame {
 	    return new ImageIcon(resizedImage);
 	    }
 	public Home_LoggedIn(String username,int user_id) {
+		setMinimumSize(new Dimension(900, 900));
 		this.user_id=user_id;
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -100,7 +101,7 @@ public class Home_LoggedIn extends JFrame {
 	    Image icons = kit.createImage(Home_LoggedIn.class.getResource("/Image/ICON.png"));
 	    setIconImage(icons);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 0, 1385, 909);
+		setBounds(100, 0, 1259, 909);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -108,7 +109,7 @@ public class Home_LoggedIn extends JFrame {
 		
 		JPanel panelShowTag = new JPanel();
 		panelShowTag.setVisible(false);
-		panelShowTag.setBounds(787, 43, 232, 225);
+		panelShowTag.setBounds(692, 43, 232, 225);
 		contentPane.add(panelShowTag);
 		
 		//Start
@@ -116,12 +117,12 @@ public class Home_LoggedIn extends JFrame {
 		
 		JPanel panelShow = new JPanel();
 		panelShow.setVisible(false);
-		panelShow.setBounds(984, 42, 232, 226);
+		panelShow.setBounds(889, 42, 232, 226);
 		contentPane.add(panelShow);
 		panelShow.setLayout(null);
 		
 		JLabel lblProfile = new JLabel("");
-		ImageIcon icon = new ImageIcon(settingUser2.class.getResource("/Image/smile.png"));
+		ImageIcon icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/smile.png"));
 		lblProfile.setBounds(21, 35, 36, 34);
 		int offset = lblProfile.getInsets().left;
 		lblProfile.setIcon(resizeIcon(icon, lblProfile.getWidth() - offset, lblProfile.getHeight() - offset));
@@ -162,7 +163,7 @@ public class Home_LoggedIn extends JFrame {
 		panelShow.add(labelLogOut);
 		
 		JLabel lblOrder = new JLabel("");
-		icon = new ImageIcon(settingUser2.class.getResource("/Image/box.png"));
+		icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/box.png"));
 		offset = lblOrder.getInsets().left;
 		lblOrder.setBounds(21, 95, 36, 34);
 		lblOrder.setIcon(resizeIcon(icon, lblOrder.getWidth() - offset, lblOrder.getHeight() - offset));
@@ -170,13 +171,13 @@ public class Home_LoggedIn extends JFrame {
 		
 		JLabel lblLogout = new JLabel("");
 		offset = lblLogout.getInsets().left;
-		icon = new ImageIcon(settingUser2.class.getResource("/Image/logout.png"));
+		icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/logout.png"));
 		lblLogout.setBounds(21, 150, 36, 34);
 		lblLogout.setIcon(resizeIcon(icon, lblLogout.getWidth() - offset, lblLogout.getHeight() - offset));
 		panelShow.add(lblLogout);
 		
 		JPanel MenuBar = new JPanel();
-		MenuBar.setBounds(0, 0, 1365, 42);
+		MenuBar.setBounds(0, 0, 1243, 42);
 		contentPane.add(MenuBar);
 		MenuBar.setBackground(new Color(0, 51, 51));
 		MenuBar.setLayout(null);
@@ -184,7 +185,7 @@ public class Home_LoggedIn extends JFrame {
 		JLabel taggingProduct_Bar = new JLabel("\u0E15\u0E34\u0E14\u0E15\u0E32\u0E21\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32");
 		taggingProduct_Bar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taggingProduct_Bar.setForeground(Color.WHITE);
-		taggingProduct_Bar.setBounds(863, 11, 76, 23);
+		taggingProduct_Bar.setBounds(780, 10, 76, 23);
 		MenuBar.add(taggingProduct_Bar);
 		
 		JLabel about_Bar = new JLabel("");
@@ -195,7 +196,7 @@ public class Home_LoggedIn extends JFrame {
 				ab.setVisible(true);
 			}
 		});
-		about_Bar.setBounds(1313, 11, 22, 27);
+		about_Bar.setBounds(1176, 6, 22, 27);
 		MenuBar.add(about_Bar);
 		about_Bar.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/markz.png")));
 		
@@ -203,11 +204,11 @@ public class Home_LoggedIn extends JFrame {
 		lblUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblUser.setForeground(Color.WHITE);
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUser.setBounds(1010, 12, 239, 23);
+		lblUser.setBounds(927, 11, 239, 23);
 		MenuBar.add(lblUser);
 		
 		JPanel SearchPanel = new JPanel();
-		SearchPanel.setBounds(0, 40, 1365, 131);
+		SearchPanel.setBounds(0, 43, 1243, 128);
 		contentPane.add(SearchPanel);
 		SearchPanel.setBackground(new Color(8, 54, 69));
 		SearchPanel.setLayout(null);
@@ -258,7 +259,7 @@ public class Home_LoggedIn extends JFrame {
 		SearchPanel.add(lblBig);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 170, 1365, 700);
+		scrollPane.setBounds(0, 170, 1243, 700);
 		contentPane.add(scrollPane);
 		
 		JPanel ShowPanel = new JPanel();
@@ -478,7 +479,7 @@ JPanel subMenu1 = new JPanel();
 		
 		JLabel lblMostPopular = new JLabel("Most Popular");
 		lblMostPopular.setFont(new Font("Dubai", Font.PLAIN, 26));
-		lblMostPopular.setBounds(134, 337, 162, 34);
+		lblMostPopular.setBounds(83, 337, 162, 34);
 		ShowPanel.add(lblMostPopular);
 		
 		JPanel GlobalCollPanel = new JPanel();
@@ -800,44 +801,44 @@ JPanel subMenu1 = new JPanel();
 		ShowPanel.add(banner);
 		
 		SubShowPanel = new JPanel();
-		SubShowPanel.setBounds(0, 382, 1346, 1062);
+		SubShowPanel.setBounds(0, 382, 1241, 1062);
 		ShowPanel.add(SubShowPanel);
 		SubShowPanel.setLayout(null);
 		SubShowPanel.setBackground(SystemColor.menu);
 		
 		MostPop_Img = new ImagePanel((Image) null);
 		MostPop_Img.setBackground(Color.WHITE);
-		MostPop_Img.setBounds(137, 11, 220, 212);
+		MostPop_Img.setBounds(99, 11, 220, 212);
 		SubShowPanel.add(MostPop_Img);
 		
 		tbl_MostPop = new JTable();
-		tbl_MostPop.setBounds(367, 11, 807, 212);
+		tbl_MostPop.setBounds(329, 11, 807, 212);
 		
 		SubShowPanel.add(tbl_MostPop);
 		
 		JLabel label_6 = new JLabel("Collections");
 		label_6.setFont(new Font("Dubai", Font.PLAIN, 26));
-		label_6.setBounds(137, 255, 162, 34);
+		label_6.setBounds(99, 257, 162, 34);
 		SubShowPanel.add(label_6);
 		
 		JLabel label_7 = new JLabel("Flash Sale");
 		label_7.setFont(new Font("Dubai", Font.PLAIN, 26));
-		label_7.setBounds(137, 549, 142, 34);
+		label_7.setBounds(100, 580, 142, 34);
 		SubShowPanel.add(label_7);
 		
 		tbl_FlashSale = new JTable();
-		tbl_FlashSale.setBounds(137, 661, 1079, 150);
+		tbl_FlashSale.setBounds(100, 692, 1037, 150);
 		SubShowPanel.add(tbl_FlashSale);
 		
 		JPanel tbl_Collections = new JPanel();
 		tbl_Collections.setLayout(null);
-		tbl_Collections.setBounds(116, 300, 871, 228);
+		tbl_Collections.setBounds(85, 311, 1024, 228);
 		SubShowPanel.add(tbl_Collections);
 		
 		JPanel CollOne_Show = new JPanel();
 		CollOne_Show.setLayout(null);
 		CollOne_Show.setBackground(Color.WHITE);
-		CollOne_Show.setBounds(23, 11, 405, 209);
+		CollOne_Show.setBounds(55, 11, 405, 209);
 		tbl_Collections.add(CollOne_Show);
 		
 		JLabel lblCollOne = new JLabel("Converse!!! Callin'");
@@ -863,7 +864,7 @@ JPanel subMenu1 = new JPanel();
 		JPanel CollTwo_Show = new JPanel();
 		CollTwo_Show.setLayout(null);
 		CollTwo_Show.setBackground(Color.WHITE);
-		CollTwo_Show.setBounds(462, 11, 405, 209);
+		CollTwo_Show.setBounds(572, 11, 405, 209);
 		tbl_Collections.add(CollTwo_Show);
 		
 		JLabel lblCollTwo = new JLabel("be Save and be Seer");
@@ -887,7 +888,7 @@ JPanel subMenu1 = new JPanel();
 		CollTwo_Show.add(Img3CollTwo);
 		
 		JPanel FlashTime_Panel = new JPanel();
-		FlashTime_Panel.setBounds(137, 596, 1079, 45);
+		FlashTime_Panel.setBounds(100, 627, 1037, 45);
 		SubShowPanel.add(FlashTime_Panel);
 		FlashTime_Panel.setBorder(UIManager.getBorder("List.focusCellHighlightBorder"));
 		FlashTime_Panel.setBackground(Color.DARK_GRAY);
@@ -954,7 +955,7 @@ JPanel subMenu1 = new JPanel();
 		FlashTime_Panel.add(label_14);
 		
 		JPanel FollowUsPanel = new JPanel();
-		FollowUsPanel.setBounds(0, 909, 1346, 152);
+		FollowUsPanel.setBounds(0, 877, 1241, 152);
 		SubShowPanel.add(FollowUsPanel);
 		FollowUsPanel.setLayout(null);
 		FollowUsPanel.setBackground(Color.WHITE);
