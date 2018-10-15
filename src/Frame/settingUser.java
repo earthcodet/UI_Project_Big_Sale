@@ -50,6 +50,8 @@ import java.awt.Button;
 import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.ScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class settingUser extends JFrame {
 	private JTextField textField;
@@ -66,11 +68,11 @@ public class settingUser extends JFrame {
 	static LinkedList<OrderProductDB> orderMyAccount;
 	private int[] checkDuplicateOrderID;
 	private JTextField text_name;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField text_AddAddress_name;
+	private JTextField text_AddAddress_phone;
+	private JTextField text_AddAddress_address;
+	private JTextField text_AddAddress_district;
+	private JTextField text_AddAddress_zipcode;
 	JPanel panel_Manage_AddAddress;
 	JTextPane textAdress;
 	JTextPane textAdress2;
@@ -85,10 +87,7 @@ public class settingUser extends JFrame {
 	UserManagerAddress managerAddress = new UserManagerAddress();
 	private JTable NewProduct_tbl;
 	
-	public static void main(String[] args) {
-		settingUser open2 = new settingUser("Panuwat Rueharom",1);
-		open2.setVisible(true);
-	}
+
 	private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
 		Image img = icon.getImage();
 		Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight, java.awt.Image.SCALE_SMOOTH);
@@ -436,10 +435,18 @@ public class settingUser extends JFrame {
 		JLabel label_8 = new JLabel("\u0E2A\u0E21\u0E38\u0E14\u0E17\u0E35\u0E48\u0E2D\u0E22\u0E39\u0E48");
 		label_8.setForeground(Color.BLACK);
 		label_8.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_8.setBounds(29, 11, 84, 28);
+		label_8.setBounds(29, 11, 63, 28);
 		panel_Address.add(label_8);
 
 		lbl_edit = new JLabel("\u0E41\u0E01\u0E49\u0E44\u0E02");
+		lbl_edit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+					falseAll();
+					panel_Manage_AddAddress.setVisible(true);
+				
+			}
+		});
 		lbl_edit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_edit.setForeground(Color.BLUE);
 		lbl_edit.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -672,26 +679,26 @@ public class settingUser extends JFrame {
 		lblNewLabel_4.setBounds(39, 44, 145, 25);
 		panel_5.add(lblNewLabel_4);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(39, 80, 393, 40);
-		panel_5.add(textField_1);
-		textField_1.setColumns(10);
+		text_AddAddress_name = new JTextField();
+		text_AddAddress_name.setBounds(39, 80, 393, 40);
+		panel_5.add(text_AddAddress_name);
+		text_AddAddress_name.setColumns(10);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(39, 186, 393, 40);
-		panel_5.add(textField_2);
+		text_AddAddress_phone = new JTextField();
+		text_AddAddress_phone.setColumns(10);
+		text_AddAddress_phone.setBounds(39, 199, 393, 40);
+		panel_5.add(text_AddAddress_phone);
 
 		JLabel label_25 = new JLabel(
 				"\u0E2B\u0E21\u0E32\u0E22\u0E40\u0E25\u0E02\u0E42\u0E17\u0E23\u0E28\u0E31\u0E1E\u0E17\u0E4C");
 		label_25.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_25.setBounds(39, 150, 145, 25);
+		label_25.setBounds(39, 163, 145, 25);
 		panel_5.add(label_25);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(488, 80, 393, 40);
-		panel_5.add(textField_3);
+		text_AddAddress_address = new JTextField();
+		text_AddAddress_address.setColumns(10);
+		text_AddAddress_address.setBounds(488, 80, 393, 40);
+		panel_5.add(text_AddAddress_address);
 
 		JLabel label_26 = new JLabel("\u0E17\u0E35\u0E48\u0E2D\u0E22\u0E39\u0E48");
 		label_26.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -703,20 +710,20 @@ public class settingUser extends JFrame {
 		label_27.setBounds(488, 150, 145, 25);
 		panel_5.add(label_27);
 
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(488, 292, 393, 40);
-		panel_5.add(textField_5);
+		text_AddAddress_district = new JTextField();
+		text_AddAddress_district.setColumns(10);
+		text_AddAddress_district.setBounds(488, 292, 393, 40);
+		panel_5.add(text_AddAddress_district);
 
 		JLabel label_28 = new JLabel("\u0E40\u0E02\u0E15/\u0E2D\u0E33\u0E40\u0E20\u0E2D");
 		label_28.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		label_28.setBounds(488, 256, 145, 25);
 		panel_5.add(label_28);
 
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(488, 404, 393, 40);
-		panel_5.add(textField_6);
+		text_AddAddress_zipcode = new JTextField();
+		text_AddAddress_zipcode.setColumns(10);
+		text_AddAddress_zipcode.setBounds(488, 404, 393, 40);
+		panel_5.add(text_AddAddress_zipcode);
 
 		JLabel label_29 = new JLabel("\u0E23\u0E2B\u0E31\u0E2A\u0E44\u0E1B\u0E23\u0E29\u0E13\u0E35\u0E22\u0E4C");
 		label_29.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -730,8 +737,8 @@ public class settingUser extends JFrame {
 		button_1.setBounds(39, 292, 285, 50);
 		panel_5.add(button_1);
 
-		JComboBox combox_province = new JComboBox();
-		combox_province.setModel(new DefaultComboBoxModel(new String[] {
+		JComboBox combobox_AddAddress_province = new JComboBox();
+		combobox_AddAddress_province.setModel(new DefaultComboBoxModel(new String[] {
 				"\u0E01\u0E23\u0E38\u0E07\u0E40\u0E17\u0E1E\u0E21\u0E2B\u0E32\u0E19\u0E04\u0E23",
 				"\u0E19\u0E04\u0E23\u0E23\u0E32\u0E0A\u0E2A\u0E35\u0E21\u0E32",
 				"\u0E40\u0E0A\u0E35\u0E22\u0E07\u0E43\u0E2B\u0E21\u0E48",
@@ -782,8 +789,43 @@ public class settingUser extends JFrame {
 				"\u0E2A\u0E34\u0E07\u0E2B\u0E4C\u0E1A\u0E38\u0E23\u0E35", "\u0E19\u0E19\u0E17\u0E1A\u0E38\u0E23\u0E35",
 				"\u0E20\u0E39\u0E40\u0E01\u0E47\u0E15",
 				"\u0E2A\u0E21\u0E38\u0E17\u0E23\u0E2A\u0E07\u0E04\u0E23\u0E32\u0E21" }));
-		combox_province.setBounds(488, 186, 393, 40);
-		panel_5.add(combox_province);
+		combobox_AddAddress_province.setBounds(488, 186, 393, 40);
+		panel_5.add(combobox_AddAddress_province);
+		
+		JLabel alert_name_AA = new JLabel("\u0E0A\u0E48\u0E2D\u0E07\u0E19\u0E35\u0E49\u0E40\u0E27\u0E49\u0E19\u0E27\u0E48\u0E32\u0E07\u0E44\u0E21\u0E48\u0E44\u0E14\u0E49");
+		alert_name_AA.setForeground(Color.RED);
+		alert_name_AA.setVisible(false);
+		alert_name_AA.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		alert_name_AA.setBounds(39, 131, 145, 25);
+		panel_5.add(alert_name_AA);
+		
+		JLabel alert_phone_AA = new JLabel("\u0E0A\u0E48\u0E2D\u0E07\u0E19\u0E35\u0E49\u0E40\u0E27\u0E49\u0E19\u0E27\u0E48\u0E32\u0E07\u0E44\u0E21\u0E48\u0E44\u0E14\u0E49");
+		alert_phone_AA.setForeground(Color.RED);
+		alert_phone_AA.setVisible(false);
+		alert_phone_AA.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		alert_phone_AA.setBounds(39, 250, 300, 25);
+		panel_5.add(alert_phone_AA);
+		
+		JLabel alert_address_AA = new JLabel("\u0E0A\u0E48\u0E2D\u0E07\u0E19\u0E35\u0E49\u0E40\u0E27\u0E49\u0E19\u0E27\u0E48\u0E32\u0E07\u0E44\u0E21\u0E48\u0E44\u0E14\u0E49");
+		alert_address_AA.setVisible(false);
+		alert_address_AA.setForeground(Color.RED);
+		alert_address_AA.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		alert_address_AA.setBounds(498, 128, 145, 31);
+		panel_5.add(alert_address_AA);
+		
+		JLabel alert_district_AA = new JLabel("\u0E0A\u0E48\u0E2D\u0E07\u0E19\u0E35\u0E49\u0E40\u0E27\u0E49\u0E19\u0E27\u0E48\u0E32\u0E07\u0E44\u0E21\u0E48\u0E44\u0E14\u0E49");
+		alert_district_AA.setVisible(false);
+		alert_district_AA.setForeground(Color.RED);
+		alert_district_AA.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		alert_district_AA.setBounds(488, 338, 145, 31);
+		panel_5.add(alert_district_AA);
+		
+		JLabel alert_zipcode_AA = new JLabel("\u0E0A\u0E48\u0E2D\u0E07\u0E19\u0E35\u0E49\u0E40\u0E27\u0E49\u0E19\u0E27\u0E48\u0E32\u0E07\u0E44\u0E21\u0E48\u0E44\u0E14\u0E49");
+		alert_zipcode_AA.setVisible(false);
+		alert_zipcode_AA.setForeground(Color.RED);
+		alert_zipcode_AA.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		alert_zipcode_AA.setBounds(488, 455, 336, 31);
+		panel_5.add(alert_zipcode_AA);
 
 		panelShow.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
@@ -925,6 +967,56 @@ public class settingUser extends JFrame {
 		});
 		NewProduct_SCP.setViewportView(NewProduct_tbl);
 		
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			boolean redyInsert = true;
+				/*
+				 	text_AddAddress_name
+					text_AddAddress_phone
+					text_AddAddress_address
+					combobox_AddAddress_province
+					text_AddAddress_district
+					text_AddAddress_zipcode
+				 */
+				
+				alert_name_AA.setVisible(false);
+				alert_phone_AA.setVisible(false);
+				alert_address_AA.setVisible(false);
+				alert_district_AA.setVisible(false);
+				alert_zipcode_AA.setVisible(false);
+				if(text_AddAddress_name.getText().trim().length()<=0) {
+					redyInsert=false;
+					alert_name_AA.setVisible(true);
+				}if(text_AddAddress_phone.getText().trim().length()<=0) {
+					redyInsert=false;
+					alert_phone_AA.setVisible(true);
+				}if(text_AddAddress_phone.getText().trim().length()!=10||text_AddAddress_phone.getText().trim().matches(".*[a-z].*")) {
+					redyInsert=false;
+					alert_phone_AA.setVisible(true);
+					alert_phone_AA.setText("รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง");
+				}if(text_AddAddress_address.getText().trim().length()<=0) {
+					redyInsert=false;
+					alert_address_AA.setVisible(true);
+				}if(text_AddAddress_district.getText().trim().length()<=0) {
+					redyInsert=false;
+					alert_district_AA.setVisible(true);
+				}if(text_AddAddress_zipcode.getText().trim().length()<=0) {
+					redyInsert=false;
+					alert_zipcode_AA.setVisible(true);
+				}if(text_AddAddress_zipcode.getText().trim().length()>5||text_AddAddress_zipcode.getText().trim().matches(".*[a-z].*")) {
+					redyInsert=false;
+					alert_zipcode_AA.setVisible(true);
+					alert_zipcode_AA.setText("รูปแบบรหัสไปรษณีย์ไม่ถูกต้อง");
+				}if(redyInsert) {
+					boolean checkInsert = managerAddress.saveTable_address(user_id, text_AddAddress_phone.getText().trim(), text_AddAddress_address.getText().trim(), combobox_AddAddress_province.getSelectedItem().toString(), text_AddAddress_district.getText().trim(), text_AddAddress_zipcode.getText().trim(),text_AddAddress_name.getText().trim());
+					if(checkInsert) {
+						JOptionPane.showMessageDialog(settingUser.this, "สำเร็จ");
+					}else
+						JOptionPane.showMessageDialog(settingUser.this, "เกิดข้อผิดพลาก","แจ้งเตือน",JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});
+		
 		lblUser.setText("บัญชีของ " + username.toUpperCase());
 		loadAddress();
 		loadTablePageAccount();
@@ -942,6 +1034,14 @@ public class settingUser extends JFrame {
 			textName2.setText("");
 			textAdress2.setText("");
 			textPhone2.setText("");
+		}
+		else {
+			textName.setText(addressUser.getFirst().getName());
+			textAdress.setText(addressUser.getFirst().getAddress());
+			textPhone.setText(addressUser.getFirst().getPhone());
+			textName2.setText(addressUser.getFirst().getName());
+			textAdress2.setText(addressUser.getFirst().getAddress());
+			textPhone2.setText(addressUser.getFirst().getPhone());
 		}
 	}
 

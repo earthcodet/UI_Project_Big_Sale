@@ -9,7 +9,6 @@ import javax.swing.JRootPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 
@@ -27,6 +26,7 @@ import javax.swing.UIManager;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.DefaultCellEditor;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -35,7 +35,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -65,8 +64,6 @@ import DatabaseAndTools.DataTableRenderer;
 import DatabaseAndTools.ImagePanel;
 import java.awt.Window.Type;
 import java.awt.SystemColor;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 @SuppressWarnings("serial")
 public class Home extends JFrame {	
@@ -81,12 +78,8 @@ public class Home extends JFrame {
 	private JLabel Mincount;
 	private JLabel Hourcount;
 	private JLabel banner;
-	List<JPanel> subMenus = new LinkedList<>();
 	private JPanel Sub_pullDownMenu;
-	private JPanel pullDownMenu;
-	/**
-	 * Launch the application.
-	 */
+	List<JPanel> subMenus = new LinkedList<>();
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -103,16 +96,18 @@ public class Home extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
+	    Image img = icon.getImage();
+	    Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
+	    return new ImageIcon(resizedImage);
+	    }
 	public Home() {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				int res = JOptionPane.showConfirmDialog(Home.this, "Are you sure to closing window?", "Confirm closing", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if(res == JOptionPane.YES_OPTION) {
-					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);				}
+					setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				}
 				else
 					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			}
@@ -121,144 +116,100 @@ public class Home extends JFrame {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 	    Image icons = kit.createImage(Home.class.getResource("/Image/ICON.png"));
 	    setIconImage(icons);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 0, 1024, 760);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 0, 1385, 909);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		ImageIcon icon = new ImageIcon(settingUser2.class.getResource("/Image/smile.png"));
+		icon = new ImageIcon(settingUser2.class.getResource("/Image/box.png"));
+		icon = new ImageIcon(settingUser2.class.getResource("/Image/logout.png"));
 		
 		JPanel MenuBar = new JPanel();
-		MenuBar.setBounds(0, 0, 1031, 42);
+		MenuBar.setBounds(0, 0, 1365, 42);
 		contentPane.add(MenuBar);
 		MenuBar.setBackground(new Color(0, 51, 51));
 		MenuBar.setLayout(null);
 		
 		JLabel taggingProduct_Bar = new JLabel("\u0E15\u0E34\u0E14\u0E15\u0E32\u0E21\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32");
-		taggingProduct_Bar.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(Home.this, "กรุณาเข้าสู่ระบบก่อน", "Warning", JOptionPane.WARNING_MESSAGE);
-			}
-		});
-		taggingProduct_Bar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		taggingProduct_Bar.setBorder(UIManager.getBorder("MenuBar.border"));
 		taggingProduct_Bar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taggingProduct_Bar.setForeground(Color.WHITE);
-		taggingProduct_Bar.setBounds(649, 11, 76, 23);
+		taggingProduct_Bar.setBounds(1035, 15, 76, 23);
 		MenuBar.add(taggingProduct_Bar);
 		
-		JLabel login_Bar = new JLabel("\u0E25\u0E07\u0E0A\u0E37\u0E48\u0E2D\u0E40\u0E02\u0E49\u0E32\u0E43\u0E0A\u0E49");
-		login_Bar.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				try {
-					Login login = new Login();
-					login.setVisible(true);
-				} catch (IOException exc) {
-					// TODO Auto-generated catch block
-					exc.printStackTrace();
-				}
-				dispose();
-			}
-		});
-		login_Bar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		
-		login_Bar.setForeground(Color.WHITE);
-		login_Bar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		login_Bar.setBorder(UIManager.getBorder("MenuBar.border"));
-		login_Bar.setBounds(753, 11, 76, 23);
-		MenuBar.add(login_Bar);
-		
-		JLabel regsiter_Bar = new JLabel("\u0E2A\u0E21\u0E31\u0E04\u0E23\u0E2A\u0E21\u0E32\u0E0A\u0E34\u0E01");
-		regsiter_Bar.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				try {
-					Register register = new Register();
-					register.setVisible(true);
-				} catch (Exception xx) {
-					// TODO Auto-generated catch block
-					xx.printStackTrace();
-				}
-				
-			}
-		});
-		regsiter_Bar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		regsiter_Bar.setForeground(Color.WHITE);
-		regsiter_Bar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		regsiter_Bar.setBorder(UIManager.getBorder("MenuBar.border"));
-		regsiter_Bar.setBounds(856, 11, 73, 23);
-		MenuBar.add(regsiter_Bar);
-		
 		JLabel about_Bar = new JLabel("");
+		about_Bar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		about_Bar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				about ab = new about();
 				ab.setVisible(true);
 			}
 		});
-		about_Bar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		about_Bar.setBounds(974, 11, 22, 27);
+		about_Bar.setBounds(1313, 11, 22, 27);
 		MenuBar.add(about_Bar);
 		about_Bar.setIcon(new ImageIcon(Home.class.getResource("/Image/markz.png")));
 		
-		JPanel SearchBar = new JPanel();
-		SearchBar.setBounds(0, 40, 1031, 131);
-		contentPane.add(SearchBar);
-		SearchBar.setBackground(new Color(8, 54, 69));
-		SearchBar.setLayout(null);
+		JLabel lbllogin = new JLabel("New label");
+		lbllogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lbllogin.setForeground(Color.WHITE);
+		lbllogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbllogin.setBounds(1133, 15, 66, 23);
+		MenuBar.add(lbllogin);
+		
+		JPanel SearchPanel = new JPanel();
+		SearchPanel.setBounds(0, 40, 1365, 131);
+		contentPane.add(SearchPanel);
+		SearchPanel.setBackground(new Color(8, 54, 69));
+		SearchPanel.setLayout(null);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(Home.class.getResource("/Image/\u0E42\u0E25\u0E42\u0E01\u0E49\u0E2A\u0E35\u0E02\u0E32\u0E273.png")));
-		label.setBounds(10, 11, 108, 96);
-		SearchBar.add(label);
+		label.setBounds(135, 13, 108, 96);
+		SearchPanel.add(label);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField.setBounds(305, 40, 434, 55);
-		SearchBar.add(textField);
+		textField.setBounds(527, 56, 504, 40);
+		SearchPanel.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblBigSale = new JLabel("SALE");
 		lblBigSale.setFont(new Font("Segoe WP Black", Font.BOLD, 24));
 		lblBigSale.setForeground(Color.WHITE);
-		lblBigSale.setBounds(158, 40, 70, 40);
-		SearchBar.add(lblBigSale);
+		lblBigSale.setBounds(331, 39, 70, 40);
+		SearchPanel.add(lblBigSale);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 102, 51));
-		panel_1.setBounds(736, 40, 53, 55);
-		SearchBar.add(panel_1);
+		panel_1.setBounds(1028, 56, 44, 40);
+		SearchPanel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel searching = new JLabel("");
-		searching.setIcon(new ImageIcon(Home.class.getResource("/Image/\u0E04\u0E49\u0E19\u0E2B\u0E32 \u0E2A\u0E35\u0E02\u0E32\u0E272.png")));
-		searching.setBounds(13, 3, 33, 51);
-		panel_1.add(searching);
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(Home.class.getResource("/Image/\u0E04\u0E49\u0E19\u0E2B\u0E32 \u0E2A\u0E35\u0E02\u0E32\u0E272.png")));
+		label_1.setBounds(10, 0, 33, 43);
+		panel_1.add(label_1);
 		
-		JLabel adding = new JLabel("");
-		adding.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane.showMessageDialog(Home.this, "กรุณาเข้าสู่ระบบก่อน", "Warning", JOptionPane.WARNING_MESSAGE);
-			}
-		});
-		adding.setIcon(new ImageIcon(Home.class.getResource("/Image/\u0E15\u0E23\u0E30\u0E01\u0E25\u0E49\u0E32\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E322.png")));
-		adding.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		adding.setBounds(836, 46, 44, 40);
-		SearchBar.add(adding);
+		JLabel label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon(Home.class.getResource("/Image/\u0E15\u0E23\u0E30\u0E01\u0E25\u0E49\u0E32\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E322.png")));
+		label_2.setBounds(1133, 56, 32, 40);
+		SearchPanel.add(label_2);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(255, 102, 51));
-		panel_2.setBounds(108, 78, 115, 10);
-		SearchBar.add(panel_2);
+		panel_2.setBounds(281, 77, 115, 10);
+		SearchPanel.add(panel_2);
 		
 		JLabel lblBig = new JLabel("BIG");
 		lblBig.setBackground(Color.WHITE);
 		lblBig.setForeground(new Color(255, 102, 51));
 		lblBig.setFont(new Font("Segoe WP Black", Font.BOLD, 24));
-		lblBig.setBounds(107, 40, 53, 40);
-		SearchBar.add(lblBig);
+		lblBig.setBounds(280, 39, 53, 40);
+		SearchPanel.add(lblBig);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 169, 1017, 552);
+		scrollPane.setBounds(0, 170, 1365, 700);
 		contentPane.add(scrollPane);
 		
 		JPanel ShowPanel = new JPanel();
@@ -268,6 +219,7 @@ public class Home extends JFrame {
 		ShowPanel.setLayout(null);
 		
 		JLabel bannerChoosing4 = new JLabel("");
+		bannerChoosing4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing4.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner4.png")));
@@ -277,11 +229,11 @@ public class Home extends JFrame {
 		Sub_pullDownMenu = new JPanel();
 		Sub_pullDownMenu.setVisible(false);
 		Sub_pullDownMenu.setBackground(Color.WHITE);
-		Sub_pullDownMenu.setBounds(281, 0, 223, 249);
+		Sub_pullDownMenu.setBounds(281, 0, 223, 263);
 		ShowPanel.add(Sub_pullDownMenu);
 		Sub_pullDownMenu.setLayout(null);
 		
-		JPanel subMenu1 = new JPanel();
+JPanel subMenu1 = new JPanel();
 		
 		JLabel submenulbl1 = new JLabel("?");
 		submenulbl1.setFont(new Font("Dubai", Font.PLAIN, 14));
@@ -405,88 +357,94 @@ public class Home extends JFrame {
 		subMenus.add(subMenu4);
 		subMenus.add(subMenu5);
 		
-		bannerChoosing4.setBounds(565, 224, 15, 25);
+		bannerChoosing4.setBounds(613, 224, 15, 25);
 		ShowPanel.add(bannerChoosing4);
 		bannerChoosing4.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing7 = new JLabel("");
+		bannerChoosing7.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing7.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner7.png")));
 			}
 		});
-		bannerChoosing7.setBounds(640, 224, 15, 25);
+		bannerChoosing7.setBounds(688, 224, 15, 25);
 		ShowPanel.add(bannerChoosing7);
 		bannerChoosing7.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing5 = new JLabel("");
+		bannerChoosing5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing5.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner5.png")));
 			}
 		});
-		bannerChoosing5.setBounds(590, 224, 15, 25);
+		bannerChoosing5.setBounds(638, 224, 15, 25);
 		ShowPanel.add(bannerChoosing5);
 		bannerChoosing5.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing1 = new JLabel("");
+		bannerChoosing1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner1.png")));
 			}
 		});
-		bannerChoosing1.setBounds(665, 224, 15, 25);
+		bannerChoosing1.setBounds(538, 224, 15, 25);
 		ShowPanel.add(bannerChoosing1);
 		bannerChoosing1.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing3 = new JLabel("");
+		bannerChoosing3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing3.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner3.png")));
 			}
 		});
-		bannerChoosing3.setBounds(540, 224, 15, 25);
+		bannerChoosing3.setBounds(588, 224, 15, 25);
 		ShowPanel.add(bannerChoosing3);
 		bannerChoosing3.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing2 = new JLabel("");
+		bannerChoosing2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing2.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner2.png")));
 			}
 		});
-		bannerChoosing2.setBounds(515, 224, 15, 25);
+		bannerChoosing2.setBounds(563, 224, 15, 25);
 		ShowPanel.add(bannerChoosing2);
 		bannerChoosing2.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing6 = new JLabel("");
+		bannerChoosing6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing6.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner6.png")));
 			}
 		});
-		bannerChoosing6.setBounds(615, 224, 15, 25);
+		bannerChoosing6.setBounds(663, 224, 15, 25);
 		ShowPanel.add(bannerChoosing6);
 		bannerChoosing6.setIcon(new ImageIcon(Home.class.getResource("/Image/circle4.png")));
 		
 		JLabel lblMostPopular = new JLabel("Most Popular");
 		lblMostPopular.setFont(new Font("Dubai", Font.PLAIN, 26));
-		lblMostPopular.setBounds(47, 335, 162, 34);
+		lblMostPopular.setBounds(134, 337, 162, 34);
 		ShowPanel.add(lblMostPopular);
 		
 		JPanel GlobalCollPanel = new JPanel();
 		GlobalCollPanel.setLayout(null);
 		GlobalCollPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		GlobalCollPanel.setBounds(365, 260, 259, 45);
+		GlobalCollPanel.setBounds(559, 279, 259, 45);
 		ShowPanel.add(GlobalCollPanel);
 		
 		JLabel lblGlobalCollection = new JLabel("Global Collection");
-		lblGlobalCollection.setForeground(Color.BLACK);
 		lblGlobalCollection.setFont(new Font("Dubai", Font.PLAIN, 18));
 		lblGlobalCollection.setBounds(41, 5, 153, 35);
 		GlobalCollPanel.add(lblGlobalCollection);
 		
 		JLabel btnGblColl = new JLabel("");
+		btnGblColl.setIcon(new ImageIcon(Home.class.getResource("/Image/gc2.png")));
 		btnGblColl.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				//btnGblColl.setIcon(new ImageIcon(Home.class.getResource("/Image/gblClicked.png")));
@@ -500,24 +458,22 @@ public class Home extends JFrame {
 				btnGblColl.setIcon(new ImageIcon(Home.class.getResource("/Image/gbl.png")));
 			}
 		});
-		
-		btnGblColl.setIcon(new ImageIcon(Home.class.getResource("/Image/gbl.png")));
 		btnGblColl.setBounds(5, 5, 250, 35);
 		GlobalCollPanel.add(btnGblColl);
 		
 		JPanel VoucherPanel = new JPanel();
 		VoucherPanel.setLayout(null);
 		VoucherPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		VoucherPanel.setBounds(648, 260, 259, 45);
+		VoucherPanel.setBounds(842, 279, 259, 45);
 		ShowPanel.add(VoucherPanel);
 		
 		JLabel lblVouchers = new JLabel("Vouchers");
-		lblVouchers.setForeground(Color.BLACK);
 		lblVouchers.setFont(new Font("Dubai", Font.PLAIN, 18));
 		lblVouchers.setBounds(41, 5, 153, 35);
 		VoucherPanel.add(lblVouchers);
 		
 		JLabel btnVouchers = new JLabel("");
+		btnVouchers.setIcon(new ImageIcon(Home.class.getResource("/Image/vc2.png")));
 		btnVouchers.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
@@ -531,18 +487,16 @@ public class Home extends JFrame {
 				btnVouchers.setIcon(new ImageIcon(Home.class.getResource("/Image/vc2.png")));
 			}
 		});
-		btnVouchers.setIcon(new ImageIcon(Home.class.getResource("/Image/vc2.png")));
-		btnVouchers.setBounds(5, 5, 250, 35);
+		btnVouchers.setBounds(10, 6, 250, 35);
 		VoucherPanel.add(btnVouchers);
 		
 		JPanel BigMallPanel = new JPanel();
 		BigMallPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		BigMallPanel.setLayout(null);
-		BigMallPanel.setBounds(83, 260, 259, 45);
+		BigMallPanel.setBounds(277, 279, 259, 45);
 		ShowPanel.add(BigMallPanel);
 		
 		JLabel lblBigmall = new JLabel("BigMall");
-		lblBigmall.setForeground(Color.BLACK);
 		lblBigmall.setFont(new Font("Dubai", Font.PLAIN, 18));
 		lblBigmall.setBounds(41, 5, 153, 35);
 		BigMallPanel.add(lblBigmall);
@@ -553,7 +507,7 @@ public class Home extends JFrame {
 				
 			}
 			public void mouseEntered(MouseEvent e) {
-				lblBigmall.setForeground(new Color(255, 51, 51));
+				btnBigMall.setBounds(5, 5, 250, 35);
 				btnBigMall.setIcon(new ImageIcon(Home.class.getResource("/Image/bgmClicked.png")));
 			}
 			public void mouseExited(MouseEvent e) {
@@ -561,18 +515,18 @@ public class Home extends JFrame {
 				btnBigMall.setIcon(new ImageIcon(Home.class.getResource("/Image/bgmNEW.png")));
 			}
 		});
-		btnBigMall.setIcon(new ImageIcon(Home.class.getResource("/Image/bgmNEW.png")));
+		btnBigMall.setIcon(new ImageIcon(Home.class.getResource("/Image/bt2.png")));
 		btnBigMall.setBounds(5, 5, 250, 35);
 		BigMallPanel.add(btnBigMall);
 		
-		pullDownMenu = new JPanel();
+		JPanel pullDownMenu = new JPanel();
+		pullDownMenu.setBackground(Color.WHITE);
+		pullDownMenu.setBounds(83, 14, 198, 249);
 		pullDownMenu.addMouseListener(new MouseAdapter() {
 			public void mouseExited(MouseEvent e) {
 				Sub_pullDownMenu.setVisible(false);
 			}
 		});
-		pullDownMenu.setBackground(Color.WHITE);
-		pullDownMenu.setBounds(83, 0, 198, 249);
 		ShowPanel.add(pullDownMenu);
 		pullDownMenu.setLayout(null);
 		
@@ -592,14 +546,12 @@ public class Home extends JFrame {
 				arrowToy.setVisible(true);
 				ToysPanel.setBackground(Color.GRAY);
 				lblToys.setForeground(new Color(51, 255, 255));
-
 				ShowSubMenuPanel(subMenus,new String[]{"Babies Gear", "Baby Clothing", "Baby Personal Care", "Baby & Toys", "Figure & Collectibles"});
 			}
 			public void mouseExited(MouseEvent e) {
 				arrowToy.setVisible(false);
 				ToysPanel.setBackground(Color.WHITE);
 				lblToys.setForeground(Color.BLACK);
-				
 			}
 		});
 		ToysPanel.setBounds(0, 0, 198, 34);
@@ -703,7 +655,7 @@ public class Home extends JFrame {
 		JLabel lblGroceries = new JLabel("Groceries & Pets");
 		lblGroceries.setFont(new Font("Dubai", Font.PLAIN, 14));
 		lblGroceries.setBounds(10, 11, 100, 14);
-			
+		
 		JLabel arrowGroce = new JLabel("");
 		arrowGroce.setVisible(false);
 		arrowGroce.setIcon(new ImageIcon(Home.class.getResource("/Image/arrowMenu.png")));
@@ -762,75 +714,75 @@ public class Home extends JFrame {
 		SportPanel.add(lblSport);
 		SportPanel.add(arrowSport);
 		
-		JLabel lblHome = new JLabel("Home & Lifestyle");
-		lblHome.setFont(new Font("Dubai", Font.PLAIN, 14));
-		lblHome.setBounds(10, 11, 128, 14);
+		JLabel lblHealth = new JLabel("Health & Lifestyle");
+		lblHealth.setFont(new Font("Dubai", Font.PLAIN, 14));
+		lblHealth.setBounds(10, 11, 128, 14);
 		
-		JLabel arrowHome = new JLabel("");
-		arrowHome.setVisible(false);
-		arrowHome.setIcon(new ImageIcon(Home.class.getResource("/Image/arrowMenu.png")));
-		arrowHome.setBounds(169, 0, 19, 30);
+		JLabel arrowHealth = new JLabel("");
+		arrowHealth.setVisible(false);
+		arrowHealth.setIcon(new ImageIcon(Home.class.getResource("/Image/arrowMenu.png")));
+		arrowHealth.setBounds(169, 0, 19, 30);
 		
-		JPanel HomePanel = new JPanel();
-		HomePanel.setBackground(Color.WHITE);
-		HomePanel.addMouseListener(new MouseAdapter() {
+		JPanel HealthPanel = new JPanel();
+		HealthPanel.setBackground(Color.WHITE);
+		HealthPanel.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
-				arrowHome.setVisible(true);
-				HomePanel.setBackground(Color.GRAY);
-				lblHome.setForeground(new Color(51, 255, 255));
+				arrowHealth.setVisible(true);
+				HealthPanel.setBackground(Color.GRAY);
+				lblHealth.setForeground(new Color(51, 255, 255));
 				
 				ShowSubMenuPanel(subMenus,new String[]{"Home","Lifestyle"});
 			}
 			public void mouseExited(MouseEvent e) {
-				arrowHome.setVisible(false);
-				HomePanel.setBackground(Color.WHITE);
-				lblHome.setForeground(Color.BLACK);
+				arrowHealth.setVisible(false);
+				HealthPanel.setBackground(Color.WHITE);
+				lblHealth.setForeground(Color.BLACK);
 			}
 		});
-		HomePanel.setLayout(null);
-		HomePanel.setBounds(0, 209, 198, 34);
-		pullDownMenu.add(HomePanel);
-		HomePanel.add(lblHome);
-		HomePanel.add(arrowHome);
+		HealthPanel.setLayout(null);
+		HealthPanel.setBounds(0, 209, 198, 34);
+		pullDownMenu.add(HealthPanel);
+		HealthPanel.add(lblHealth);
+		HealthPanel.add(arrowHealth);
 		
 		banner = new JLabel("");
 		banner.setIcon(new ImageIcon(Home.class.getResource("/Image/rbanner1.png")));
-		banner.setBounds(0, -14, 998, 263);
+		banner.setBounds(0, 0, 1559, 263);
 		ShowPanel.add(banner);
 		
 		SubShowPanel = new JPanel();
-		SubShowPanel.setBounds(0, 380, 998, 1000);
+		SubShowPanel.setBounds(0, 382, 1346, 1062);
 		ShowPanel.add(SubShowPanel);
 		SubShowPanel.setLayout(null);
 		SubShowPanel.setBackground(SystemColor.menu);
 		
 		MostPop_Img = new ImagePanel((Image) null);
 		MostPop_Img.setBackground(Color.WHITE);
-		MostPop_Img.setBounds(48, 11, 220, 212);
+		MostPop_Img.setBounds(137, 11, 220, 212);
 		SubShowPanel.add(MostPop_Img);
 		
 		tbl_MostPop = new JTable();
-		tbl_MostPop.setBounds(276, 11, 660, 212);
+		tbl_MostPop.setBounds(367, 11, 807, 212);
 		
 		SubShowPanel.add(tbl_MostPop);
 		
 		JLabel label_6 = new JLabel("Collections");
 		label_6.setFont(new Font("Dubai", Font.PLAIN, 26));
-		label_6.setBounds(48, 252, 162, 34);
+		label_6.setBounds(137, 255, 162, 34);
 		SubShowPanel.add(label_6);
 		
 		JLabel label_7 = new JLabel("Flash Sale");
 		label_7.setFont(new Font("Dubai", Font.PLAIN, 26));
-		label_7.setBounds(48, 552, 142, 34);
+		label_7.setBounds(137, 549, 142, 34);
 		SubShowPanel.add(label_7);
 		
 		tbl_FlashSale = new JTable();
-		tbl_FlashSale.setBounds(48, 650, 892, 150);
+		tbl_FlashSale.setBounds(137, 661, 1079, 150);
 		SubShowPanel.add(tbl_FlashSale);
 		
 		JPanel tbl_Collections = new JPanel();
 		tbl_Collections.setLayout(null);
-		tbl_Collections.setBounds(48, 297, 888, 228);
+		tbl_Collections.setBounds(116, 300, 871, 228);
 		SubShowPanel.add(tbl_Collections);
 		
 		JPanel CollOne_Show = new JPanel();
@@ -886,7 +838,7 @@ public class Home extends JFrame {
 		CollTwo_Show.add(Img3CollTwo);
 		
 		JPanel FlashTime_Panel = new JPanel();
-		FlashTime_Panel.setBounds(48, 597, 892, 45);
+		FlashTime_Panel.setBounds(137, 596, 1079, 45);
 		SubShowPanel.add(FlashTime_Panel);
 		FlashTime_Panel.setBorder(UIManager.getBorder("List.focusCellHighlightBorder"));
 		FlashTime_Panel.setBackground(Color.DARK_GRAY);
@@ -953,7 +905,7 @@ public class Home extends JFrame {
 		FlashTime_Panel.add(label_14);
 		
 		JPanel FollowUsPanel = new JPanel();
-		FollowUsPanel.setBounds(0, 850, 1021, 152);
+		FollowUsPanel.setBounds(0, 909, 1346, 152);
 		SubShowPanel.add(FollowUsPanel);
 		FollowUsPanel.setLayout(null);
 		FollowUsPanel.setBackground(Color.WHITE);
@@ -961,18 +913,18 @@ public class Home extends JFrame {
 		JLabel label_8 = new JLabel("Follow Us");
 		label_8.setForeground(Color.DARK_GRAY);
 		label_8.setFont(new Font("Dubai", Font.PLAIN, 25));
-		label_8.setBounds(338, 40, 108, 25);
+		label_8.setBounds(448, 31, 108, 25);
 		FollowUsPanel.add(label_8);
 		
 		JLabel label_11 = new JLabel("\u00A9 BigMall 2018");
 		label_11.setForeground(Color.DARK_GRAY);
-		label_11.setBounds(860, 49, 72, 14);
+		label_11.setBounds(970, 40, 72, 14);
 		FollowUsPanel.add(label_11);
 		
 		JPanel LogosPanel = new JPanel();
 		LogosPanel.setLayout(null);
 		LogosPanel.setBackground(Color.WHITE);
-		LogosPanel.setBounds(338, 65, 264, 44);
+		LogosPanel.setBounds(448, 56, 264, 44);
 		FollowUsPanel.add(LogosPanel);
 		
 		JLabel label_13 = new JLabel("");
@@ -1017,6 +969,67 @@ public class Home extends JFrame {
 		loadData();
 		Countdown();
 		changeBanner();
+		
+		lbllogin.setText("\u0E40\u0E02\u0E49\u0E32\u0E2A\u0E39\u0E48\u0E23\u0E30\u0E1A\u0E1A");
+		lbllogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lbllogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			Login open;
+			try {
+				open = new Login();
+				open.setVisible(true);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbllogin.setForeground(new Color(255, 69, 0));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lbllogin.setForeground(Color.WHITE);
+			}
+		
+		});
+		
+		taggingProduct_Bar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		JLabel label_4 = new JLabel("\u0E2A\u0E21\u0E31\u0E04\u0E23\u0E2A\u0E21\u0E32\u0E0A\u0E34\u0E01");
+		label_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		label_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				label_4.setForeground(new Color(255, 69, 0));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				label_4.setForeground(Color.WHITE);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Register open = new Register();
+				open.setVisible(true);
+				
+			}
+		});
+		label_4.setForeground(Color.WHITE);
+		label_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_4.setBounds(1209, 15, 76, 23);
+		MenuBar.add(label_4);
+		taggingProduct_Bar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				taggingProduct_Bar.setForeground(new Color(255, 69, 0));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				taggingProduct_Bar.setForeground(Color.WHITE);
+			}
+		});
 	}
 	public void loadData() {
 		DefaultTableModel modelMost = new DefaultTableModel();
@@ -1080,7 +1093,8 @@ public class Home extends JFrame {
 	    timer.start();
 	}
 	public void changeBanner() {
-		Timer timer = new Timer(5000, new ActionListener() {
+		Timer timer;
+		timer = new Timer(5000, new ActionListener() {
 			int count = 1;
 			public void actionPerformed(ActionEvent e) {
 				if(count == 1) {

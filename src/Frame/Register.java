@@ -53,12 +53,7 @@ public class Register extends JFrame {
 	 * Launch the application.
 	 */
 	
-	public static void main(String[] args) {
-		Register n = new Register();
-		System.out.println(n.isValid("axcasd6"));
-		System.out.println(n.isValid("axca"));
-		n.setVisible(true);
-	}
+	
 	private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
 		    Image img = icon.getImage();
 		    Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
@@ -373,13 +368,7 @@ public class Register extends JFrame {
 						JLabel title = new JLabel("สมัครสมาชิกเรียบร้อย");
 						title.setFont(new Font("CS ChatThai", Font.PLAIN, 35));
 						JOptionPane.showMessageDialog(null,  title,"แจ้งเตือน", JOptionPane.PLAIN_MESSAGE);
-						try {
-							Login login = new Login();
-							login.setVisible(true);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						
 						dispose();
  						}else {
 							JLabel title = new JLabel("เกิดข้อผิดพลาด");

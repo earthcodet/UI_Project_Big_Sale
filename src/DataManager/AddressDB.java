@@ -6,8 +6,9 @@ public class AddressDB {
 	String province;
 	String district;
 	String zipcode;
+	String name;
 	
-	public AddressDB(String phone, String address, String province, String district, String zipcode) {
+	public AddressDB(String phone, String address, String province, String district, String zipcode,String name) {
 		this.phone=phone;
 		this.address=address;
 		this.province=province;
@@ -15,4 +16,14 @@ public class AddressDB {
 		this.zipcode=zipcode;
 
 	}
+	public String getName() {
+		return name;
+	}
+	public String getAddress() {
+		return address+" "+district+" "+zipcode;
+	}
+	public String getPhone() {
+		return phone;
+	}
+
 }
