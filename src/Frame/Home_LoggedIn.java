@@ -89,6 +89,7 @@ public class Home_LoggedIn extends JFrame {
 	    return new ImageIcon(resizedImage);
 	    }
 	public Home_LoggedIn(String username,int user_id) {
+		setResizable(false);
 		this.username =username;
 		setMinimumSize(new Dimension(900, 900));
 		this.user_id=user_id;
@@ -104,7 +105,7 @@ public class Home_LoggedIn extends JFrame {
 	    Image icons = kit.createImage(Home_LoggedIn.class.getResource("/Image/ICON.png"));
 	    setIconImage(icons);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 0, 1259, 909);
+		setBounds(100, 0, 1259, 852);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -262,7 +263,7 @@ public class Home_LoggedIn extends JFrame {
 		SearchPanel.add(lblBig);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 170, 1243, 700);
+		scrollPane.setBounds(0, 170, 1243, 657);
 		contentPane.add(scrollPane);
 		
 		JPanel ShowPanel = new JPanel();
