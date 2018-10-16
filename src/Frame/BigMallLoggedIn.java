@@ -11,6 +11,7 @@ import DatabaseAndTools.ImagePanel;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
@@ -26,6 +27,7 @@ import java.awt.Toolkit;
 
 import javax.swing.UIManager;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 
@@ -41,7 +43,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BigMall extends JFrame {
+public class BigMallLoggedIn extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -85,30 +87,38 @@ public class BigMall extends JFrame {
 	/***/private JLabel Store3Price2;		/***/private JLabel Store4Price2;	 /***/
 	/***/private JLabel Store3Price3;		/***/private JLabel Store4Price3;	 /***/
 	/********************************************************************************/
+	/*
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UIManager.setLookAndFeel(
+			            UIManager.getSystemLookAndFeelClassName());
+					BigMallLoggedIn frame = new BigMallLoggedIn("Champ",1);
+				frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					UIManager.setLookAndFeel(
-//				            UIManager.getSystemLookAndFeelClassName());
-//					BigMall frame = new BigMall();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public BigMall() {
+	private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
+	    Image img = icon.getImage();
+	    Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
+	    return new ImageIcon(resizedImage);
+	    }
+	public BigMallLoggedIn(String username,int user_id) {
+		
 		setResizable(false);
+		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				int res = JOptionPane.showConfirmDialog(BigMall.this, "Are you sure to closing window?", "Confirm closing", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				int res = JOptionPane.showConfirmDialog(BigMallLoggedIn.this, "Are you sure to closing window?", "Confirm closing", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if(res == JOptionPane.YES_OPTION) {
 					Home.BigMallAllowed = 0;
 					dispose();
@@ -128,39 +138,158 @@ public class BigMall extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JPanel panelShow = new JPanel();
+		panelShow.setVisible(false);
+		panelShow.setBounds(724, 42, 232, 226);
+		contentPane.add(panelShow);
+		panelShow.setLayout(null);
+		
+		JLabel lblProfile = new JLabel("");
+		ImageIcon icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/smile.png"));
+		lblProfile.setBounds(21, 35, 36, 34);
+		int offset = lblProfile.getInsets().left;
+		lblProfile.setIcon(resizeIcon(icon, lblProfile.getWidth() - offset, lblProfile.getHeight() - offset));
+		panelShow.add(lblProfile);
+		
+		JLabel lblNewLabel = new JLabel("\u0E08\u0E31\u0E14\u0E01\u0E32\u0E23\u0E01\u0E31\u0E1A\u0E1A\u0E31\u0E0D\u0E0A\u0E35\u0E02\u0E2D\u0E07\u0E09\u0E31\u0E19");
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				settingUser open = new settingUser(username,user_id);
+				open.setVisible(true);
+				dispose();
+			}
+		});
+		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(67, 35, 134, 24);
+		panelShow.add(lblNewLabel);
+		
+		JLabel labelMyOrder = new JLabel("\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23\u0E2A\u0E31\u0E48\u0E07\u0E0B\u0E37\u0E49\u0E2D\u0E02\u0E2D\u0E07\u0E09\u0E31\u0E19");
+		labelMyOrder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		labelMyOrder.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelMyOrder.setBounds(67, 95, 134, 34);
+		panelShow.add(labelMyOrder);
+		
+		JLabel labelLogOut = new JLabel("\u0E2D\u0E2D\u0E01\u0E08\u0E32\u0E01\u0E23\u0E30\u0E1A\u0E1A");
+		labelLogOut.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Home open = new Home();
+				open.setVisible(true);
+				dispose();
+			}
+		});
+		labelLogOut.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		labelLogOut.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelLogOut.setBounds(67, 157, 134, 27);
+		panelShow.add(labelLogOut);
+		
+		JLabel lblOrder = new JLabel("");
+		icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/box.png"));
+		offset = lblOrder.getInsets().left;
+		lblOrder.setBounds(21, 95, 36, 34);
+		lblOrder.setIcon(resizeIcon(icon, lblOrder.getWidth() - offset, lblOrder.getHeight() - offset));
+		panelShow.add(lblOrder);
+		
+		JLabel lblLogout = new JLabel("");
+		offset = lblLogout.getInsets().left;
+		icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/logout.png"));
+		lblLogout.setBounds(21, 150, 36, 34);
+		lblLogout.setIcon(resizeIcon(icon, lblLogout.getWidth() - offset, lblLogout.getHeight() - offset));
+		panelShow.add(lblLogout);
+		
+		panelShow.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				lblNewLabel.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						lblNewLabel.setForeground(new Color(255, 69, 0));
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						lblNewLabel.setForeground(Color.BLACK);
+					}
+				});
+				labelMyOrder.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						labelMyOrder.setForeground(new Color(255, 69, 0));
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						labelMyOrder.setForeground(Color.BLACK);
+					}
+				});
+				labelLogOut.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						labelLogOut.setForeground(new Color(255, 69, 0));
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						labelLogOut.setForeground(Color.BLACK);
+					}
+				});
+			}
+		});
+		
 		JPanel SearchBar = new JPanel();
 		SearchBar.setBounds(0, 0, 1023, 42);
 		SearchBar.setLayout(null);
 		SearchBar.setBackground(new Color(0, 51, 51));
 		contentPane.add(SearchBar);
 		
-		JLabel label_5 = new JLabel("\u0E15\u0E34\u0E14\u0E15\u0E32\u0E21\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32");
-		label_5.setForeground(Color.WHITE);
-		label_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label_5.setBorder(UIManager.getBorder("MenuBar.border"));
-		label_5.setBounds(649, 11, 76, 23);
-		SearchBar.add(label_5);
+		JLabel lblUser = new JLabel("New label");
+		lblUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblUser.setForeground(Color.WHITE);
+		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUser.setBounds(727, 11, 204, 23);
+		lblUser.setText("ºÑ­ªÕ¢Í§ "+username.toUpperCase());
+		SearchBar.add(lblUser);
 		
-		JLabel label_6 = new JLabel("\u0E25\u0E07\u0E0A\u0E37\u0E48\u0E2D\u0E40\u0E02\u0E49\u0E32\u0E43\u0E0A\u0E49");
-		label_6.setForeground(Color.WHITE);
-		label_6.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label_6.setBorder(UIManager.getBorder("MenuBar.border"));
-		label_6.setBounds(753, 11, 76, 23);
-		SearchBar.add(label_6);
+		lblUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblUser.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				panelShow.setVisible(true);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblUser.setForeground(new Color(255, 69, 0));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblUser.setForeground(Color.WHITE);
+			}
 		
-		JLabel label_7 = new JLabel("\u0E2A\u0E21\u0E31\u0E04\u0E23\u0E2A\u0E21\u0E32\u0E0A\u0E34\u0E01");
-		label_7.setForeground(Color.WHITE);
-		label_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label_7.setBorder(UIManager.getBorder("MenuBar.border"));
-		label_7.setBounds(856, 11, 73, 23);
-		SearchBar.add(label_7);
+		});
+		
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelShow.setVisible(false);
+			}
+		});
 		
 		JLabel label_8 = new JLabel("");
-		label_8.setIcon(new ImageIcon(BigMall.class.getResource("/Image/markz.png")));
+		label_8.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/markz.png")));
 		label_8.setBounds(974, 11, 22, 27);
 		SearchBar.add(label_8);
 		
+		JLabel label_5 = new JLabel("\u0E15\u0E34\u0E14\u0E15\u0E32\u0E21\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32");
+		label_5.setForeground(Color.WHITE);
+		label_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_5.setBounds(559, 11, 95, 23);
+		SearchBar.add(label_5);
+		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelShow.setVisible(false);
+			}
+		});
 		scrollPane.setBounds(0, 204, 1023, 517);
 		contentPane.add(scrollPane);
 		
@@ -319,7 +448,7 @@ public class BigMall extends JFrame {
 		
 		JLabel arrow1 = new JLabel("");
 		arrow1.setVisible(false);
-		arrow1.setIcon(new ImageIcon(BigMall.class.getResource("/Image/arrowMenu.png")));
+		arrow1.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		arrow1.setBounds(169, 0, 19, 30);
 		ToysPanel.add(arrow1);
 		ToysPanel.addMouseListener(new MouseAdapter() {
@@ -351,7 +480,7 @@ public class BigMall extends JFrame {
 		
 		JLabel arrow2 = new JLabel("");
 		arrow2.setVisible(false);
-		arrow2.setIcon(new ImageIcon(BigMall.class.getResource("/Image/arrowMenu.png")));
+		arrow2.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		arrow2.setBounds(169, 0, 19, 30);
 		MalesPanel.add(arrow2);
 		MalesPanel.addMouseListener(new MouseAdapter() {
@@ -383,7 +512,7 @@ public class BigMall extends JFrame {
 		JLabel arrow3 = new JLabel("");
 		arrow3.setVisible(false);
 		arrow3.setBounds(169, 0, 19, 30);
-		arrow3.setIcon(new ImageIcon(BigMall.class.getResource("/Image/arrowMenu.png")));
+		arrow3.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		FemalesPanel.add(arrow3);
 		FemalesPanel.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
@@ -414,7 +543,7 @@ public class BigMall extends JFrame {
 		JLabel arrow4 = new JLabel("");
 		arrow4.setVisible(false);
 		arrow4.setBounds(169, 0, 19, 30);
-		arrow4.setIcon(new ImageIcon(BigMall.class.getResource("/Image/arrowMenu.png")));
+		arrow4.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		ElecsPanel.add(arrow4);
 		ElecsPanel.setLayout(null);
 		ElecsPanel.setBackground(Color.WHITE);
@@ -444,7 +573,7 @@ public class BigMall extends JFrame {
 		
 		JLabel arrow5 = new JLabel("");
 		arrow5.setVisible(false);
-		arrow5.setIcon(new ImageIcon(BigMall.class.getResource("/Image/arrowMenu.png")));
+		arrow5.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		arrow5.setBounds(169, 0, 19, 30);
 		GrocesPanel.add(arrow5);
 		GrocesPanel.addMouseListener(new MouseAdapter() {
@@ -475,7 +604,7 @@ public class BigMall extends JFrame {
 		
 		JLabel arrow6 = new JLabel("");
 		arrow6.setVisible(false);
-		arrow6.setIcon(new ImageIcon(BigMall.class.getResource("/Image/arrowMenu.png")));
+		arrow6.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		arrow6.setBounds(169, 0, 19, 30);
 		SportsPanel.add(arrow6);
 		SportsPanel.addMouseListener(new MouseAdapter() {
@@ -506,7 +635,7 @@ public class BigMall extends JFrame {
 		
 		JLabel arrow7 = new JLabel("");
 		arrow7.setVisible(false);
-		arrow7.setIcon(new ImageIcon(BigMall.class.getResource("/Image/arrowMenu.png")));
+		arrow7.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		arrow7.setBounds(169, 0, 19, 30);
 		HomePanel.add(arrow7);
 		HomePanel.addMouseListener(new MouseAdapter() {
@@ -558,42 +687,42 @@ public class BigMall extends JFrame {
 		FollowUsPanel.add(FollowPanel);
 		
 		JLabel label_124 = new JLabel("");
-		label_124.setIcon(new ImageIcon(BigMall.class.getResource("/Image/facebook.png")));
+		label_124.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/facebook.png")));
 		label_124.setBounds(0, 11, 33, 34);
 		FollowPanel.add(label_124);
 		
 		JLabel label_125 = new JLabel("");
-		label_125.setIcon(new ImageIcon(BigMall.class.getResource("/Image/twitter.PNG")));
+		label_125.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/twitter.PNG")));
 		label_125.setBounds(33, 11, 33, 34);
 		FollowPanel.add(label_125);
 		
 		JLabel label_126 = new JLabel("");
-		label_126.setIcon(new ImageIcon(BigMall.class.getResource("/Image/gg_plus.png")));
+		label_126.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/gg_plus.png")));
 		label_126.setBounds(65, 11, 33, 34);
 		FollowPanel.add(label_126);
 		
 		JLabel label_127 = new JLabel("");
-		label_127.setIcon(new ImageIcon(BigMall.class.getResource("/Image/instagram.png")));
+		label_127.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/instagram.png")));
 		label_127.setBounds(97, 11, 33, 34);
 		FollowPanel.add(label_127);
 		
 		JLabel label_128 = new JLabel("");
-		label_128.setIcon(new ImageIcon(BigMall.class.getResource("/Image/youtuber.png")));
+		label_128.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/youtuber.png")));
 		label_128.setBounds(129, 11, 33, 34);
 		FollowPanel.add(label_128);
 		
 		JLabel label_129 = new JLabel("");
-		label_129.setIcon(new ImageIcon(BigMall.class.getResource("/Image/pinteres.png")));
+		label_129.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/pinteres.png")));
 		label_129.setBounds(162, 11, 33, 34);
 		FollowPanel.add(label_129);
 		
 		JLabel label_130 = new JLabel("");
-		label_130.setIcon(new ImageIcon(BigMall.class.getResource("/Image/blogg.png")));
+		label_130.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/blogg.png")));
 		label_130.setBounds(195, 11, 33, 34);
 		FollowPanel.add(label_130);
 		
 		JLabel label_131 = new JLabel("");
-		label_131.setIcon(new ImageIcon(BigMall.class.getResource("/Image/tumblr.PNG")));
+		label_131.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/tumblr.PNG")));
 		label_131.setBounds(228, 11, 33, 34);
 		FollowPanel.add(label_131);
 		
@@ -619,7 +748,7 @@ public class BigMall extends JFrame {
 		Store1.add(nameBrandStore1);
 		
 		lblLazmallStore1 = new JLabel("");
-		lblLazmallStore1.setIcon(new ImageIcon(BigMall.class.getResource("/Image/flagship.PNG")));
+		lblLazmallStore1.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/flagship.PNG")));
 		lblLazmallStore1.setBounds(99, 44, 196, 22);
 		Store1.add(lblLazmallStore1);
 		
@@ -667,7 +796,7 @@ public class BigMall extends JFrame {
 		Store2.add(nameBrandStore2);
 		
 		lblLazmallStore2 = new JLabel("");
-		lblLazmallStore2.setIcon(new ImageIcon(BigMall.class.getResource("/Image/flagship.PNG")));
+		lblLazmallStore2.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/flagship.PNG")));
 		lblLazmallStore2.setBounds(99, 44, 196, 22);
 		Store2.add(lblLazmallStore2);
 		
@@ -715,7 +844,7 @@ public class BigMall extends JFrame {
 		Store3.add(nameBrandStore3);
 		
 		lblLazmallStore3 = new JLabel("");
-		lblLazmallStore3.setIcon(new ImageIcon(BigMall.class.getResource("/Image/flagship.PNG")));
+		lblLazmallStore3.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/flagship.PNG")));
 		lblLazmallStore3.setBounds(99, 44, 196, 22);
 		Store3.add(lblLazmallStore3);
 		
@@ -763,7 +892,7 @@ public class BigMall extends JFrame {
 		Store4.add(nameBrandStore4);
 		
 		lblLazmallStore4 = new JLabel("");
-		lblLazmallStore4.setIcon(new ImageIcon(BigMall.class.getResource("/Image/flagship.PNG")));
+		lblLazmallStore4.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/flagship.PNG")));
 		lblLazmallStore4.setBounds(99, 44, 196, 22);
 		Store4.add(lblLazmallStore4);
 		
@@ -796,55 +925,55 @@ public class BigMall extends JFrame {
 		
 		JLabel Sports = new JLabel("");
 		Sports.setVisible(false);
-		Sports.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/SportNew.PNG")));
+		Sports.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/SportNew.PNG")));
 		Sports.setBounds(885, 478, 107, 106);
 		Sub_ShowPanel.add(Sports);
 		
 		JLabel Home = new JLabel("");
 		Home.setVisible(false);
-		Home.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/home&LifestyleNEW.png")));
+		Home.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/home&LifestyleNEW.png")));
 		Home.setBounds(762, 478, 122, 106);
 		Sub_ShowPanel.add(Home);
 		
 		JLabel ElecDevice = new JLabel("");
 		ElecDevice.setVisible(false);
-		ElecDevice.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/electronicsDevicesNEW.png")));
+		ElecDevice.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/electronicsDevicesNEW.png")));
 		ElecDevice.setBounds(666, 478, 108, 106);
 		Sub_ShowPanel.add(ElecDevice);
 		
 		JLabel Mother = new JLabel("");
 		Mother.setVisible(false);
-		Mother.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/mother&BabyNEW.png")));
+		Mother.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/mother&BabyNEW.png")));
 		Mother.setBounds(558, 478, 108, 106);
 		Sub_ShowPanel.add(Mother);
 		
 		JLabel Groces = new JLabel("");
 		Groces.setVisible(false);
-		Groces.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/groceriesNEW.png")));
+		Groces.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/groceriesNEW.png")));
 		Groces.setBounds(450, 478, 108, 106);
 		Sub_ShowPanel.add(Groces);
 		
 		JLabel Consumer = new JLabel("");
 		Consumer.setVisible(false);
-		Consumer.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/consumerAppNEW.png")));
+		Consumer.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/consumerAppNEW.png")));
 		Consumer.setBounds(346, 478, 108, 106);
 		Sub_ShowPanel.add(Consumer);
 		
 		JLabel Health = new JLabel("");
 		Health.setVisible(false);
-		Health.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/health&BeautyNEW.png")));
+		Health.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/health&BeautyNEW.png")));
 		Health.setBounds(237, 478, 108, 106);
 		Sub_ShowPanel.add(Health);
 		
 		JLabel ElecAccess = new JLabel("");
 		ElecAccess.setVisible(false);
-		ElecAccess.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/electronicsAccessNEW.png")));
+		ElecAccess.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/electronicsAccessNEW.png")));
 		ElecAccess.setBounds(129, 478, 108, 106);
 		Sub_ShowPanel.add(ElecAccess);
 		
 		JLabel PickForU = new JLabel("");
 		PickForU.setVisible(false);
-		PickForU.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/PickForYouNEW.png")));
+		PickForU.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/PickForYouNEW.png")));
 		PickForU.setBounds(21, 478, 108, 106);
 		Sub_ShowPanel.add(PickForU);
 		
@@ -908,17 +1037,17 @@ public class BigMall extends JFrame {
 		Sub_ShowPanel.add(label_30);
 		
 		JLabel BrandEvent1 = new JLabel("");
-		BrandEvent1.setIcon(new ImageIcon(BigMall.class.getResource("/Image/brandEvent1new.png")));
+		BrandEvent1.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/brandEvent1new.png")));
 		BrandEvent1.setBounds(21, 51, 308, 374);
 		Sub_ShowPanel.add(BrandEvent1);
 		
 		JLabel BrandEvent2 = new JLabel("");
-		BrandEvent2.setIcon(new ImageIcon(BigMall.class.getResource("/Image/brandEvent2new.png")));
+		BrandEvent2.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/brandEvent2new.png")));
 		BrandEvent2.setBounds(350, 51, 308, 374);
 		Sub_ShowPanel.add(BrandEvent2);
 		
 		JLabel BrandEvent3 = new JLabel("");
-		BrandEvent3.setIcon(new ImageIcon(BigMall.class.getResource("/Image/brandEvent3new.png")));
+		BrandEvent3.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/brandEvent3new.png")));
 		BrandEvent3.setBounds(679, 51, 308, 374);
 		Sub_ShowPanel.add(BrandEvent3);
 		
@@ -966,14 +1095,14 @@ public class BigMall extends JFrame {
 		panel1.add(label_64);
 		
 		JLabel label_65 = new JLabel("");
-		label_65.setIcon(new ImageIcon(BigMall.class.getResource("/JustForYou/panel1_sub.PNG")));
+		label_65.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/JustForYou/panel1_sub.PNG")));
 		label_65.setForeground(Color.GRAY);
 		label_65.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		label_65.setBounds(6, 228, 89, 14);
 		panel1.add(label_65);
 		
 		JLabel label_66 = new JLabel("");
-		label_66.setIcon(new ImageIcon(BigMall.class.getResource("/starReviewGrades/starReview4_8.PNG")));
+		label_66.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/starReviewGrades/starReview4_8.PNG")));
 		label_66.setBounds(9, 253, 85, 18);
 		panel1.add(label_66);
 		
@@ -1012,14 +1141,14 @@ public class BigMall extends JFrame {
 		panel2.add(label_70);
 		
 		JLabel label_71 = new JLabel("");
-		label_71.setIcon(new ImageIcon(BigMall.class.getResource("/JustForYou/panel2_sub.PNG")));
+		label_71.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/JustForYou/panel2_sub.PNG")));
 		label_71.setForeground(Color.GRAY);
 		label_71.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		label_71.setBounds(6, 228, 89, 14);
 		panel2.add(label_71);
 		
 		JLabel label_72 = new JLabel("");
-		label_72.setIcon(new ImageIcon(BigMall.class.getResource("/starReviewGrades/starReview4_8.PNG")));
+		label_72.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/starReviewGrades/starReview4_8.PNG")));
 		label_72.setBounds(9, 253, 78, 18);
 		panel2.add(label_72);
 		
@@ -1058,14 +1187,14 @@ public class BigMall extends JFrame {
 		panel3.add(label_76);
 		
 		JLabel label_77 = new JLabel("");
-		label_77.setIcon(new ImageIcon(BigMall.class.getResource("/JustForYou/panel3_sub.PNG")));
+		label_77.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/JustForYou/panel3_sub.PNG")));
 		label_77.setForeground(Color.GRAY);
 		label_77.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		label_77.setBounds(6, 228, 89, 14);
 		panel3.add(label_77);
 		
 		JLabel label_78 = new JLabel("");
-		label_78.setIcon(new ImageIcon(BigMall.class.getResource("/starReviewGrades/starReview5.PNG")));
+		label_78.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/starReviewGrades/starReview5.PNG")));
 		label_78.setBounds(9, 253, 78, 18);
 		panel3.add(label_78);
 		
@@ -1104,7 +1233,7 @@ public class BigMall extends JFrame {
 		panel4.add(label_82);
 		
 		JLabel label_84 = new JLabel("");
-		label_84.setIcon(new ImageIcon(BigMall.class.getResource("/starReviewGrades/starReview5.PNG")));
+		label_84.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/starReviewGrades/starReview5.PNG")));
 		label_84.setBounds(9, 253, 78, 18);
 		panel4.add(label_84);
 		
@@ -1143,7 +1272,7 @@ public class BigMall extends JFrame {
 		panel5.add(label_88);
 		
 		JLabel label_90 = new JLabel("");
-		label_90.setIcon(new ImageIcon(BigMall.class.getResource("/starReviewGrades/starReview4_8.PNG")));
+		label_90.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/starReviewGrades/starReview4_8.PNG")));
 		label_90.setBounds(9, 253, 78, 18);
 		panel5.add(label_90);
 		
@@ -1182,14 +1311,14 @@ public class BigMall extends JFrame {
 		panel6.add(label_94);
 		
 		JLabel label_95 = new JLabel("");
-		label_95.setIcon(new ImageIcon(BigMall.class.getResource("/JustForYou/panel10_sub.PNG")));
+		label_95.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/JustForYou/panel10_sub.PNG")));
 		label_95.setForeground(Color.GRAY);
 		label_95.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		label_95.setBounds(6, 228, 89, 14);
 		panel6.add(label_95);
 		
 		JLabel label_96 = new JLabel("");
-		label_96.setIcon(new ImageIcon(BigMall.class.getResource("/starReviewGrades/starReview5.PNG")));
+		label_96.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/starReviewGrades/starReview5.PNG")));
 		label_96.setBounds(9, 253, 78, 18);
 		panel6.add(label_96);
 		
@@ -1228,14 +1357,14 @@ public class BigMall extends JFrame {
 		panel7.add(label_100);
 		
 		JLabel label_101 = new JLabel("");
-		label_101.setIcon(new ImageIcon(BigMall.class.getResource("/JustForYou/panel_sub9.PNG")));
+		label_101.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/JustForYou/panel_sub9.PNG")));
 		label_101.setForeground(Color.GRAY);
 		label_101.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		label_101.setBounds(6, 228, 89, 14);
 		panel7.add(label_101);
 		
 		JLabel label_102 = new JLabel("");
-		label_102.setIcon(new ImageIcon(BigMall.class.getResource("/starReviewGrades/starReview4_8.PNG")));
+		label_102.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/starReviewGrades/starReview4_8.PNG")));
 		label_102.setBounds(9, 253, 78, 18);
 		panel7.add(label_102);
 		
@@ -1274,14 +1403,14 @@ public class BigMall extends JFrame {
 		panel8.add(label_106);
 		
 		JLabel label_107 = new JLabel("");
-		label_107.setIcon(new ImageIcon(BigMall.class.getResource("/JustForYou/panel_sub8.PNG")));
+		label_107.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/JustForYou/panel_sub8.PNG")));
 		label_107.setForeground(Color.GRAY);
 		label_107.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		label_107.setBounds(6, 228, 89, 14);
 		panel8.add(label_107);
 		
 		JLabel label_108 = new JLabel("");
-		label_108.setIcon(new ImageIcon(BigMall.class.getResource("/starReviewGrades/starReview3.PNG")));
+		label_108.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/starReviewGrades/starReview3.PNG")));
 		label_108.setBounds(9, 253, 78, 18);
 		panel8.add(label_108);
 		
@@ -1320,14 +1449,14 @@ public class BigMall extends JFrame {
 		panel9.add(label_112);
 		
 		JLabel label_113 = new JLabel("");
-		label_113.setIcon(new ImageIcon(BigMall.class.getResource("/JustForYou/panel_sub6.PNG")));
+		label_113.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/JustForYou/panel_sub6.PNG")));
 		label_113.setForeground(Color.GRAY);
 		label_113.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		label_113.setBounds(6, 228, 89, 14);
 		panel9.add(label_113);
 		
 		JLabel label_114 = new JLabel("");
-		label_114.setIcon(new ImageIcon(BigMall.class.getResource("/starReviewGrades/starReview4_8.PNG")));
+		label_114.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/starReviewGrades/starReview4_8.PNG")));
 		label_114.setBounds(9, 253, 78, 18);
 		panel9.add(label_114);
 		
@@ -1349,16 +1478,16 @@ public class BigMall extends JFrame {
 		panel10.add(pic10);
 		
 		try {
-			pic1.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/JustForYou/panel1.PNG")));
-			pic2.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/JustForYou/panel2.PNG")));
-			pic3.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/JustForYou/panel3.PNG")));
-			pic4.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/JustForYou/panel4.PNG")));
-			pic5.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/JustForYou/panel5.PNG")));
-			pic6.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/JustForYou/panel6.PNG")));
-			pic7.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/JustForYou/panel7.PNG")));
-			pic8.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/JustForYou/panel8.PNG")));
-			pic9.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/JustForYou/panel9.PNG")));
-			pic10.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/JustForYou/panel10.PNG")));
+			pic1.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/JustForYou/panel1.PNG")));
+			pic2.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/JustForYou/panel2.PNG")));
+			pic3.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/JustForYou/panel3.PNG")));
+			pic4.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/JustForYou/panel4.PNG")));
+			pic5.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/JustForYou/panel5.PNG")));
+			pic6.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/JustForYou/panel6.PNG")));
+			pic7.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/JustForYou/panel7.PNG")));
+			pic8.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/JustForYou/panel8.PNG")));
+			pic9.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/JustForYou/panel9.PNG")));
+			pic10.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/JustForYou/panel10.PNG")));
 			
 		} catch (IOException e2) {
 			e2.printStackTrace();
@@ -1382,14 +1511,14 @@ public class BigMall extends JFrame {
 		panel10.add(label_118);
 		
 		JLabel label_119 = new JLabel("");
-		label_119.setIcon(new ImageIcon(BigMall.class.getResource("/JustForYou/panel_sub7.PNG")));
+		label_119.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/JustForYou/panel_sub7.PNG")));
 		label_119.setForeground(Color.GRAY);
 		label_119.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		label_119.setBounds(6, 228, 89, 14);
 		panel10.add(label_119);
 		
 		JLabel label_120 = new JLabel("");
-		label_120.setIcon(new ImageIcon(BigMall.class.getResource("/starReviewGrades/starReview4_5.PNG")));
+		label_120.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/starReviewGrades/starReview4_5.PNG")));
 		label_120.setBounds(9, 253, 78, 18);
 		panel10.add(label_120);
 		
@@ -1409,10 +1538,10 @@ public class BigMall extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				ControlRowLabel(controlRowLabel,1);
 				
-				brandStore1.setIcon(new ImageIcon(BigMall.class.getResource("/Brands/grandsportSport.PNG")));
-				brandStore2.setIcon(new ImageIcon(BigMall.class.getResource("/Brands/tvdirectHome.PNG")));
-				brandStore3.setIcon(new ImageIcon(BigMall.class.getResource("/Brands/xiaomiConsumer_ElecAccess.PNG")));
-				brandStore4.setIcon(new ImageIcon(BigMall.class.getResource("/Brands/hongthongGroce.PNG")));
+				brandStore1.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Brands/grandsportSport.PNG")));
+				brandStore2.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Brands/tvdirectHome.PNG")));
+				brandStore3.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Brands/xiaomiConsumer_ElecAccess.PNG")));
+				brandStore4.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Brands/hongthongGroce.PNG")));
 			
 				nameBrandStore1.setText("GRAND SPORT");
 				nameBrandStore2.setText("TV Direct");
@@ -1420,21 +1549,21 @@ public class BigMall extends JFrame {
 				nameBrandStore4.setText("Hongthong Rice");
 				
 				try {
-					Store1Pic1.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Sport/grandsportSport+355.PNG")));
-					Store1Pic2.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Sport/grandsportSport+395.PNG")));
-					Store1Pic3.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Sport/grandsportSport+590.PNG")));
+					Store1Pic1.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Sport/grandsportSport+355.PNG")));
+					Store1Pic2.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Sport/grandsportSport+395.PNG")));
+					Store1Pic3.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Sport/grandsportSport+590.PNG")));
 				
-					Store2Pic1.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Home/tvdirectHome+3990.PNG")));
-					Store2Pic2.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Home/tvdirectHome+490.PNG")));
-					Store2Pic3.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Home/tvdirectHome+99.PNG")));
+					Store2Pic1.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Home/tvdirectHome+3990.PNG")));
+					Store2Pic2.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Home/tvdirectHome+490.PNG")));
+					Store2Pic3.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Home/tvdirectHome+99.PNG")));
 					
-					Store3Pic1.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Consumer/xiaomiConsumer+12990.PNG")));
-					Store3Pic2.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Consumer/xiaomiConsumer+5990.PNG")));
-					Store3Pic3.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Consumer/xiaomiConsumer+9390.PNG")));
+					Store3Pic1.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Consumer/xiaomiConsumer+12990.PNG")));
+					Store3Pic2.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Consumer/xiaomiConsumer+5990.PNG")));
+					Store3Pic3.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Consumer/xiaomiConsumer+9390.PNG")));
 					
-					Store4Pic1.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Groceries/hongthongGroce+1160.PNG")));
-					Store4Pic2.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Groceries/hongthongGroce+300.PNG")));
-					Store4Pic3.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/Groceries/hongthongGroce+580.PNG")));
+					Store4Pic1.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Groceries/hongthongGroce+1160.PNG")));
+					Store4Pic2.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Groceries/hongthongGroce+300.PNG")));
+					Store4Pic3.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/Groceries/hongthongGroce+580.PNG")));
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -1456,7 +1585,7 @@ public class BigMall extends JFrame {
 	
 			}
 		});
-		PickForUR.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/ScrollH_Bar_Picks.png")));
+		PickForUR.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/ScrollH_Bar_Picks.png")));
 		PickForUR.setBounds(0, 0, 108, 100);
 		RowPanel.add(PickForUR);
 		
@@ -1497,7 +1626,7 @@ public class BigMall extends JFrame {
 				StoresShowing(PicbrandLabels, NamebrandLabels, StorePics, "ElecAccess");
 			}
 		});
-		ElecAccessR.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/ScrollH_Bar_ElecAc.png")));
+		ElecAccessR.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/ScrollH_Bar_ElecAc.png")));
 		ElecAccessR.setBounds(108, 0, 108, 100);
 		RowPanel.add(ElecAccessR);
 		
@@ -1538,7 +1667,7 @@ public class BigMall extends JFrame {
 				StoresShowing(PicbrandLabels, NamebrandLabels, StorePics, "Health");
 			}
 		});
-		HealthR.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/ScrollH_Barnew_Health.png")));
+		HealthR.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/ScrollH_Barnew_Health.png")));
 		HealthR.setBounds(216, 0, 108, 100);
 		RowPanel.add(HealthR);
 		
@@ -1579,7 +1708,7 @@ public class BigMall extends JFrame {
 				StoresShowing(PicbrandLabels, NamebrandLabels, StorePics, "Consumer");
 			}
 		});
-		ConsumerR.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/ScrollH_Barnew_Consume.png")));
+		ConsumerR.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/ScrollH_Barnew_Consume.png")));
 		ConsumerR.setBounds(325, 0, 103, 100);
 		RowPanel.add(ConsumerR);
 		
@@ -1620,7 +1749,7 @@ public class BigMall extends JFrame {
 				StoresShowing(PicbrandLabels, NamebrandLabels, StorePics, "Groceries");
 			}
 		});
-		GroceR.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/ScrollH_Barnew_Groces.png")));
+		GroceR.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/ScrollH_Barnew_Groces.png")));
 		GroceR.setBounds(429, 0, 108, 100);
 		RowPanel.add(GroceR);
 		
@@ -1661,7 +1790,7 @@ public class BigMall extends JFrame {
 				StoresShowing(PicbrandLabels, NamebrandLabels, StorePics, "Mother");
 			}
 		});
-		MotherR.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/ScrollH_Barnew_Mother.png")));
+		MotherR.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/ScrollH_Barnew_Mother.png")));
 		MotherR.setBounds(537, 0, 108, 100);
 		RowPanel.add(MotherR);
 		
@@ -1702,7 +1831,7 @@ public class BigMall extends JFrame {
 				StoresShowing(PicbrandLabels, NamebrandLabels, StorePics, "ElecDevice");
 			}
 		});
-		ElecDeviceR.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/ScrollH_Barnew_ElecDev.png")));
+		ElecDeviceR.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/ScrollH_Barnew_ElecDev.png")));
 		ElecDeviceR.setBounds(645, 0, 97, 100);
 		RowPanel.add(ElecDeviceR);
 		
@@ -1743,7 +1872,7 @@ public class BigMall extends JFrame {
 				StoresShowing(PicbrandLabels, NamebrandLabels, StorePics, "Home");
 			}
 		});
-		HomeR.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/ScrollH_Barnew_Home.png")));
+		HomeR.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/ScrollH_Barnew_Home.png")));
 		HomeR.setBounds(741, 0, 122, 100);
 		RowPanel.add(HomeR);
 		
@@ -1784,7 +1913,7 @@ public class BigMall extends JFrame {
 				StoresShowing(PicbrandLabels, NamebrandLabels, StorePics, "Sport");
 			}
 		});
-		SportR.setIcon(new ImageIcon(BigMall.class.getResource("/ScrollBarPics/ScrollH_BarNew_Sport.PNG")));
+		SportR.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/ScrollBarPics/ScrollH_BarNew_Sport.PNG")));
 		SportR.setBounds(864, 0, 107, 99);
 		RowPanel.add(SportR);
 		
@@ -1798,7 +1927,7 @@ public class BigMall extends JFrame {
 		});
 		bannerChange1.setBounds(473, 267, 15, 25);
 		ShowPanel.add(bannerChange1);
-		bannerChange1.setIcon(new ImageIcon(BigMall.class.getResource("/Image/circle4.png")));
+		bannerChange1.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChange6 = new JLabel("");
 		bannerChange6.addMouseListener(new MouseAdapter() {
@@ -1808,7 +1937,7 @@ public class BigMall extends JFrame {
 		});
 		bannerChange6.setBounds(598, 267, 15, 25);
 		ShowPanel.add(bannerChange6);
-		bannerChange6.setIcon(new ImageIcon(BigMall.class.getResource("/Image/circle4.png")));
+		bannerChange6.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChange4 = new JLabel("");
 		bannerChange4.addMouseListener(new MouseAdapter() {
@@ -1818,7 +1947,7 @@ public class BigMall extends JFrame {
 		});
 		bannerChange4.setBounds(548, 267, 15, 25);
 		ShowPanel.add(bannerChange4);
-		bannerChange4.setIcon(new ImageIcon(BigMall.class.getResource("/Image/circle4.png")));
+		bannerChange4.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChange3 = new JLabel("");
 		bannerChange3.addMouseListener(new MouseAdapter() {
@@ -1828,7 +1957,7 @@ public class BigMall extends JFrame {
 		});
 		bannerChange3.setBounds(523, 267, 15, 25);
 		ShowPanel.add(bannerChange3);
-		bannerChange3.setIcon(new ImageIcon(BigMall.class.getResource("/Image/circle4.png")));
+		bannerChange3.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChange2 = new JLabel("");
 		bannerChange2.addMouseListener(new MouseAdapter() {
@@ -1838,7 +1967,7 @@ public class BigMall extends JFrame {
 		});
 		bannerChange2.setBounds(498, 267, 15, 25);
 		ShowPanel.add(bannerChange2);
-		bannerChange2.setIcon(new ImageIcon(BigMall.class.getResource("/Image/circle4.png")));
+		bannerChange2.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChange5 = new JLabel("");
 		bannerChange5.addMouseListener(new MouseAdapter() {
@@ -1848,33 +1977,54 @@ public class BigMall extends JFrame {
 		});
 		bannerChange5.setBounds(573, 267, 15, 25);
 		ShowPanel.add(bannerChange5);
-		bannerChange5.setIcon(new ImageIcon(BigMall.class.getResource("/Image/circle4.png")));
+		bannerChange5.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		banner = new JLabel("");
 		banner.setBounds(0, -13, 1020, 304);
 		ShowPanel.add(banner);
-		banner.setIcon(new ImageIcon(BigMall.class.getResource("/Image/BigMall_banner1n.png")));
+		banner.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/BigMall_banner1n.png")));
 		
 		JLabel BigMALLbanner = new JLabel("");
-		BigMALLbanner.setIcon(new ImageIcon(BigMall.class.getResource("/Image/MallAuthenticR.png")));
+		BigMALLbanner.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/MallAuthenticR.png")));
 		BigMALLbanner.setBounds(0, 290, 1015, 54);
 		ShowPanel.add(BigMALLbanner);
 		
 		JPanel MenuBar = new JPanel();
-		MenuBar.setBounds(0, 40, 1023, 164);
+		MenuBar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelShow.setVisible(false);
+			}
+		});
+		MenuBar.setBounds(0, 42, 1023, 162);
 		MenuBar.setBackground(new Color(8, 54, 69));
 		contentPane.add(MenuBar);
 		MenuBar.setLayout(null);
 		
 		JLabel label = new JLabel("");
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Home_LoggedIn open = new Home_LoggedIn(username,user_id);
+				open.setVisible(true);
+				dispose();
+			}
+		});
+		label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		label.setBounds(10, 11, 108, 96);
-		label.setIcon(new ImageIcon(BigMall.class.getResource("/Image/\u0E42\u0E25\u0E42\u0E01\u0E49\u0E2A\u0E35\u0E02\u0E32\u0E273.png")));
+		label.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/\u0E42\u0E25\u0E42\u0E01\u0E49\u0E2A\u0E35\u0E02\u0E32\u0E273.png")));
 		MenuBar.add(label);
 		
 		textField = new JTextField();
 		textField.setBounds(281, 40, 458, 55);
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textField.setColumns(10);
+		textField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelShow.setVisible(false);
+			}
+		});
 		MenuBar.add(textField);
 		
 		JLabel label_1 = new JLabel("SALE");
@@ -1890,13 +2040,13 @@ public class BigMall extends JFrame {
 		MenuBar.add(panel_1);
 		
 		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon(BigMall.class.getResource("/Image/\u0E04\u0E49\u0E19\u0E2B\u0E32 \u0E2A\u0E35\u0E02\u0E32\u0E272.png")));
+		label_2.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/\u0E04\u0E49\u0E19\u0E2B\u0E32 \u0E2A\u0E35\u0E02\u0E32\u0E272.png")));
 		label_2.setBounds(13, 3, 33, 51);
 		panel_1.add(label_2);
 		
 		JLabel label_3 = new JLabel("");
 		label_3.setBounds(836, 46, 44, 40);
-		label_3.setIcon(new ImageIcon(BigMall.class.getResource("/Image/\u0E15\u0E23\u0E30\u0E01\u0E25\u0E49\u0E32\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E322.png")));
+		label_3.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/\u0E15\u0E23\u0E30\u0E01\u0E25\u0E49\u0E32\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E322.png")));
 		MenuBar.add(label_3);
 		
 		JPanel panel_2 = new JPanel();
@@ -1912,17 +2062,17 @@ public class BigMall extends JFrame {
 		MenuBar.add(label_4);
 		
 		JLabel label_10 = new JLabel("");
-		label_10.setIcon(new ImageIcon(BigMall.class.getResource("/Image/gblICON.PNG")));
+		label_10.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/gblICON.PNG")));
 		label_10.setBounds(425, 124, 30, 37);
 		MenuBar.add(label_10);
 		
 		JLabel label_11 = new JLabel("");
-		label_11.setIcon(new ImageIcon(BigMall.class.getResource("/Image/vchICON.PNG")));
+		label_11.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/vchICON.PNG")));
 		label_11.setBounds(615, 125, 30, 37);
 		MenuBar.add(label_11);
 		
 		menuPuller = new JLabel("");
-		menuPuller.setIcon(new ImageIcon(BigMall.class.getResource("/Image/menuPuller.png")));
+		menuPuller.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/menuPuller.png")));
 		menuPuller.setBounds(174, 135, 19, 14);
 		MenuBar.add(menuPuller);
 		
@@ -1959,7 +2109,7 @@ public class BigMall extends JFrame {
 		MenuBar.add(lblVouchers);
 		
 		JLabel label_9 = new JLabel("");
-		label_9.setIcon(new ImageIcon(BigMall.class.getResource("/Image/bgmICON.PNG")));
+		label_9.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/bgmICON.PNG")));
 		label_9.setBounds(291, 124, 30, 37);
 		MenuBar.add(label_9);
 		
@@ -1971,10 +2121,11 @@ public class BigMall extends JFrame {
 		CatergoriesPanel.setLayout(null);
 		
 		JLabel label_13 = new JLabel("");
-		label_13.setIcon(new ImageIcon(BigMall.class.getResource("/Image/menuPullerBLACK.png")));
+		label_13.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Image/menuPullerBLACK.png")));
 		label_13.setBounds(119, 20, 19, 14);
 		CatergoriesPanel.add(label_13);
 		changeBanner();
+		//end MenuLogin 2
 	}
 	public void changeBanner() {
 		Timer timer = new Timer(5000, new ActionListener() {
@@ -2040,7 +2191,7 @@ public class BigMall extends JFrame {
 		
 		for(int i=0;i<4;i++) {
 			JLabel temp = (JLabel)PackofPicBrands.get(i);
-			temp.setIcon(new ImageIcon(BigMall.class.getResource("/Brands/"+PicbrandsLabel.get(i))));
+			temp.setIcon(new ImageIcon(BigMallLoggedIn.class.getResource("/Brands/"+PicbrandsLabel.get(i))));
 		}
 	
 		for(int i=0;i<4;i++) {
@@ -2052,7 +2203,7 @@ public class BigMall extends JFrame {
 			int i = 0;
 			for (Iterator<JPanel> iterator = PackofStoresPics.iterator(); iterator.hasNext();) {
 				ImagePanel col = (ImagePanel)iterator.next();
-				col.setImage((BufferedImage)ImageIO.read(BigMall.class.getResource("/"+StoreName+"/"+StorePics.get(i++))));
+				col.setImage((BufferedImage)ImageIO.read(BigMallLoggedIn.class.getResource("/"+StoreName+"/"+StorePics.get(i++))));
 			}
 		}
 		catch(IOException e) {

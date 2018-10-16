@@ -97,6 +97,12 @@ public class settingUser extends JFrame {
 	}
 
 	public settingUser(String username, int user_id) {
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+			Home open = new Home();
+			open.setVisible(true);
+			}
+		});
 		this.username=username;
 		setMinimumSize(new Dimension(900, 900));
 		this.user_id = user_id;
@@ -865,7 +871,6 @@ public class settingUser extends JFrame {
 					@Override
 					public void mouseEntered(MouseEvent e) {
 						lblNewLabel.setForeground(new Color(255, 69, 0));
-						lblNewLabel.setBorder(UIManager.getBorder("MenuBar.border"));
 					}
 
 					@Override
@@ -877,7 +882,6 @@ public class settingUser extends JFrame {
 					@Override
 					public void mouseEntered(MouseEvent e) {
 						label_5.setForeground(new Color(255, 69, 0));
-						label_5.setBorder(UIManager.getBorder("MenuBar.border"));
 					}
 
 					@Override
@@ -889,7 +893,6 @@ public class settingUser extends JFrame {
 					@Override
 					public void mouseEntered(MouseEvent e) {
 						label_7.setForeground(new Color(255, 69, 0));
-						label_7.setBorder(UIManager.getBorder("MenuBar.border"));
 					}
 
 					@Override

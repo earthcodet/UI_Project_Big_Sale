@@ -81,12 +81,15 @@ public class Home_LoggedIn extends JFrame {
 	private JPanel Sub_pullDownMenu;
 	List<JPanel> subMenus = new LinkedList<>();
 	int user_id;
+	String username ;
+	int BigMallAllowed;
 	private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
 	    Image img = icon.getImage();
 	    Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
 	    return new ImageIcon(resizedImage);
 	    }
 	public Home_LoggedIn(String username,int user_id) {
+		this.username =username;
 		setMinimumSize(new Dimension(900, 900));
 		this.user_id=user_id;
 		addWindowListener(new WindowAdapter() {
@@ -204,11 +207,11 @@ public class Home_LoggedIn extends JFrame {
 		lblUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblUser.setForeground(Color.WHITE);
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUser.setBounds(927, 11, 239, 23);
+		lblUser.setBounds(885, 10, 239, 23);
 		MenuBar.add(lblUser);
 		
 		JPanel SearchPanel = new JPanel();
-		SearchPanel.setBounds(0, 43, 1243, 128);
+		SearchPanel.setBounds(0, 34, 1243, 137);
 		contentPane.add(SearchPanel);
 		SearchPanel.setBackground(new Color(8, 54, 69));
 		SearchPanel.setLayout(null);
@@ -494,6 +497,7 @@ JPanel subMenu1 = new JPanel();
 		GlobalCollPanel.add(lblGlobalCollection);
 		
 		JLabel btnGblColl = new JLabel("");
+		btnGblColl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnGblColl.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/gc2.png")));
 		btnGblColl.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -523,6 +527,7 @@ JPanel subMenu1 = new JPanel();
 		VoucherPanel.add(lblVouchers);
 		
 		JLabel btnVouchers = new JLabel("");
+		btnVouchers.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnVouchers.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/vc2.png")));
 		btnVouchers.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -552,9 +557,15 @@ JPanel subMenu1 = new JPanel();
 		BigMallPanel.add(lblBigmall);
 		
 		JLabel btnBigMall = new JLabel("");
+		btnBigMall.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnBigMall.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				
+				if(BigMallAllowed == 0) {
+					BigMallLoggedIn bgm = new BigMallLoggedIn(username,user_id);
+					bgm.setVisible(true);
+					BigMallAllowed = 1;
+					dispose();
+				}
 			}
 			public void mouseEntered(MouseEvent e) {
 				btnBigMall.setBounds(5, 5, 250, 35);
@@ -1036,7 +1047,6 @@ JPanel subMenu1 = new JPanel();
 					@Override
 					public void mouseEntered(MouseEvent e) {
 						lblNewLabel.setForeground(new Color(255, 69, 0));
-						lblNewLabel.setBorder(UIManager.getBorder("MenuBar.border"));
 					}
 					@Override
 					public void mouseExited(MouseEvent e) {
@@ -1047,7 +1057,6 @@ JPanel subMenu1 = new JPanel();
 					@Override
 					public void mouseEntered(MouseEvent e) {
 						labelMyOrder.setForeground(new Color(255, 69, 0));
-						labelMyOrder.setBorder(UIManager.getBorder("MenuBar.border"));
 					}
 					@Override
 					public void mouseExited(MouseEvent e) {
@@ -1058,7 +1067,6 @@ JPanel subMenu1 = new JPanel();
 					@Override
 					public void mouseEntered(MouseEvent e) {
 						labelLogOut.setForeground(new Color(255, 69, 0));
-						labelLogOut.setBorder(UIManager.getBorder("MenuBar.border"));
 					}
 					@Override
 					public void mouseExited(MouseEvent e) {
