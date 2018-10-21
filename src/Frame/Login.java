@@ -180,7 +180,7 @@ public class Login extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				forgetpassword nw = new forgetpassword();
+				ForgetPassword nw = new ForgetPassword();
 				nw.setVisible(true);
 			}
 		});
@@ -213,11 +213,11 @@ public class Login extends JFrame {
 						// dispose();
 
 						if (check.equals("user")) {
-							Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
+							HomeLoggedIn loginHome = new HomeLoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
 						loginHome.setVisible(true);
 						}
 						if (check.equals("admin")) {
-							aDMIN nw = new aDMIN(UserManager.getNameUserLogin());
+							ADMIN nw = new ADMIN(UserManager.getNameUserLogin());
 							nw.setVisible(true);
 						}
 						dispose();
@@ -285,11 +285,11 @@ public class Login extends JFrame {
 							dispose();
 
 							if (check.equals("user")) {
-								Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
+								HomeLoggedIn loginHome = new HomeLoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
 								loginHome.setVisible(true);
 							}
 							if (check.equals("admin")) {
-								aDMIN nw = new aDMIN(UserManager.getNameUserLogin());
+								ADMIN nw = new ADMIN(UserManager.getNameUserLogin());
 								nw.setVisible(true);
 							}
 							dispose();
@@ -320,11 +320,11 @@ public class Login extends JFrame {
 							JOptionPane.showMessageDialog(Login.this, title, "แจ้งเตือน", JOptionPane.PLAIN_MESSAGE);
 							System.out.println(check);
 							if (check.equals("user")) {
-								Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
+								HomeLoggedIn loginHome = new HomeLoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
 								loginHome.setVisible(true);
 							}
 							if (check.equals("admin")) {
-								aDMIN nw = new aDMIN(UserManager.getNameUserLogin());
+								ADMIN nw = new ADMIN(UserManager.getNameUserLogin());
 								nw.setVisible(true);
 							}
 							dispose();
@@ -356,11 +356,11 @@ public class Login extends JFrame {
 							dispose();
 
 							if (check.equals("user")) {
-								Home_LoggedIn loginHome = new Home_LoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
+								HomeLoggedIn loginHome = new HomeLoggedIn(UserManager.getNameUserLogin(),UserManager.getUserID());
 								loginHome.setVisible(true);
 							}
 							if (check.equals("admin")) {
-								aDMIN nw = new aDMIN(UserManager.getNameUserLogin());
+								ADMIN nw = new ADMIN(UserManager.getNameUserLogin());
 								nw.setVisible(true);
 							}
 							dispose();

@@ -1,9 +1,7 @@
 package Frame;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -12,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.LinkedList;
 
 import javax.swing.JFrame;
@@ -25,8 +22,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import DataManager.AddressDB;
-import DataManager.NewProductDB;
-import DataManager.NewProductManager;
 import DataManager.OrderProductDB;
 import DataManager.OrderProductManager;
 import DataManager.UserManagerAddress;
@@ -36,10 +31,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import java.awt.CardLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.JTable;
 import java.awt.event.KeyAdapter;
@@ -47,23 +40,21 @@ import java.awt.event.KeyEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Button;
-import java.awt.Component;
-import java.awt.Rectangle;
-import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 
-public class settingUser extends JFrame {
+public class SettingUser extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPanel contentPane;
 	private JLabel lbl_Manage_Account;
 	private JLabel lbl_Manage_MyProfile;
 	private JLabel lbl_Manage_Address;
-	private JLabel lbl_Manage_Vouchers;
 	private JLabel lbl_Manage_MyOrders;
-	private JLabel lbl_Manage_MyReturns;
-	private JLabel lbl_Manage_Cancellations;
 	private JPanel panel_Manage_Account;
 	private JPanel panel_Manage_EditMyAccount;
 	static LinkedList<OrderProductDB> orderMyAccount;
@@ -77,18 +68,25 @@ public class settingUser extends JFrame {
 	JPanel panel_Manage_AddAddress;
 	JTextPane textAdress;
 	JTextPane textAdress2;
+	JScrollPane NewProduct_SCP;
 	JLabel textPhone2;
 	JLabel textName;
 	JLabel textName2;
 	JLabel textPhone;
+	JPanel panel_3;
 	JLabel lblstatus2;
 	int user_id;
+	JLabel iconaddress ;
 	String username;
 	JLabel lblstatus;
 	JLabel lbl_edit;
 	UserManagerAddress managerAddress = new UserManagerAddress();
 	private JTable NewProduct_tbl;
 	
+	public static void main(String[] a) {
+		SettingUser showTest = new SettingUser("Panuwat",1);
+		showTest.setVisible(true);
+	}
 
 	private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
 		Image img = icon.getImage();
@@ -96,7 +94,8 @@ public class settingUser extends JFrame {
 		return new ImageIcon(resizedImage);
 	}
 
-	public settingUser(String username, int user_id) {
+	public SettingUser(String username, int user_id) {
+		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 			Home open = new Home();
@@ -106,8 +105,9 @@ public class settingUser extends JFrame {
 		this.username=username;
 		setMinimumSize(new Dimension(900, 900));
 		this.user_id = user_id;
-		OrderProductManager MJManager = new OrderProductManager();
-		orderMyAccount = MJManager.get_Image_Order(user_id);
+		OrderProductManager manager = new OrderProductManager();
+		orderMyAccount = manager.get_Image_Order(user_id);
+		
 		System.out.println(orderMyAccount.size());
 		checkDuplicateOrderID = new int[orderMyAccount.size()];
 		checkDuplicateImage();
@@ -144,7 +144,7 @@ public class settingUser extends JFrame {
 		panelShowTag.setBackground(Color.WHITE);
 		panelShowTag.setBounds(671, 42, 232, 225);
 		contentPane.add(panelShowTag);
-		panelShow.setBounds(868, 41, 232, 226);
+		panelShow.setBounds(907, 42, 232, 226);
 		contentPane.add(panelShow);
 		panelShow.setBorder(UIManager.getBorder("DesktopIcon.border"));
 		panelShow.setBackground(Color.WHITE);
@@ -158,14 +158,14 @@ public class settingUser extends JFrame {
 		panelShow.add(lblNewLabel);
 
 		JLabel lblProfile = new JLabel("");
-		ImageIcon icon = new ImageIcon(settingUser.class.getResource("/Image/smile.png"));
+		ImageIcon icon = new ImageIcon(SettingUser.class.getResource("/Image/smile.png"));
 		lblProfile.setBounds(21, 35, 36, 34);
 		int offset = lblProfile.getInsets().left;
 		lblProfile.setIcon(resizeIcon(icon, lblProfile.getWidth() - offset, lblProfile.getHeight() - offset));
 		panelShow.add(lblProfile);
 
 		JLabel lblOrder = new JLabel("");
-		icon = new ImageIcon(settingUser.class.getResource("/Image/box.png"));
+		icon = new ImageIcon(SettingUser.class.getResource("/Image/box.png"));
 		offset = lblOrder.getInsets().left;
 		lblOrder.setBounds(21, 95, 36, 34);
 		lblOrder.setIcon(resizeIcon(icon, lblOrder.getWidth() - offset, lblOrder.getHeight() - offset));
@@ -180,7 +180,7 @@ public class settingUser extends JFrame {
 
 		JLabel lblLogout = new JLabel("");
 		offset = lblLogout.getInsets().left;
-		icon = new ImageIcon(settingUser.class.getResource("/Image/logout.png"));
+		icon = new ImageIcon(SettingUser.class.getResource("/Image/logout.png"));
 		lblLogout.setBounds(21, 150, 36, 34);
 		lblLogout.setIcon(resizeIcon(icon, lblLogout.getWidth() - offset, lblLogout.getHeight() - offset));
 		panelShow.add(lblLogout);
@@ -235,11 +235,11 @@ public class settingUser extends JFrame {
 		about_Bar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		about_Bar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
-				about ab = new about();
+				About ab = new About();
 				ab.setVisible(true);
 			}
 		});
-		about_Bar.setBounds(1205, 8, 22, 27);
+		about_Bar.setBounds(1135, 8, 22, 27);
 		MenuBar.add(about_Bar);
 		about_Bar.setIcon(new ImageIcon(Home.class.getResource("/Image/markz.png")));
 
@@ -266,7 +266,7 @@ public class settingUser extends JFrame {
 
 		lblUser.setForeground(Color.WHITE);
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUser.setBounds(896, 11, 202, 23);
+		lblUser.setBounds(937, 11, 188, 23);
 		MenuBar.add(lblUser);
 
 		JPanel SearchPanel = new JPanel();
@@ -392,35 +392,13 @@ public class settingUser extends JFrame {
 		lbl_Manage_Address.setBounds(56, 107, 157, 16);
 		panelSetting.add(lbl_Manage_Address);
 
-		lbl_Manage_Vouchers = new JLabel("\u0E04\u0E39\u0E1B\u0E2D\u0E07\u0E2A\u0E48\u0E27\u0E19\u0E25\u0E14");
-		lbl_Manage_Vouchers.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lbl_Manage_Vouchers.setForeground(Color.GRAY);
-		lbl_Manage_Vouchers.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lbl_Manage_Vouchers.setBounds(56, 134, 157, 16);
-		panelSetting.add(lbl_Manage_Vouchers);
-
 		lbl_Manage_MyOrders = new JLabel(
 				"\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23\u0E2A\u0E31\u0E48\u0E07\u0E0B\u0E37\u0E49\u0E2D\u0E02\u0E2D\u0E07\u0E09\u0E31\u0E19 ");
 		lbl_Manage_MyOrders.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_Manage_MyOrders.setForeground(Color.GRAY);
 		lbl_Manage_MyOrders.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_Manage_MyOrders.setBounds(46, 161, 205, 28);
+		lbl_Manage_MyOrders.setBounds(46, 136, 148, 28);
 		panelSetting.add(lbl_Manage_MyOrders);
-
-		lbl_Manage_MyReturns = new JLabel("\u0E01\u0E32\u0E23\u0E04\u0E37\u0E19\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32");
-		lbl_Manage_MyReturns.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lbl_Manage_MyReturns.setForeground(Color.GRAY);
-		lbl_Manage_MyReturns.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lbl_Manage_MyReturns.setBounds(56, 195, 157, 16);
-		panelSetting.add(lbl_Manage_MyReturns);
-
-		lbl_Manage_Cancellations = new JLabel(
-				"\u0E01\u0E32\u0E23\u0E22\u0E01\u0E40\u0E25\u0E34\u0E01\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32");
-		lbl_Manage_Cancellations.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lbl_Manage_Cancellations.setForeground(Color.GRAY);
-		lbl_Manage_Cancellations.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lbl_Manage_Cancellations.setBounds(56, 222, 157, 16);
-		panelSetting.add(lbl_Manage_Cancellations);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(255, 193, 1027, 678);
@@ -469,6 +447,12 @@ public class settingUser extends JFrame {
 		panel_Address.setBackground(Color.WHITE);
 		panel_Manage_Account.add(panel_Address);
 		panel_Address.setLayout(null);
+		
+		iconaddress = new JLabel("");
+		iconaddress.setIcon(new ImageIcon(SettingUser.class.getResource("/Image/AddIcon.png")));
+		iconaddress.setVisible(false);
+		iconaddress.setBounds(39, 99, 46, 51);
+		panel_Address.add(iconaddress);
 
 		JLabel label_8 = new JLabel("\u0E2A\u0E21\u0E38\u0E14\u0E17\u0E35\u0E48\u0E2D\u0E22\u0E39\u0E48");
 		label_8.setForeground(Color.BLACK);
@@ -546,7 +530,7 @@ public class settingUser extends JFrame {
 		panel_Address.add(textName2);
 
 		JLabel label_16 = new JLabel("");
-		label_16.setIcon(new ImageIcon(settingUser.class.getResource("/Image/line.PNG")));
+		label_16.setIcon(new ImageIcon(SettingUser.class.getResource("/Image/line.PNG")));
 		label_16.setBounds(311, 20, 18, 193);
 		panel_Address.add(label_16);
 
@@ -557,7 +541,8 @@ public class settingUser extends JFrame {
 		label_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_Manage_Account.add(label_3);
 
-		JPanel panel_3 = new JPanel();
+		panel_3 = new JPanel();
+		panel_3.setVisible(false);
 		panel_3.setBounds(28, 340, 934, 48);
 		panel_3.setBackground(Color.WHITE);
 		panel_Manage_Account.add(panel_3);
@@ -708,7 +693,7 @@ public class settingUser extends JFrame {
 
 		JPanel panel_5 = new JPanel();
 		panel_5.setBackground(Color.WHITE);
-		panel_5.setBounds(41, 93, 941, 532);
+		panel_5.setBounds(51, 95, 941, 532);
 		panel_Manage_AddAddress.add(panel_5);
 		panel_5.setLayout(null);
 
@@ -776,57 +761,7 @@ public class settingUser extends JFrame {
 		panel_5.add(button_1);
 
 		JComboBox combobox_AddAddress_province = new JComboBox();
-		combobox_AddAddress_province.setModel(new DefaultComboBoxModel(new String[] {
-				"\u0E01\u0E23\u0E38\u0E07\u0E40\u0E17\u0E1E\u0E21\u0E2B\u0E32\u0E19\u0E04\u0E23",
-				"\u0E19\u0E04\u0E23\u0E23\u0E32\u0E0A\u0E2A\u0E35\u0E21\u0E32",
-				"\u0E40\u0E0A\u0E35\u0E22\u0E07\u0E43\u0E2B\u0E21\u0E48",
-				"\u0E01\u0E32\u0E0D\u0E08\u0E19\u0E1A\u0E38\u0E23\u0E35", "\u0E15\u0E32\u0E01",
-				"\u0E2D\u0E38\u0E1A\u0E25\u0E23\u0E32\u0E0A\u0E18\u0E32\u0E19\u0E35",
-				"\u0E2A\u0E38\u0E23\u0E32\u0E29\u0E0E\u0E23\u0E4C\u0E18\u0E32\u0E19\u0E35",
-				"\u0E0A\u0E31\u0E22\u0E20\u0E39\u0E21\u0E34",
-				"\u0E41\u0E21\u0E48\u0E2E\u0E48\u0E2D\u0E07\u0E2A\u0E2D\u0E19",
-				"\u0E40\u0E1E\u0E0A\u0E23\u0E1A\u0E39\u0E23\u0E13\u0E4C", "\u0E25\u0E33\u0E1B\u0E32\u0E07",
-				"\u0E2D\u0E38\u0E14\u0E23\u0E18\u0E32\u0E19\u0E35", "\u0E40\u0E0A\u0E35\u0E22\u0E07\u0E23\u0E32\u0E22",
-				"\u0E19\u0E48\u0E32\u0E19", "\u0E40\u0E25\u0E22", "\u0E02\u0E2D\u0E19\u0E41\u0E01\u0E48\u0E19",
-				"\u0E1E\u0E34\u0E29\u0E13\u0E38\u0E42\u0E25\u0E01",
-				"\u0E1A\u0E38\u0E23\u0E35\u0E23\u0E31\u0E21\u0E22\u0E4C",
-				"\u0E19\u0E04\u0E23\u0E28\u0E23\u0E35\u0E18\u0E23\u0E23\u0E21\u0E23\u0E32\u0E0A",
-				"\u0E2A\u0E01\u0E25\u0E19\u0E04\u0E23", "\u0E19\u0E04\u0E23\u0E2A\u0E27\u0E23\u0E23\u0E04\u0E4C",
-				"\u0E28\u0E23\u0E35\u0E2A\u0E30\u0E40\u0E01\u0E29",
-				"\u0E01\u0E33\u0E41\u0E1E\u0E07\u0E40\u0E1E\u0E0A\u0E23",
-				"\u0E23\u0E49\u0E2D\u0E22\u0E40\u0E2D\u0E47\u0E14", "\u0E2A\u0E38\u0E23\u0E34\u0E19\u0E17\u0E23\u0E4C",
-				"\u0E2D\u0E38\u0E15\u0E23\u0E14\u0E34\u0E15\u0E16\u0E4C", "\u0E2A\u0E07\u0E02\u0E25\u0E32",
-				"\u0E2A\u0E23\u0E30\u0E41\u0E01\u0E49\u0E27", "\u0E01\u0E32\u0E2C\u0E2A\u0E34\u0E19\u0E18\u0E38\u0E4C",
-				"\u0E2D\u0E38\u0E17\u0E31\u0E22\u0E18\u0E32\u0E19\u0E35", "\u0E2A\u0E38\u0E42\u0E02\u0E17\u0E31\u0E22",
-				"\u0E41\u0E1E\u0E23\u0E48",
-				"\u0E1B\u0E23\u0E30\u0E08\u0E27\u0E1A\u0E04\u0E35\u0E23\u0E35\u0E02\u0E31\u0E19\u0E18\u0E4C",
-				"\u0E08\u0E31\u0E19\u0E17\u0E1A\u0E38\u0E23\u0E35", "\u0E1E\u0E30\u0E40\u0E22\u0E32",
-				"\u0E40\u0E1E\u0E0A\u0E23\u0E1A\u0E38\u0E23\u0E35", "\u0E25\u0E1E\u0E1A\u0E38\u0E23\u0E35",
-				"\u0E0A\u0E38\u0E21\u0E1E\u0E23", "\u0E19\u0E04\u0E23\u0E1E\u0E19\u0E21",
-				"\u0E2A\u0E38\u0E1E\u0E23\u0E23\u0E13\u0E1A\u0E38\u0E23\u0E35",
-				"\u0E09\u0E30\u0E40\u0E0A\u0E34\u0E07\u0E40\u0E17\u0E23\u0E32",
-				"\u0E21\u0E2B\u0E32\u0E2A\u0E32\u0E23\u0E04\u0E32\u0E21", "\u0E23\u0E32\u0E0A\u0E1A\u0E38\u0E23\u0E35",
-				"\u0E15\u0E23\u0E31\u0E07", "\u0E1B\u0E23\u0E32\u0E08\u0E35\u0E19\u0E1A\u0E38\u0E23\u0E35",
-				"\u0E01\u0E23\u0E30\u0E1A\u0E35\u0E48", "\u0E1E\u0E34\u0E08\u0E34\u0E15\u0E23",
-				"\u0E22\u0E30\u0E25\u0E32", "\u0E25\u0E33\u0E1E\u0E39\u0E19",
-				"\u0E19\u0E23\u0E32\u0E18\u0E34\u0E27\u0E32\u0E2A", "\u0E0A\u0E25\u0E1A\u0E38\u0E23\u0E35",
-				"\u0E21\u0E38\u0E01\u0E14\u0E32\u0E2B\u0E32\u0E23", "\u0E1A\u0E36\u0E07\u0E01\u0E32\u0E2C",
-				"\u0E1E\u0E31\u0E07\u0E07\u0E32", "\u0E22\u0E42\u0E2A\u0E18\u0E23",
-				"\u0E2B\u0E19\u0E2D\u0E07\u0E1A\u0E31\u0E27\u0E25\u0E33\u0E20\u0E39",
-				"\u0E2A\u0E23\u0E30\u0E1A\u0E38\u0E23\u0E35", "\u0E23\u0E30\u0E22\u0E2D\u0E07",
-				"\u0E1E\u0E31\u0E17\u0E25\u0E38\u0E07", "\u0E23\u0E30\u0E19\u0E2D\u0E07",
-				"\u0E2D\u0E33\u0E19\u0E32\u0E08\u0E40\u0E08\u0E23\u0E34\u0E0D",
-				"\u0E2B\u0E19\u0E2D\u0E07\u0E04\u0E32\u0E22", "\u0E15\u0E23\u0E32\u0E14",
-				"\u0E1E\u0E23\u0E30\u0E19\u0E04\u0E23\u0E28\u0E23\u0E35\u0E2D\u0E22\u0E38\u0E18\u0E22\u0E32",
-				"\u0E2A\u0E15\u0E39\u0E25", "\u0E0A\u0E31\u0E22\u0E19\u0E32\u0E17",
-				"\u0E19\u0E04\u0E23\u0E1B\u0E10\u0E21", "\u0E19\u0E04\u0E23\u0E19\u0E32\u0E22\u0E01",
-				"\u0E1B\u0E31\u0E15\u0E15\u0E32\u0E19\u0E35", "\u0E1B\u0E17\u0E38\u0E21\u0E18\u0E32\u0E19\u0E35",
-				"\u0E2A\u0E21\u0E38\u0E17\u0E23\u0E1B\u0E23\u0E32\u0E01\u0E32\u0E23",
-				"\u0E2D\u0E48\u0E32\u0E07\u0E17\u0E2D\u0E07",
-				"\u0E2A\u0E21\u0E38\u0E17\u0E23\u0E2A\u0E32\u0E04\u0E23\t",
-				"\u0E2A\u0E34\u0E07\u0E2B\u0E4C\u0E1A\u0E38\u0E23\u0E35", "\u0E19\u0E19\u0E17\u0E1A\u0E38\u0E23\u0E35",
-				"\u0E20\u0E39\u0E40\u0E01\u0E47\u0E15",
-				"\u0E2A\u0E21\u0E38\u0E17\u0E23\u0E2A\u0E07\u0E04\u0E23\u0E32\u0E21" }));
+		combobox_AddAddress_province.setModel(new DefaultComboBoxModel(new String[] {"Bangkok", "Krabi Province", "Kanchanaburi Province", "Kalasin Province", "Kamphaeng Phet Province", "Khon Kaen Province", "Chanthaburi Province", "Chachoengsao Province", "Chonburi Province", "Chainat Province", "Chaiyaphum Province", "Chumphon Province", "Chiang Mai Province", "Chiang Rai Province", "Trang Province", "Trat Province", "Tak Province", "Nakhon Nayok Province", "Nakhon Pathom Province", "Nakhon Phanom Province", "Nakhon Ratchasima Province", "Nakhon Si Thammarat Province", "Nakhon Sawan Province", "Nonthaburi Province", "Narathiwat Province", "Nan Province", "Bueng Kan Province", "Buriram Province", "Pathum Thani Province", "Prachuap Khiri Khan Province", "Prachinburi Province", "Pattani Province", "Phra Nakhon Si Ayutthaya Province", "Phayao Province", "Phang Nga Province", "Phatthalung Province", "Phichit Province", "Phitsanulok Province", "Phetchaburi Province", "Phetchabun Province", "Phrae Province", "Phuket Province", "Maha Sarakham Province", "Mukdahan Province", "Mae Hong Son Province", "Yasothon Province", "Yala Province", "Roi Et Province", "Ranong Province", "Rayong Province", "Ratchaburi Province", "Lopburi Province", "Lampang Province", "Lamphun Province", "Loei Province", "Sisaket Province", "Sakon Nakhon Province", "Songkhla Province", "Satun Province", "Samut Prakan Province", "Samut Songkhram Province", "Samut Sakhon Province", "Sa Kaeo Province", "Saraburi Province", "Sing Buri Province", "Sukhothai Province", "Suphan Buri Province", "Surat Thani Province", "Surin Province", "Nong Khai Province", "Nong Bua Lamphu Province", "Ang Thong Province", "Amnat Charoen Province", "Udon Thani Province", "Uttaradit Province", "Uthai Thani Province", "Ubon Ratchathani Province"}));
 		combobox_AddAddress_province.setBounds(488, 186, 393, 40);
 		panel_5.add(combobox_AddAddress_province);
 		
@@ -834,35 +769,35 @@ public class settingUser extends JFrame {
 		alert_name_AA.setForeground(Color.RED);
 		alert_name_AA.setVisible(false);
 		alert_name_AA.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		alert_name_AA.setBounds(39, 131, 145, 25);
+		alert_name_AA.setBounds(39, 131, 393, 25);
 		panel_5.add(alert_name_AA);
 		
 		JLabel alert_phone_AA = new JLabel("\u0E0A\u0E48\u0E2D\u0E07\u0E19\u0E35\u0E49\u0E40\u0E27\u0E49\u0E19\u0E27\u0E48\u0E32\u0E07\u0E44\u0E21\u0E48\u0E44\u0E14\u0E49");
 		alert_phone_AA.setForeground(Color.RED);
 		alert_phone_AA.setVisible(false);
 		alert_phone_AA.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		alert_phone_AA.setBounds(39, 250, 300, 25);
+		alert_phone_AA.setBounds(39, 250, 393, 25);
 		panel_5.add(alert_phone_AA);
 		
 		JLabel alert_address_AA = new JLabel("\u0E0A\u0E48\u0E2D\u0E07\u0E19\u0E35\u0E49\u0E40\u0E27\u0E49\u0E19\u0E27\u0E48\u0E32\u0E07\u0E44\u0E21\u0E48\u0E44\u0E14\u0E49");
 		alert_address_AA.setVisible(false);
 		alert_address_AA.setForeground(Color.RED);
 		alert_address_AA.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		alert_address_AA.setBounds(498, 128, 145, 31);
+		alert_address_AA.setBounds(498, 128, 377, 31);
 		panel_5.add(alert_address_AA);
 		
 		JLabel alert_district_AA = new JLabel("\u0E0A\u0E48\u0E2D\u0E07\u0E19\u0E35\u0E49\u0E40\u0E27\u0E49\u0E19\u0E27\u0E48\u0E32\u0E07\u0E44\u0E21\u0E48\u0E44\u0E14\u0E49");
 		alert_district_AA.setVisible(false);
 		alert_district_AA.setForeground(Color.RED);
 		alert_district_AA.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		alert_district_AA.setBounds(488, 338, 145, 31);
+		alert_district_AA.setBounds(488, 338, 393, 31);
 		panel_5.add(alert_district_AA);
 		
 		JLabel alert_zipcode_AA = new JLabel("\u0E0A\u0E48\u0E2D\u0E07\u0E19\u0E35\u0E49\u0E40\u0E27\u0E49\u0E19\u0E27\u0E48\u0E32\u0E07\u0E44\u0E21\u0E48\u0E44\u0E14\u0E49");
 		alert_zipcode_AA.setVisible(false);
 		alert_zipcode_AA.setForeground(Color.RED);
 		alert_zipcode_AA.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		alert_zipcode_AA.setBounds(488, 455, 336, 31);
+		alert_zipcode_AA.setBounds(488, 455, 393, 31);
 		panel_5.add(alert_zipcode_AA);
 
 		panelShow.addMouseListener(new MouseAdapter() {
@@ -944,15 +879,6 @@ public class settingUser extends JFrame {
 				panel_Manage_AddAddress.setVisible(true);
 			}
 		});
-		lbl_Manage_Vouchers.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setManage();
-				panelShow.setVisible(false);
-				panelShowTag.setVisible(false);
-				lbl_Manage_Vouchers.setForeground(Color.blue);
-			}
-		});
 		lbl_Manage_MyOrders.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -962,26 +888,9 @@ public class settingUser extends JFrame {
 				lbl_Manage_MyOrders.setForeground(Color.blue);
 			}
 		});
-		lbl_Manage_MyReturns.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setManage();
-				panelShow.setVisible(false);
-				panelShowTag.setVisible(false);
-				lbl_Manage_MyReturns.setForeground(Color.blue);
-			}
-		});
-		lbl_Manage_Cancellations.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setManage();
-				panelShow.setVisible(false);
-				panelShowTag.setVisible(false);
-				lbl_Manage_Cancellations.setForeground(Color.blue);
-			}
-		});
 
-		JScrollPane NewProduct_SCP = new JScrollPane();
+		NewProduct_SCP = new JScrollPane();
+		NewProduct_SCP.setVisible(false);
 		NewProduct_SCP.setBounds(28, 388, 934, 266);
 		panel_Manage_Account.add(NewProduct_SCP);
 		
@@ -994,7 +903,7 @@ public class settingUser extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					JOptionPane.showMessageDialog(settingUser.this, "สำเร็จ");
+					JOptionPane.showMessageDialog(SettingUser.this, "สำเร็จ");
 				}catch(Exception exp) {
 					
 				}
@@ -1005,49 +914,21 @@ public class settingUser extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			boolean redyInsert = true;
-				/*
-				 	text_AddAddress_name
-					text_AddAddress_phone
-					text_AddAddress_address
-					combobox_AddAddress_province
-					text_AddAddress_district
-					text_AddAddress_zipcode
-				 */
-				
-				alert_name_AA.setVisible(false);
-				alert_phone_AA.setVisible(false);
-				alert_address_AA.setVisible(false);
-				alert_district_AA.setVisible(false);
-				alert_zipcode_AA.setVisible(false);
-				if(text_AddAddress_name.getText().trim().length()<=0) {
+			String address = Service.SettingService.isValidAddress(text_AddAddress_name.getText().trim());
+			String phone   = Service.SettingService.isValidPhone(text_AddAddress_phone.getText().trim());
+			String name = Service.SettingService.isValidName(text_AddAddress_name.getText().trim());
+			String zipcode =Service.SettingService.isValidZipcode(text_AddAddress_zipcode.getText().trim());
+			String district = Service.SettingService.isValidDistrict(text_AddAddress_district.getText().trim());
+			System.out.println(address+phone+name+zipcode+district);
+				if(!(address.equals("PASS")&&phone.equals("PASS")&&name.equals("PASS")&&zipcode.equals("PASS")&&district.equals("PASS"))) {
 					redyInsert=false;
-					alert_name_AA.setVisible(true);
-				}if(text_AddAddress_phone.getText().trim().length()<=0) {
-					redyInsert=false;
-					alert_phone_AA.setVisible(true);
-				}if(text_AddAddress_phone.getText().trim().length()!=10||text_AddAddress_phone.getText().trim().matches(".*[a-z].*")) {
-					redyInsert=false;
-					alert_phone_AA.setVisible(true);
-					alert_phone_AA.setText("รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง");
-				}if(text_AddAddress_address.getText().trim().length()<=0) {
-					redyInsert=false;
-					alert_address_AA.setVisible(true);
-				}if(text_AddAddress_district.getText().trim().length()<=0) {
-					redyInsert=false;
-					alert_district_AA.setVisible(true);
-				}if(text_AddAddress_zipcode.getText().trim().length()<=0) {
-					redyInsert=false;
-					alert_zipcode_AA.setVisible(true);
-				}if(text_AddAddress_zipcode.getText().trim().length()>5||text_AddAddress_zipcode.getText().trim().matches(".*[a-z].*")) {
-					redyInsert=false;
-					alert_zipcode_AA.setVisible(true);
-					alert_zipcode_AA.setText("รูปแบบรหัสไปรษณีย์ไม่ถูกต้อง");
+					JOptionPane.showMessageDialog(SettingUser.this, "ข้อมูลไม่ถูกต้อง", "แจ้งเตือน", JOptionPane.WARNING_MESSAGE);
 				}if(redyInsert) {
 					boolean checkInsert = managerAddress.saveTable_address(user_id, text_AddAddress_phone.getText().trim(), text_AddAddress_address.getText().trim(), combobox_AddAddress_province.getSelectedItem().toString(), text_AddAddress_district.getText().trim(), text_AddAddress_zipcode.getText().trim(),text_AddAddress_name.getText().trim());
 					if(checkInsert) {
-						JOptionPane.showMessageDialog(settingUser.this, "สำเร็จ");
+						JOptionPane.showMessageDialog(SettingUser.this, "บันทึกข้อมูลสำเร็จ");
 					}else
-						JOptionPane.showMessageDialog(settingUser.this, "เกิดข้อผิดพลาก","แจ้งเตือน",JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(SettingUser.this, "เกิดข้อผิดพลาก","แจ้งเตือน",JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
@@ -1055,6 +936,92 @@ public class settingUser extends JFrame {
 		lblUser.setText("บัญชีของ " + username.toUpperCase());
 		loadAddress();
 		loadTablePageAccount();
+		if(orderMyAccount.size()!=0) {
+			panel_3.setVisible(true);
+			NewProduct_SCP.setVisible(true);
+		}
+		//Key Address
+		text_AddAddress_phone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				alert_phone_AA.setVisible(false);
+				String st = text_AddAddress_phone.getText();
+				String tempPhone = st.replaceAll("\\s+","");
+				String tempCheck=Service.SettingService.isValidPhone(tempPhone);
+				if(tempCheck.equals("PASS")||tempCheck.equals("Not text")) {
+					alert_phone_AA.setVisible(false);
+				}
+				else {
+					alert_phone_AA.setVisible(true);
+					alert_phone_AA.setText(tempCheck);
+				}
+			}
+		});
+		text_AddAddress_name.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				alert_name_AA.setVisible(false);
+				String st = text_AddAddress_name.getText();
+				String tempPassword = st.replaceAll("\\s+","");
+				String tempCheck=Service.SettingService.isValidName(tempPassword);
+				if(tempCheck.equals("PASS")||tempCheck.equals("Not text")) {
+					alert_name_AA.setVisible(false);
+				}
+				else {
+					alert_name_AA.setVisible(true);
+					alert_name_AA.setText(tempCheck);
+				}
+			}
+		});
+		text_AddAddress_address.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				alert_address_AA.setVisible(false);
+				String st = text_AddAddress_address.getText();
+				String tempAddress = st.replaceAll("\\s+","");
+				String tempCheck=Service.SettingService.isValidAddress(tempAddress);
+				if(tempCheck.equals("PASS")||tempCheck.equals("Not text")) {
+					alert_address_AA.setVisible(false);
+				}
+				else {
+					alert_address_AA.setVisible(true);
+					alert_address_AA.setText(tempCheck);
+				}
+			}
+		});
+		text_AddAddress_district.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				alert_district_AA.setVisible(false);
+				String st = text_AddAddress_district.getText();
+				String tempDistrict = st.replaceAll("\\s+","");
+				String tempCheck=Service.SettingService.isValidDistrict(tempDistrict);
+				if(tempCheck.equals("PASS")||tempCheck.equals("Not text")) {
+					alert_district_AA.setVisible(false);
+				}
+				else {
+					alert_district_AA.setVisible(true);
+					alert_district_AA.setText(tempCheck);
+				}
+			}
+		});
+		text_AddAddress_zipcode.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				alert_zipcode_AA.setVisible(false);
+				String st = text_AddAddress_zipcode.getText();
+				String tempZipcode = st.replaceAll("\\s+","");
+				String tempCheck=Service.SettingService.isValidZipcode(tempZipcode);
+				if(tempCheck.equals("PASS")||tempCheck.equals("Not text")) {
+					alert_zipcode_AA.setVisible(false);
+				}
+				else {
+					alert_zipcode_AA.setVisible(true);
+					alert_zipcode_AA.setText(tempCheck);
+				}
+			}
+		});
+		//Key Address
 	}
 
 	public void loadAddress() {
@@ -1069,8 +1036,10 @@ public class settingUser extends JFrame {
 			textName2.setText("");
 			textAdress2.setText("");
 			textPhone2.setText("");
+			iconaddress.setVisible(true);
 		}
 		else {
+			iconaddress.setVisible(false);
 			textName.setText(addressUser.getFirst().getName());
 			textAdress.setText(addressUser.getFirst().getAddress());
 			textPhone.setText(addressUser.getFirst().getPhone());
@@ -1084,10 +1053,7 @@ public class settingUser extends JFrame {
 		lbl_Manage_Account.setForeground(Color.GRAY);
 		lbl_Manage_MyProfile.setForeground(Color.GRAY);
 		lbl_Manage_Address.setForeground(Color.GRAY);
-		lbl_Manage_Vouchers.setForeground(Color.GRAY);
 		lbl_Manage_MyOrders.setForeground(Color.GRAY);
-		lbl_Manage_MyReturns.setForeground(Color.GRAY);
-		lbl_Manage_Cancellations.setForeground(Color.GRAY);
 	}
 	public void checkDuplicateImage() {
 		int tempCheck = 0;
@@ -1160,7 +1126,7 @@ public class settingUser extends JFrame {
 		panel_Manage_AddAddress.setVisible(false);
 	}
 	public void goHome() {
-		Home_LoggedIn open = new Home_LoggedIn(username,user_id);
+		HomeLoggedIn open = new HomeLoggedIn(username,user_id);
 		open.setVisible(true);
 		dispose();
 	}

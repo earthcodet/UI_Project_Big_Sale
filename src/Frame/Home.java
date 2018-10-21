@@ -112,6 +112,7 @@ public class Home extends JFrame {
 	 * Create the frame.
 	 */
 	public Home() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				int res = JOptionPane.showConfirmDialog(Home.this, "Are you sure to closing window?", "Confirm closing", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -195,7 +196,7 @@ public class Home extends JFrame {
 		JLabel about_Bar = new JLabel("");
 		about_Bar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
-				about ab = new about();
+				About ab = new About();
 				ab.setVisible(true);
 			}
 		});

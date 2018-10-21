@@ -23,11 +23,11 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class forgetpasswordCom extends JFrame {
+public class ForgetPasswordShow extends JFrame {
 
 	private JPanel contentPane;
 
-	public forgetpasswordCom(String Temail , String Tpassword) {
+	public ForgetPasswordShow(String Temail , String Tpassword) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("BIG SALE - ลืมรหัสผ่าน");
@@ -104,7 +104,7 @@ public class forgetpasswordCom extends JFrame {
 			}
 		});
 		lblok.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblok.setIcon(new ImageIcon(forgetpasswordCom.class.getResource("/Image/ok.png")));
+		lblok.setIcon(new ImageIcon(ForgetPasswordShow.class.getResource("/Image/ok.png")));
 		lblok.setBounds(117, 253, 213, 58);
 		panel.add(lblok);
 	}

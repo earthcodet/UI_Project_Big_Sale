@@ -145,7 +145,7 @@ public class BigMallLoggedIn extends JFrame {
 		panelShow.setLayout(null);
 		
 		JLabel lblProfile = new JLabel("");
-		ImageIcon icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/smile.png"));
+		ImageIcon icon = new ImageIcon(HomeLoggedIn.class.getResource("/Image/smile.png"));
 		lblProfile.setBounds(21, 35, 36, 34);
 		int offset = lblProfile.getInsets().left;
 		lblProfile.setIcon(resizeIcon(icon, lblProfile.getWidth() - offset, lblProfile.getHeight() - offset));
@@ -155,7 +155,7 @@ public class BigMallLoggedIn extends JFrame {
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				settingUser open = new settingUser(username,user_id);
+				SettingUser open = new SettingUser(username,user_id);
 				open.setVisible(true);
 				dispose();
 			}
@@ -186,7 +186,7 @@ public class BigMallLoggedIn extends JFrame {
 		panelShow.add(labelLogOut);
 		
 		JLabel lblOrder = new JLabel("");
-		icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/box.png"));
+		icon = new ImageIcon(HomeLoggedIn.class.getResource("/Image/box.png"));
 		offset = lblOrder.getInsets().left;
 		lblOrder.setBounds(21, 95, 36, 34);
 		lblOrder.setIcon(resizeIcon(icon, lblOrder.getWidth() - offset, lblOrder.getHeight() - offset));
@@ -194,7 +194,7 @@ public class BigMallLoggedIn extends JFrame {
 		
 		JLabel lblLogout = new JLabel("");
 		offset = lblLogout.getInsets().left;
-		icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/logout.png"));
+		icon = new ImageIcon(HomeLoggedIn.class.getResource("/Image/logout.png"));
 		lblLogout.setBounds(21, 150, 36, 34);
 		lblLogout.setIcon(resizeIcon(icon, lblLogout.getWidth() - offset, lblLogout.getHeight() - offset));
 		panelShow.add(lblLogout);
@@ -2005,7 +2005,7 @@ public class BigMallLoggedIn extends JFrame {
 		label.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Home_LoggedIn open = new Home_LoggedIn(username,user_id);
+				HomeLoggedIn open = new HomeLoggedIn(username,user_id);
 				open.setVisible(true);
 				dispose();
 			}

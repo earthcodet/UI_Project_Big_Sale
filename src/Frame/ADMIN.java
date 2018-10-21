@@ -53,7 +53,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
-public class aDMIN extends JFrame {
+public class ADMIN extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txt_type_NP;
@@ -78,7 +78,7 @@ public class aDMIN extends JFrame {
 				try {
 					UIManager.setLookAndFeel(
 				            UIManager.getSystemLookAndFeelClassName());
-					aDMIN frame = new aDMIN("Mr. ...");
+					ADMIN frame = new ADMIN("Mr. ...");
 					frame.setVisible(true);
 					frame.setResizable(false);
 					
@@ -91,7 +91,7 @@ public class aDMIN extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public aDMIN(String username) {
+	public ADMIN(String username) {
 		setTitle("BIG SALE - Home");
 		Toolkit kit = Toolkit.getDefaultToolkit();
 	    Image icons = kit.createImage(Home.class.getResource("/Image/ICON.png"));
@@ -146,7 +146,7 @@ public class aDMIN extends JFrame {
 				fc.addChoosableFileFilter(new OpenFileFilter("png","Photo in PNG format"));
 				fc.addChoosableFileFilter(new OpenFileFilter("jpeg","Photo in JPEG format"));
 				fc.setAcceptAllFileFilterUsed(false);
-				int returnVal = fc.showOpenDialog(aDMIN.this);
+				int returnVal = fc.showOpenDialog(ADMIN.this);
 				if(returnVal == JFileChooser.APPROVE_OPTION) {
 					File f = fc.getSelectedFile();
 					try {
@@ -176,10 +176,10 @@ public class aDMIN extends JFrame {
 					x = new NewProductDB((BufferedImage)img_NP.getImage(), txt_type_NP.getText().trim());
 				if(ImagePanel.isDraw) {
 					NewProductManager.saveNew_Product(x);			
-					JOptionPane.showMessageDialog(aDMIN.this,"SAVE FINISH!!");
+					JOptionPane.showMessageDialog(ADMIN.this,"SAVE FINISH!!");
 				}
 				else {
-					JOptionPane.showMessageDialog(aDMIN.this,"INSERT IMAGE!!");
+					JOptionPane.showMessageDialog(ADMIN.this,"INSERT IMAGE!!");
 					return;
 				}
 //				ClearFields(new JComponent[]{txt_id_PM, comboBox_Type, txt_name_PM, txt_remark_PM, spinnerQTY_PMD});
@@ -219,7 +219,7 @@ public class aDMIN extends JFrame {
 		label.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int res = JOptionPane.showConfirmDialog(aDMIN.this, "คุณแน่ใจที่จะออกจากระบบหรือไม่?", "Log out", JOptionPane.YES_NO_OPTION);
+				int res = JOptionPane.showConfirmDialog(ADMIN.this, "คุณแน่ใจที่จะออกจากระบบหรือไม่?", "Log out", JOptionPane.YES_NO_OPTION);
 				if(res == JOptionPane.YES_OPTION) {
 					Home nw = new Home();
 					nw.setVisible(true);
@@ -280,7 +280,7 @@ public class aDMIN extends JFrame {
 				fc.addChoosableFileFilter(new OpenFileFilter("png","Photo in PNG format"));
 				fc.addChoosableFileFilter(new OpenFileFilter("jpeg","Photo in JPEG format"));
 				fc.setAcceptAllFileFilterUsed(false);
-				int returnVal = fc.showOpenDialog(aDMIN.this);
+				int returnVal = fc.showOpenDialog(ADMIN.this);
 				if(returnVal == JFileChooser.APPROVE_OPTION) {
 					File f = fc.getSelectedFile();
 					try {
@@ -305,16 +305,16 @@ public class aDMIN extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				NewProductDB x;
 				if(txt_productId.getText().trim().length()<1) {
-					JOptionPane.showMessageDialog(aDMIN.this,"Product_id");
+					JOptionPane.showMessageDialog(ADMIN.this,"Product_id");
 				}
 				else{
 					x = new NewProductDB((BufferedImage)imagePanel.getImage(), txt_productId.getText().trim());
 					if(ImagePanel.isDraw) {
 						ProductManager.saveTable_imageproduct(x);			
-						JOptionPane.showMessageDialog(aDMIN.this,"SAVE FINISH!!");
+						JOptionPane.showMessageDialog(ADMIN.this,"SAVE FINISH!!");
 					}
 					else {
-						JOptionPane.showMessageDialog(aDMIN.this,"INSERT IMAGE!!");
+						JOptionPane.showMessageDialog(ADMIN.this,"INSERT IMAGE!!");
 						return;
 					};
 				}

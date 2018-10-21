@@ -27,7 +27,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import java.awt.Cursor;
 
-public class forgetpassword extends JFrame {
+public class ForgetPassword extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textemail;
@@ -39,7 +39,7 @@ public class forgetpassword extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public forgetpassword() {
+	public ForgetPassword() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("BIG SALE - ลืมรหัสผ่าน");
@@ -110,7 +110,7 @@ public class forgetpassword extends JFrame {
 				}
 				String check = UserManager.forget(textemail.getText());
 				if(!check.equals("notFound")) {
-					forgetpasswordCom forget = new forgetpasswordCom(textemail.getText(),check);
+					ForgetPasswordShow forget = new ForgetPasswordShow(textemail.getText(),check);
 					forget.setVisible(true);
 					dispose();
 				}
@@ -120,7 +120,7 @@ public class forgetpassword extends JFrame {
 			}
 		});
 		lblok.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblok.setIcon(new ImageIcon(forgetpassword.class.getResource("/Image/ok.png")));
+		lblok.setIcon(new ImageIcon(ForgetPassword.class.getResource("/Image/ok.png")));
 		lblok.setBounds(116, 251, 213, 44);
 		panel.add(lblok);
 		
@@ -135,7 +135,7 @@ public class forgetpassword extends JFrame {
 					}
 					String check = UserManager.forget(textemail.getText());
 					if(!check.equals("notFound")) {
-						forgetpasswordCom forget = new forgetpasswordCom(textemail.getText(),check);
+						ForgetPasswordShow forget = new ForgetPasswordShow(textemail.getText(),check);
 						forget.setVisible(true);
 						dispose();
 					}

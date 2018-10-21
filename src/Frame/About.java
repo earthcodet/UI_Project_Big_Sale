@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
-public class about extends JFrame {
+public class About extends JFrame {
 
 	private JPanel contentPane;
 
@@ -34,10 +34,10 @@ public class about extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public about() {
+	public About() {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				int res = JOptionPane.showConfirmDialog(about.this, "Are you sure to closing window?", "Confirm closing", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				int res = JOptionPane.showConfirmDialog(About.this, "Are you sure to closing window?", "Confirm closing", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if(res == JOptionPane.YES_OPTION) {
 					dispose();
 				}
@@ -47,7 +47,7 @@ public class about extends JFrame {
 		});
 		setTitle("BIG SALE - About");
 		Toolkit kit = Toolkit.getDefaultToolkit();
-	    Image icons = kit.createImage(Home_LoggedIn.class.getResource("/Image/ICON.png"));
+	    Image icons = kit.createImage(HomeLoggedIn.class.getResource("/Image/ICON.png"));
 	    setIconImage(icons);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 547, 515);
@@ -111,7 +111,7 @@ public class about extends JFrame {
 		contentPane.add(panel);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(about.class.getResource("/Image/\u0E42\u0E25\u0E42\u0E01\u0E49\u0E2A\u0E35\u0E02\u0E32\u0E273.png")));
+		label.setIcon(new ImageIcon(About.class.getResource("/Image/\u0E42\u0E25\u0E42\u0E01\u0E49\u0E2A\u0E35\u0E02\u0E32\u0E273.png")));
 		label.setBounds(10, 11, 108, 96);
 		panel.add(label);
 		

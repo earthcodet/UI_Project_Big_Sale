@@ -66,7 +66,7 @@ import java.awt.Window.Type;
 import java.awt.SystemColor;
 
 @SuppressWarnings("serial")
-public class Home_LoggedIn extends JFrame {	
+public class HomeLoggedIn extends JFrame {	
 	private JPanel contentPane;
 	static LinkedList<NewProductDB> listImage = NewProductManager.getAllNew_Product_Image();
 	private JTextField textField;
@@ -88,7 +88,7 @@ public class Home_LoggedIn extends JFrame {
 	    Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
 	    return new ImageIcon(resizedImage);
 	    }
-	public Home_LoggedIn(String username,int user_id) {
+	public HomeLoggedIn(String username,int user_id) {
 		setResizable(false);
 		this.username =username;
 		setMinimumSize(new Dimension(900, 900));
@@ -102,7 +102,7 @@ public class Home_LoggedIn extends JFrame {
 		});
 		setTitle("BIG SALE - Home");
 		Toolkit kit = Toolkit.getDefaultToolkit();
-	    Image icons = kit.createImage(Home_LoggedIn.class.getResource("/Image/ICON.png"));
+	    Image icons = kit.createImage(HomeLoggedIn.class.getResource("/Image/ICON.png"));
 	    setIconImage(icons);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 0, 1259, 852);
@@ -126,7 +126,7 @@ public class Home_LoggedIn extends JFrame {
 		panelShow.setLayout(null);
 		
 		JLabel lblProfile = new JLabel("");
-		ImageIcon icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/smile.png"));
+		ImageIcon icon = new ImageIcon(HomeLoggedIn.class.getResource("/Image/smile.png"));
 		lblProfile.setBounds(21, 35, 36, 34);
 		int offset = lblProfile.getInsets().left;
 		lblProfile.setIcon(resizeIcon(icon, lblProfile.getWidth() - offset, lblProfile.getHeight() - offset));
@@ -136,7 +136,7 @@ public class Home_LoggedIn extends JFrame {
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				settingUser open = new settingUser(username,user_id);
+				SettingUser open = new SettingUser(username,user_id);
 				open.setVisible(true);
 				dispose();
 			}
@@ -167,7 +167,7 @@ public class Home_LoggedIn extends JFrame {
 		panelShow.add(labelLogOut);
 		
 		JLabel lblOrder = new JLabel("");
-		icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/box.png"));
+		icon = new ImageIcon(HomeLoggedIn.class.getResource("/Image/box.png"));
 		offset = lblOrder.getInsets().left;
 		lblOrder.setBounds(21, 95, 36, 34);
 		lblOrder.setIcon(resizeIcon(icon, lblOrder.getWidth() - offset, lblOrder.getHeight() - offset));
@@ -175,7 +175,7 @@ public class Home_LoggedIn extends JFrame {
 		
 		JLabel lblLogout = new JLabel("");
 		offset = lblLogout.getInsets().left;
-		icon = new ImageIcon(Home_LoggedIn.class.getResource("/Image/logout.png"));
+		icon = new ImageIcon(HomeLoggedIn.class.getResource("/Image/logout.png"));
 		lblLogout.setBounds(21, 150, 36, 34);
 		lblLogout.setIcon(resizeIcon(icon, lblLogout.getWidth() - offset, lblLogout.getHeight() - offset));
 		panelShow.add(lblLogout);
@@ -196,19 +196,19 @@ public class Home_LoggedIn extends JFrame {
 		about_Bar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		about_Bar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
-				about ab = new about();
+				About ab = new About();
 				ab.setVisible(true);
 			}
 		});
-		about_Bar.setBounds(1176, 6, 22, 27);
+		about_Bar.setBounds(1134, 6, 22, 27);
 		MenuBar.add(about_Bar);
-		about_Bar.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/markz.png")));
+		about_Bar.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/markz.png")));
 		
 		JLabel lblUser = new JLabel("New label");
 		lblUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblUser.setForeground(Color.WHITE);
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUser.setBounds(885, 10, 239, 23);
+		lblUser.setBounds(926, 10, 198, 23);
 		MenuBar.add(lblUser);
 		
 		JPanel SearchPanel = new JPanel();
@@ -218,7 +218,7 @@ public class Home_LoggedIn extends JFrame {
 		SearchPanel.setLayout(null);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/\u0E42\u0E25\u0E42\u0E01\u0E49\u0E2A\u0E35\u0E02\u0E32\u0E273.png")));
+		label.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/\u0E42\u0E25\u0E42\u0E01\u0E49\u0E2A\u0E35\u0E02\u0E32\u0E273.png")));
 		label.setBounds(135, 13, 108, 96);
 		SearchPanel.add(label);
 		
@@ -241,12 +241,12 @@ public class Home_LoggedIn extends JFrame {
 		panel_1.setLayout(null);
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/\u0E04\u0E49\u0E19\u0E2B\u0E32 \u0E2A\u0E35\u0E02\u0E32\u0E272.png")));
+		label_1.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/\u0E04\u0E49\u0E19\u0E2B\u0E32 \u0E2A\u0E35\u0E02\u0E32\u0E272.png")));
 		label_1.setBounds(10, 0, 33, 43);
 		panel_1.add(label_1);
 		
 		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/\u0E15\u0E23\u0E30\u0E01\u0E25\u0E49\u0E32\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E322.png")));
+		label_2.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/\u0E15\u0E23\u0E30\u0E01\u0E25\u0E49\u0E32\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E322.png")));
 		label_2.setBounds(1133, 56, 32, 40);
 		SearchPanel.add(label_2);
 		
@@ -263,7 +263,7 @@ public class Home_LoggedIn extends JFrame {
 		SearchPanel.add(lblBig);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 170, 1243, 657);
+		scrollPane.setBounds(0, 170, 1243, 701);
 		contentPane.add(scrollPane);
 		
 		JPanel ShowPanel = new JPanel();
@@ -276,7 +276,7 @@ public class Home_LoggedIn extends JFrame {
 		bannerChoosing4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing4.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner4.png")));
+				banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner4.png")));
 			}
 		});
 		
@@ -413,73 +413,73 @@ JPanel subMenu1 = new JPanel();
 		
 		bannerChoosing4.setBounds(613, 224, 15, 25);
 		ShowPanel.add(bannerChoosing4);
-		bannerChoosing4.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
+		bannerChoosing4.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing7 = new JLabel("");
 		bannerChoosing7.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing7.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner7.png")));
+				banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner7.png")));
 			}
 		});
 		bannerChoosing7.setBounds(688, 224, 15, 25);
 		ShowPanel.add(bannerChoosing7);
-		bannerChoosing7.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
+		bannerChoosing7.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing5 = new JLabel("");
 		bannerChoosing5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing5.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner5.png")));
+				banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner5.png")));
 			}
 		});
 		bannerChoosing5.setBounds(638, 224, 15, 25);
 		ShowPanel.add(bannerChoosing5);
-		bannerChoosing5.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
+		bannerChoosing5.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing1 = new JLabel("");
 		bannerChoosing1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
-				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner1.png")));
+				banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner1.png")));
 			}
 		});
 		bannerChoosing1.setBounds(538, 224, 15, 25);
 		ShowPanel.add(bannerChoosing1);
-		bannerChoosing1.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
+		bannerChoosing1.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing3 = new JLabel("");
 		bannerChoosing3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing3.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner3.png")));
+				banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner3.png")));
 			}
 		});
 		bannerChoosing3.setBounds(588, 224, 15, 25);
 		ShowPanel.add(bannerChoosing3);
-		bannerChoosing3.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
+		bannerChoosing3.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing2 = new JLabel("");
 		bannerChoosing2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing2.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner2.png")));
+				banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner2.png")));
 			}
 		});
 		bannerChoosing2.setBounds(563, 224, 15, 25);
 		ShowPanel.add(bannerChoosing2);
-		bannerChoosing2.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
+		bannerChoosing2.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel bannerChoosing6 = new JLabel("");
 		bannerChoosing6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bannerChoosing6.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner6.png")));
+				banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner6.png")));
 			}
 		});
 		bannerChoosing6.setBounds(663, 224, 15, 25);
 		ShowPanel.add(bannerChoosing6);
-		bannerChoosing6.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/circle4.png")));
+		bannerChoosing6.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/circle4.png")));
 		
 		JLabel lblMostPopular = new JLabel("Most Popular");
 		lblMostPopular.setFont(new Font("Dubai", Font.PLAIN, 26));
@@ -499,7 +499,7 @@ JPanel subMenu1 = new JPanel();
 		
 		JLabel btnGblColl = new JLabel("");
 		btnGblColl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnGblColl.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/gc2.png")));
+		btnGblColl.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/gc2.png")));
 		btnGblColl.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				//btnGblColl.setIcon(new ImageIcon(Home.class.getResource("/Image/gblClicked.png")));
@@ -529,7 +529,7 @@ JPanel subMenu1 = new JPanel();
 		
 		JLabel btnVouchers = new JLabel("");
 		btnVouchers.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnVouchers.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/vc2.png")));
+		btnVouchers.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/vc2.png")));
 		btnVouchers.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
@@ -577,7 +577,7 @@ JPanel subMenu1 = new JPanel();
 				btnBigMall.setIcon(new ImageIcon(Home.class.getResource("/Image/bgmNEW.png")));
 			}
 		});
-		btnBigMall.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/bt2.png")));
+		btnBigMall.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/bt2.png")));
 		btnBigMall.setBounds(5, 5, 250, 35);
 		BigMallPanel.add(btnBigMall);
 		
@@ -599,7 +599,7 @@ JPanel subMenu1 = new JPanel();
 		JLabel arrowToy = new JLabel("");
 		arrowToy.setVisible(false);
 		arrowToy.setBounds(169, 0, 19, 30);
-		arrowToy.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/arrowMenu.png")));
+		arrowToy.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		
 		JPanel ToysPanel = new JPanel();
 		ToysPanel.setBackground(Color.WHITE);
@@ -627,7 +627,7 @@ JPanel subMenu1 = new JPanel();
 		
 		JLabel arrowMale = new JLabel("");
 		arrowMale.setVisible(false);
-		arrowMale.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/arrowMenu.png")));
+		arrowMale.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		arrowMale.setBounds(169, 0, 19, 30);
 		
 		JPanel MalesPanel = new JPanel();
@@ -658,7 +658,7 @@ JPanel subMenu1 = new JPanel();
 		
 		JLabel arrowFemale = new JLabel("");
 		arrowFemale.setVisible(false);
-		arrowFemale.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/arrowMenu.png")));
+		arrowFemale.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		arrowFemale.setBounds(169, 0, 19, 30);
 		
 		JPanel FemalesPanel = new JPanel();
@@ -689,7 +689,7 @@ JPanel subMenu1 = new JPanel();
 		
 		JLabel arrowElec = new JLabel("");
 		arrowElec.setVisible(false);
-		arrowElec.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/arrowMenu.png")));
+		arrowElec.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		arrowElec.setBounds(169, 0, 19, 30);
 		
 		JPanel ElecPanel = new JPanel();
@@ -720,7 +720,7 @@ JPanel subMenu1 = new JPanel();
 		
 		JLabel arrowGroce = new JLabel("");
 		arrowGroce.setVisible(false);
-		arrowGroce.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/arrowMenu.png")));
+		arrowGroce.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		arrowGroce.setBounds(169, 0, 19, 30);
 		
 		JPanel GroceriesPanel = new JPanel();
@@ -751,7 +751,7 @@ JPanel subMenu1 = new JPanel();
 		
 		JLabel arrowSport = new JLabel("");
 		arrowSport.setVisible(false);
-		arrowSport.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/arrowMenu.png")));
+		arrowSport.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		arrowSport.setBounds(169, 0, 19, 30);
 		
 		JPanel SportPanel = new JPanel();
@@ -782,7 +782,7 @@ JPanel subMenu1 = new JPanel();
 		
 		JLabel arrowHealth = new JLabel("");
 		arrowHealth.setVisible(false);
-		arrowHealth.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/arrowMenu.png")));
+		arrowHealth.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/arrowMenu.png")));
 		arrowHealth.setBounds(169, 0, 19, 30);
 		
 		JPanel HealthPanel = new JPanel();
@@ -808,7 +808,7 @@ JPanel subMenu1 = new JPanel();
 		HealthPanel.add(arrowHealth);
 		
 		banner = new JLabel("");
-		banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner1.png")));
+		banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner1.png")));
 		banner.setBounds(0, 0, 1559, 263);
 		ShowPanel.add(banner);
 		
@@ -990,42 +990,42 @@ JPanel subMenu1 = new JPanel();
 		FollowUsPanel.add(LogosPanel);
 		
 		JLabel label_13 = new JLabel("");
-		label_13.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/facebook.png")));
+		label_13.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/facebook.png")));
 		label_13.setBounds(0, 11, 33, 34);
 		LogosPanel.add(label_13);
 		
 		JLabel label_15 = new JLabel("");
-		label_15.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/twitter.PNG")));
+		label_15.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/twitter.PNG")));
 		label_15.setBounds(33, 11, 33, 34);
 		LogosPanel.add(label_15);
 		
 		JLabel label_16 = new JLabel("");
-		label_16.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/gg_plus.png")));
+		label_16.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/gg_plus.png")));
 		label_16.setBounds(65, 11, 33, 34);
 		LogosPanel.add(label_16);
 		
 		JLabel label_17 = new JLabel("");
-		label_17.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/instagram.png")));
+		label_17.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/instagram.png")));
 		label_17.setBounds(97, 11, 33, 34);
 		LogosPanel.add(label_17);
 		
 		JLabel label_18 = new JLabel("");
-		label_18.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/youtuber.png")));
+		label_18.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/youtuber.png")));
 		label_18.setBounds(129, 11, 33, 34);
 		LogosPanel.add(label_18);
 		
 		JLabel label_19 = new JLabel("");
-		label_19.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/pinteres.png")));
+		label_19.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/pinteres.png")));
 		label_19.setBounds(162, 11, 33, 34);
 		LogosPanel.add(label_19);
 		
 		JLabel label_20 = new JLabel("");
-		label_20.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/blogg.png")));
+		label_20.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/blogg.png")));
 		label_20.setBounds(195, 11, 33, 34);
 		LogosPanel.add(label_20);
 		
 		JLabel label_21 = new JLabel("");
-		label_21.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/tumblr.PNG")));
+		label_21.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/tumblr.PNG")));
 		label_21.setBounds(228, 11, 33, 34);
 		LogosPanel.add(label_21);
 		loadData();
@@ -1187,25 +1187,25 @@ JPanel subMenu1 = new JPanel();
 			int count = 1;
 			public void actionPerformed(ActionEvent e) {
 				if(count == 1) {
-					banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner1.png")));
+					banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner1.png")));
 				}
 				else if(count == 2) {
-					banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner2.png")));
+					banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner2.png")));
 				}
 				else if(count == 3) {
-					banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner3.png")));
+					banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner3.png")));
 				}
 				else if(count == 4) {
-					banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner4.png")));
+					banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner4.png")));
 				}
 				else if(count == 5) {
-					banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner5.png")));
+					banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner5.png")));
 				}
 				else if(count == 6) {
-					banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner6.png")));
+					banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner6.png")));
 				}
 				else if(count == 7) {
-					banner.setIcon(new ImageIcon(Home_LoggedIn.class.getResource("/Image/rbanner7.png")));
+					banner.setIcon(new ImageIcon(HomeLoggedIn.class.getResource("/Image/rbanner7.png")));
 					count = 1;
 				}
 				++count;
